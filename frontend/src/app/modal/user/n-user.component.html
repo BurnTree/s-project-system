@@ -1,0 +1,26 @@
+
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeRef.hide('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form>
+    <div class="form-group">
+      <label class="col-form-label">Code:</label>
+      <input type="text" class="form-control">
+    </div>
+    <div class="form-group">
+      <select class="custom-select d-block" id="role" required="">
+        <option value="">Project manager</option>
+        <option>Developer</option>
+        <option>Tester</option>
+      </select>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeRef.hide('Save click')">Create</button>
+</div>
+

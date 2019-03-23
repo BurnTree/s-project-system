@@ -8,3 +8,12 @@
   width: 30px;
 
 }
+.op1{
+  opacity: 1 !important;
+} /*fade*/
+.fade{
+  opacity: 1 !important;
+}
+.b-1{
+  border: 2px;
+}

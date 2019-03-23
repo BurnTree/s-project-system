@@ -1,6 +1,9 @@
-import { Component} from '@angular/core';
+import {Component, TemplateRef} from '@angular/core';
 import { NProjectComponent} from '../modal/project/n-project.component';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {BsModalService} from 'ngx-bootstrap';
+import {BsModalRef} from 'ngx-bootstrap';
+import {NTaskComponent} from '../modal/task/n-task.component';
+import {NUserComponent} from '../modal/user/n-user.component';
 
 @Component({
   selector: 'app-home',
@@ -8,16 +11,33 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  constructor(private modalService: NgbModal) {
+
+  private modalRef: BsModalRef;
+
+  constructor(private modalService: BsModalService ) {
 
   }
 
-  modalNProject() {
-    const modalRef = this.modalService.open(NProjectComponent, {centered: true});
-    modalRef.result.then((result) => {
-      console.log(result);
-    }).catch((error) => {
-      console.log(error);
+  openModal(template: TemplateRef<any>): void {
+    this.modalRef = this.modalService.show(template);
+  }
+
+  openNProject() {
+    this.modalRef = this.modalService.show(NProjectComponent);
+    this.modalRef.content.onClose.subscribe(result => {
+      console.log('results', result);
+  });
+  }
+  openNTask() {
+    this.modalRef = this.modalService.show(NTaskComponent);
+    this.modalRef.content.onClose.subscribe(result => {
+      console.log('results', result);
+    });
+  }
+  openNUser() {
+    this.modalRef = this.modalService.show(NUserComponent);
+    this.modalRef.content.onClose.subscribe(result => {
+      console.log('results', result);
     });
   }
 }
