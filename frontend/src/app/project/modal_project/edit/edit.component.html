@@ -1,6 +1,6 @@
 
 <div class="modal-header bg-dark text-white">
-  <h4 class="modal-title" id="modal-basic-title">Create Task</h4>
+  <h4 class="modal-title" id="modal-basic-title">Edit Task</h4>
   <button type="button" class="close" aria-label="Close" (click)="activeRef.hide('Cross click')">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -8,15 +8,11 @@
 <div class="modal-body">
   <form>
     <div class="form-group">
-      <label class="col-form-label">Project code:</label>
+      <label class="col-form-label">Description:</label>
       <input type="text" class="form-control">
     </div>
     <div class="form-group">
-      <label class="col-form-label">Description</label>
-      <input type="text" class="form-control">
-    </div>
-    <div class="form-group">
-      <label class="col-form-label">Priority</label>
+      <label class="col-form-label">Priority:</label>
       <div class="form-group">
         <select class="custom-select d-block" id="role" required="">
           <option value="">blocker</option>
@@ -28,7 +24,7 @@
       </div>
     </div>
     <div class="form-group">
-      <label class="col-form-label">Due Data</label>
+      <label class="col-form-label">Due Data:</label>
       <div class="input-group">
         <input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
         <div class="input-group-append">
@@ -37,15 +33,15 @@
       </div>
     </div>
     <div class="form-group">
-      <label class="col-form-label">Estmation</label>
+      <label class="col-form-label">Estmation:</label>
       <input type="text" class="form-control">
     </div>
     <div class="form-group">
-      <label class="col-form-label">Assigne</label>
+      <label class="col-form-label">Assigne:</label>
       <input type="text" class="form-control">
     </div>
   </form>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-dark text-white" (click)="activeRef.hide('Save click')">Create</button>
+  <button type="button" class="btn btn-dark text-white" (click)="activeRef.hide('Save click')">Edit</button>
 </div>

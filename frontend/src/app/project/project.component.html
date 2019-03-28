@@ -1,22 +1,34 @@
 
-<div class = "container-fluid">
-  <h1>Project</h1>
+<div class = "container">
+  <div class = "row n-b py-2">
+    <div class = "col-md-6">
+      <button type="button" class="btn btn-primary my-2 mx-3" routerLink="/">Home</button>
+      <button type="button" class="btn btn-dark my-2 mx-3" (click)=openNProject()>New Project</button>
+      <button type="button" class="btn btn-dark my-2 mx-3" (click)=openNTask()>New Task</button>
+      <button type="button" class="btn btn-dark my-2 mx-3" (click)=openNUser()>New User</button>
+    </div>
+    <div class = "col-md-6 my-2 text-right">
+      <button type="button" routerLink="/login" class="btn btn-secondary mx-4">Login in</button>
+    </div>
+  </div>
+
+  <div class="ml-5 my-4"><h1>Project</h1></div>
   <div>
-    <div class="bg-secondary text-white"><h2>Description</h2></div>
+    <div class="bg-secondary text-white pl-3"><h2>Description</h2></div>
     <br/>
-    <div>
-      <button class="btn btn-dark ml-2 px-5  mx-3">Edit</button>
-      <button class="btn btn-dark ml-2 px-5  mx-3">Assign</button>
-      <button class="btn btn-dark ml-2 px-5  mx-3">Start</button>
-      <button class="btn btn-dark ml-2 px-5  mx-3">Resolve</button>
-      <button class="btn btn-dark ml-2 px-5  mx-3">Ready for test</button>
-      <button class="btn btn-dark ml-2 px-5  mx-3">ReOpen</button>
-      <button class="btn btn-dark ml-2 px-5  mx-3">Close</button>
+    <div class="mx-auto">
+      <button class="btn btn-dark ml-4 px-4  mx-3" (click)=openEdit()>Edit</button>
+      <button class="btn btn-dark ml-4 px-4  mx-3" (click)=openAssign()>Assign</button>
+      <button class="btn btn-dark ml-4 px-4  mx-3">Start</button>
+      <button class="btn btn-dark ml-4 px-4  mx-3">Resolve</button>
+      <button class="btn btn-dark ml-4 px-4  mx-3">Ready for test</button>
+      <button class="btn btn-dark ml-4 px-4  mx-3">ReOpen</button>
+      <button class="btn btn-dark ml-4 px-4  mx-3">Close</button>
     </div>
   </div>
   <br/>
   <div>
-    <div class="bg-secondary text-white"><h2>Details</h2></div>
+    <div class="bg-secondary text-white pl-3"><h2>Details:</h2></div>
     <div class = "row my-4">
       <div class = "col-md-6">
         <div class = "row">
@@ -59,9 +71,9 @@
   </div>
 
   <div>
-    <div class="bg-secondary text-white"><h2>Description</h2></div>
+    <div class="bg-secondary text-white pl-3"><h2>Description:</h2></div>
     <div class = "row my-4">
-      <div class = "col-md-6 form-group pi-100">
+      <div class = "col-md-6 form-group">
         <textarea class="form-control h-100" >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum ipsa recusandae sint. Accusamus consequuntur facilis</textarea>
       </div>
       <div class = "col-md-6">
@@ -103,21 +115,22 @@
       </div>
     </div>
   </div>
+
   <div>
-    <div class="bg-secondary text-white"><h2>Description</h2></div>
+    <div class="bg-secondary text-white pl-3"><h2>Attachment:</h2></div>
     <div class = "form-group pi-100 my-4">
       <textarea class="form-control h-100" >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum ipsa recusandae sint. Accusamus consequuntur facilis</textarea>
     </div>
   </div>
   <div>
-    <div class="bg-secondary text-white"><h2>Description</h2></div>
+    <div class="bg-secondary text-white pl-3"><h2>Comments</h2></div>
     <form>
     <div class="row my-4">
-      <div class = "col-md-8 pi-100">
+      <div class = "col-md-8">
         <textarea class="form-control h-100 d-block" >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum ipsa recusandae sint. Accusamus consequuntur facilis</textarea>
       </div>
       <div class="col-md-4">
-        <button class="btn btn-dark d-block">Add comment</button>
+        <button class="btn btn-dark d-block comm">Add comment</button>
       </div>
     </div>
     </form>

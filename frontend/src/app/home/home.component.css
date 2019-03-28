@@ -17,3 +17,8 @@
 .b-1{
   border: 2px;
 }
+
+.n-b{
+  border: 2px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
