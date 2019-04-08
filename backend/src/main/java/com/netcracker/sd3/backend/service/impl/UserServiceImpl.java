@@ -33,14 +33,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UsersEntity> getAll() {
-        return (List<UsersEntity>) userRepository.findAll();
+    public Iterable<UsersEntity> getAll() {
+        return userRepository.findAll();
     }
 
     @Override
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
-
-
 }

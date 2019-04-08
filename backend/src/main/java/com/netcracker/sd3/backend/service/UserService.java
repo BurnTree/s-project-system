@@ -9,6 +9,6 @@ public interface UserService {
     UsersEntity addUser(UsersEntity user);
     UsersEntity getByName(String name);
     Optional<UsersEntity> findById(Long id);
-    List<UsersEntity> getAll();
+    Iterable<UsersEntity> getAll();
     void deleteUser(Long id);
 }
