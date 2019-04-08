@@ -20,8 +20,13 @@ public class UserController {
     }
 
     @PostMapping
-    public UsersEntity saveUser(@RequestBody UsersEntity account) {
+    public UsersEntity newUser(@RequestBody UsersEntity account) {
         return userService.addUser(account);
+    }
+
+    @GetMapping(value = "/{id}")
+    public UsersEntity findUserById(@PathVariable(name = "id") Long id) {
+        return userService.findById(id).get();
     }
 
     @DeleteMapping(value = "/{id}")

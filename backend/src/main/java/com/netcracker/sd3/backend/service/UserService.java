@@ -1,13 +1,14 @@
 package com.netcracker.sd3.backend.service;
 
 import com.netcracker.sd3.backend.entity.UsersEntity;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
     UsersEntity addUser(UsersEntity user);
     UsersEntity getByName(String name);
+    Optional<UsersEntity> findById(Long id);
     List<UsersEntity> getAll();
     void deleteUser(Long id);
 }

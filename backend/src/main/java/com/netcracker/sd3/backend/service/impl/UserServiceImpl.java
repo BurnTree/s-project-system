@@ -4,10 +4,10 @@ import com.netcracker.sd3.backend.entity.UsersEntity;
 import com.netcracker.sd3.backend.repositories.UserRepository;
 import com.netcracker.sd3.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -25,6 +25,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public UsersEntity getByName(String name) {
         return userRepository.findByName(name);
+    }
+
+    @Override
+    public Optional<UsersEntity> findById(Long id) {
+        return userRepository.findById(id);
     }
 
     @Override
