@@ -7,10 +7,11 @@ import {LoginComponent} from './modules/layout/entry/login/login.component';
 import {RegisterComponent} from './modules/layout/entry/register/register.component';
 
 const appRoutes: Routes = [
-  { path: 'project', component: ProjectComponent, pathMatch: 'full'},
   { path: '', component: HomeComponent, pathMatch: 'full'},
+  { path: 'project/:id',
+    component: ProjectComponent,
+    pathMatch: 'full'},
   { path: 'login', component: LoginComponent, pathMatch: 'full'},
-  { path: 'register', component: RegisterComponent, pathMatch: 'full'},
   { path: '**', redirectTo: '/'}
 ];
 

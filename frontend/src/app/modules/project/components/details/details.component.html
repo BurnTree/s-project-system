@@ -6,14 +6,14 @@
       <div class = "row">
         <div class = "col-md-2"><p align = "right">Priority</p></div>
         <div class = "col-md-4">
-          <input type="text" size="80" class="form-control">
+          <input type="text" size="80" class="form-control" value='{{task.priority.namePriority}}' disabled="disabled">
         </div>
       </div>
       <br>
       <div class = "row">
         <div class = "col-md-2"><p align = "right">Status</p></div>
         <div class = "col-md-4">
-          <input type="text" size="80" class="form-control">
+          <input type="text" size="80" class="form-control" value='{{task.status.name}}' disabled="disabled">
         </div>
       </div>
     </div>
@@ -21,21 +21,21 @@
       <div class = "row">
         <div class = "col-md-2"><p align = "right">Assignee</p></div>
         <div class = "col-md-4">
-          <input type="text" size="80" class="form-control">
+          <input type="text" size="80" class="form-control" value='{{task.assigne.firstName}} {{task.assigne.secondName}}' disabled="disabled">
         </div>
       </div>
       <br>
       <div class = "row">
         <div class = "col-md-2"><p align = "right">Reporter</p></div>
         <div class = "col-md-4">
-          <input type="text" size="80" class="form-control">
+          <input type="text" size="80" class="form-control" value='{{task.reporter.firstName}} {{task.reporter.secondName}}' disabled="disabled">
         </div>
       </div>
       <br>
       <div class = "row">
         <div class = "col-md-2"><p align = "right">Estmination</p></div>
         <div class = "col-md-4">
-          <input type="text" size="80" class="form-control">
+          <input type="text" size="80" class="form-control" value='{{task.estimation}}' disabled="disabled">
         </div>
       </div>
     </div>

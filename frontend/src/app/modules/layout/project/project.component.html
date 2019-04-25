@@ -8,10 +8,11 @@
       <button type="button" routerLink="/login" class="btn btn-secondary mx-4">Login in</button>
     </div>
   </div>
-  <div class="ml-5 my-4"><h1>Project</h1></div>
-  <app-des-but></app-des-but>
-  <app-details></app-details>
-  <app-description></app-description>
-  <app-attachment></app-attachment>
-  <app-comment></app-comment>
+  <div class="ml-5 my-4"><h1>Task {{task.project.nameProject}}-{{task.idTask}}</h1></div>
+
+  <app-des-but [task]="task"></app-des-but>
+  <app-details [task]="task"></app-details>
+  <app-description [task]="task"></app-description>
+  <app-attachment [task]="task"></app-attachment>
+  <app-comment [task]="task"></app-comment>
 </div>

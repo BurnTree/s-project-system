@@ -1,6 +1,6 @@
 package com.netcracker.sd3.backend.service.impl;
 
-import com.netcracker.sd3.backend.entity.TaskEntity;
+import com.netcracker.sd3.backend.entity.Task;
 import com.netcracker.sd3.backend.repositories.TaskRepository;
 import com.netcracker.sd3.backend.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,23 +15,23 @@ public class TaskServiceImpl implements TaskService {
     TaskRepository taskRepository;
 
     @Override
-    public TaskEntity addTask(TaskEntity task) {
-        TaskEntity newTask = taskRepository.save(task);
+    public Task addTask(Task task) {
+        Task newTask = taskRepository.save(task);
         return newTask;
     }
 
     @Override
-    public Optional<TaskEntity> findById(Long id) {
-        return taskRepository.findById(id);
+    public Optional<Task> findById(long idTask) {
+        return taskRepository.findById(idTask);
     }
 
     @Override
-    public List<TaskEntity> getAll() {
-        return (List<TaskEntity>) taskRepository.findAll();
+    public List<Task> getAll() {
+        return (List<Task>) taskRepository.findAll();
     }
 
     @Override
-    public void deleteTask(Long id) {
+    public void deleteTask(long id) {
         taskRepository.deleteById(id);
     }
 }

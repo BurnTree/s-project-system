@@ -1,35 +1,64 @@
 package com.netcracker.sd3.backend.entity;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 import java.util.Objects;
 
 @Entity
 @Table(name = "task", schema = "projectdatabase", catalog = "")
-public class TaskEntity {
-    private int idTask;
+public class Task {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long idTask;
+
+
+    @ManyToOne(targetEntity = Project.class)
+    private Project project;
     private String description;
     private Date dueData;
     private Date estimation;
-    private String assigne;
+
+    @NotNull
+    @ManyToOne(targetEntity = UsersEntity.class)
+    private UsersEntity assigne;
     private String ticketCode;
+
+    //    @Temporal(TemporalType.DATE)
     private Date createDate;
+
+    //  @Temporal(TemporalType.DATE)
     private Date updateDate;
     private String comments;
     private String attachment;
 
-    @Id
-    @Column(name = "idTask")
-    public int getIdTask() {
+
+    @ManyToOne(targetEntity = Priority.class)
+    private Priority priority;
+    @ManyToOne(targetEntity = UsersEntity.class)
+    private UsersEntity reporter;
+
+    @NotNull
+    @ManyToOne(targetEntity = Status.class)
+    private Status status;
+
+    public long getIdTask() {
         return idTask;
     }
-
-    public void setIdTask(int idTask) {
+    public void setIdTask(long idTask) {
         this.idTask = idTask;
     }
 
-    @Basic
-    @Column(name = "Description")
+    public UsersEntity getReporter() {
+        return reporter;
+    }
+
+    public void setReporter(UsersEntity reporter) {
+        this.reporter = reporter;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -38,8 +67,6 @@ public class TaskEntity {
         this.description = description;
     }
 
-    @Basic
-    @Column(name = "DueData")
     public Date getDueData() {
         return dueData;
     }
@@ -48,8 +75,6 @@ public class TaskEntity {
         this.dueData = dueData;
     }
 
-    @Basic
-    @Column(name = "Estimation")
     public Date getEstimation() {
         return estimation;
     }
@@ -58,18 +83,6 @@ public class TaskEntity {
         this.estimation = estimation;
     }
 
-    @Basic
-    @Column(name = "Assigne")
-    public String getAssigne() {
-        return assigne;
-    }
-
-    public void setAssigne(String assigne) {
-        this.assigne = assigne;
-    }
-
-    @Basic
-    @Column(name = "TicketCode")
     public String getTicketCode() {
         return ticketCode;
     }
@@ -78,8 +91,6 @@ public class TaskEntity {
         this.ticketCode = ticketCode;
     }
 
-    @Basic
-    @Column(name = "CreateDate")
     public Date getCreateDate() {
         return createDate;
     }
@@ -88,8 +99,6 @@ public class TaskEntity {
         this.createDate = createDate;
     }
 
-    @Basic
-    @Column(name = "UpdateDate")
     public Date getUpdateDate() {
         return updateDate;
     }
@@ -98,8 +107,6 @@ public class TaskEntity {
         this.updateDate = updateDate;
     }
 
-    @Basic
-    @Column(name = "Comments")
     public String getComments() {
         return comments;
     }
@@ -108,8 +115,6 @@ public class TaskEntity {
         this.comments = comments;
     }
 
-    @Basic
-    @Column(name = "Attachment")
     public String getAttachment() {
         return attachment;
     }
@@ -118,11 +123,43 @@ public class TaskEntity {
         this.attachment = attachment;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public UsersEntity getAssigne() {
+        return assigne;
+    }
+
+    public void setAssigne(UsersEntity assigne) {
+        this.assigne = assigne;
+    }
+
+    public Priority getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TaskEntity that = (TaskEntity) o;
+        Task that = (Task) o;
         return idTask == that.idTask &&
                 Objects.equals(description, that.description) &&
                 Objects.equals(dueData, that.dueData) &&
@@ -132,11 +169,14 @@ public class TaskEntity {
                 Objects.equals(createDate, that.createDate) &&
                 Objects.equals(updateDate, that.updateDate) &&
                 Objects.equals(comments, that.comments) &&
-                Objects.equals(attachment, that.attachment);
+                Objects.equals(project, that.project) &&
+                Objects.equals(reporter, that.reporter) &&
+                Objects.equals(priority, that.priority) &&
+                Objects.equals(status, that.status);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idTask, description, dueData, estimation, assigne, ticketCode, createDate, updateDate, comments, attachment);
+        return Objects.hash(idTask, description, dueData, estimation, assigne, ticketCode, createDate, updateDate, comments, attachment, status);
     }
 }

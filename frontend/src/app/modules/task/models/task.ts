@@ -1,30 +1,37 @@
+import {Project} from "./project";
+import {User} from './user';
+import {Priority} from './priority';
+import {Status} from './status';
+
 export class Task {
-  id: string;
-  status: string;
+  idTask: number;
+  project: Project;
+  code: string;
   description: string;
-  dueData: string;
-  estimation: string;
-  assigne: string;
-  ticketCode: string;
-  createDate: string;
-  updateDate: string;
-  reporter: string;
-  priority: string;
-  project: string;
-  static cloneBase(task: Task): Task {
-    const clonedTask: Task = new Task();
-    clonedTask.id = task.id;
-    clonedTask.status = task.status;
-    clonedTask.description = task.description;
-    clonedTask.dueData = task.dueData;
-    clonedTask.estimation = task.estimation;
-    clonedTask.assigne = task.assigne;
-    clonedTask.ticketCode = task.ticketCode
-    clonedTask.createDate = task.createDate
-    clonedTask.updateDate = task.updateDate;
-    clonedTask.reporter = task.reporter;
-    clonedTask.priority = task.priority;
-    clonedTask.project = task.project;
-    return clonedTask;
+  priority: Priority;
+  status: Status;
+  createDate: Date;
+  dueData: Date;
+  updateDate: Date;
+  estimation: number;
+  logWork: number;
+  assigne: User;
+  reporter: User;
+  attachment: string;
+  comments: string;
+  constructor(){
+    this.description = "";
+    this.createDate = new Date();
+    this.dueData = new Date();
+    this.updateDate = new Date();
+    this.status = new Status();
+    this.assigne = new User();
+    this.reporter = new User();
+    this.project = new Project();
+    this.priority = new Priority();
+    this.estimation = 0;
+    this.logWork =  0;
+    this.attachment = "";
+    this.comments = "";
   }
 }

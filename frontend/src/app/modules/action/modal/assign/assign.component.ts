@@ -1,5 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {BsModalRef} from 'ngx-bootstrap';
+import {Task} from "../../../task/models/task";
 
 @Component({
   selector: 'app-assign',

@@ -4,7 +4,7 @@ import {NUserComponent} from './user/n-user.component';
 import {NTaskComponent} from './task/n-task.component';
 import {BrowserModule} from '@angular/platform-browser';
 import {RouterModule} from '@angular/router';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppComponent} from "../../../../app.component";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
@@ -19,7 +19,8 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
     BrowserModule,
     RouterModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule
   ],
   providers: [],
   entryComponents: [

@@ -9,21 +9,21 @@
   <form>
     <div class="form-group">
       <label class="col-form-label">Project code:</label>
-      <input type="text" class="form-control">
+      <input type="text" class="form-control" [ngModel]="newTask.idTask" (ngModelChange)="newTask.idTask = $event" [ngModelOptions]="{standalone: true}">
     </div>
     <div class="form-group">
       <label class="col-form-label">Description</label>
-      <input type="text" class="form-control">
+      <input type="text" class="form-control" [ngModel]="newTask.description" (ngModelChange)="newTask.description = $event" [ngModelOptions]="{standalone: true}">
     </div>
     <div class="form-group">
       <label class="col-form-label">Priority</label>
       <div class="form-group">
-        <select class="custom-select d-block" id="role" required="">
-          <option value="">blocker</option>
-          <option>critical</option>
-          <option>major</option>
-          <option>normal</option>
-          <option>minor</option>
+        <select class="custom-select d-block" id="role" required="" [ngModel]="newTask.priority.id" (ngModelChange)="newTask.priority.id = $event" [ngModelOptions]="{standalone: true}">
+          <option value="1">blocker</option>
+          <option value="2">critical</option>
+          <option value="3">major</option>
+          <option value="4">normal</option>
+          <option value="5">minor</option>
         </select>
       </div>
     </div>
@@ -38,14 +38,14 @@
     </div>
     <div class="form-group">
       <label class="col-form-label">Estmation</label>
-      <input type="text" class="form-control">
+      <input type="text" class="form-control" [ngModel]="newTask.estimation" (ngModelChange)="newTask.estimation = $event" [ngModelOptions]="{standalone: true}">
     </div>
     <div class="form-group">
       <label class="col-form-label">Assigne</label>
-      <input type="text" class="form-control">
+      <input type="text" class="form-control" [ngModel]="newTask.assigne.id" (ngModelChange)="newTask.assigne.id = $event" [ngModelOptions]="{standalone: true}">
     </div>
   </form>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-dark text-white" (click)="activeRef.hide('Save click')">Create</button>
+  <button type="button" class="btn btn-dark text-white" (click)=_createNewTask()>Create</button>
 </div>

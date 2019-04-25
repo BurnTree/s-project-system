@@ -8,19 +8,31 @@
 <div class="modal-body">
   <form>
     <div class="form-group">
-      <label class="col-form-label">Code:</label>
-      <input type="text" class="form-control">
+      <label class="col-form-label">First name:</label>
+      <input type="text" class="form-control" [ngModel]="newUser.firstName" (ngModelChange)="newUser.firstName = $event" [ngModelOptions]="{standalone: true}">
     </div>
     <div class="form-group">
-      <select class="custom-select d-block" id="role" required="">
-        <option value="">Project manager</option>
-        <option>Developer</option>
-        <option>Tester</option>
+      <label class="col-form-label">Second name:</label>
+      <input type="text" class="form-control" [ngModel]="newUser.secondName" (ngModelChange)="newUser.secondName = $event" [ngModelOptions]="{standalone: true}">
+    </div>
+    <div class="form-group">
+      <label class="col-form-label">Login:</label>
+      <input type="text" class="form-control" [ngModel]="newUser.sign.login" (ngModelChange)="newUser.sign.login = $event" [ngModelOptions]="{standalone: true}">
+    </div>
+    <div class="form-group">
+      <label class="col-form-label">Password:</label>
+      <input type="text" class="form-control" [ngModel]="newUser.sign.password" (ngModelChange)="newUser.sign.password = $event" [ngModelOptions]="{standalone: true}">
+    </div>
+    <div class="form-group">
+      <select class="custom-select d-block" id="role" required="" [ngModel]="newUser.role.id" (ngModelChange)="newUser.role.id = $event" [ngModelOptions]="{standalone: true}">
+        <option value="2">Project manager</option>
+        <option value="3">Developer</option>
+        <option value="4">Tester</option>
       </select>
     </div>
   </form>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-dark text-white" (click)="activeRef.hide('Save click')">Create</button>
+  <button type="button" class="btn btn-dark text-white" (click)="_createNewUser()">Create</button>
 </div>
 

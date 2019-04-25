@@ -24,20 +24,11 @@ export class ButNewComponent {
 
   openNProject() {
     this.modalRef = this.modalService.show(NProjectComponent);
-    this.modalRef.content.onClose.subscribe(result => {
-      console.log('results', result);
-    });
   }
   openNTask() {
     this.modalRef = this.modalService.show(NTaskComponent);
-    this.modalRef.content.onClose.subscribe(result => {
-      console.log('results', result);
-    });
   }
   openNUser() {
     this.modalRef = this.modalService.show(NUserComponent);
-    this.modalRef.content.onClose.subscribe(result => {
-      console.log('results', result);
-    });
   }
 }

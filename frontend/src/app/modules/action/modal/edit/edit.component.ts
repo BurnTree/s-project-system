@@ -1,5 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {BsModalRef} from 'ngx-bootstrap';
+import {Task} from "../../../task/models/task";
 
 @Component({
   selector: 'app-edit',
@@ -7,5 +8,7 @@ import {BsModalRef} from 'ngx-bootstrap';
 })
 
 export class EditComponent {
+  @Input()
+  public task: Task;
   constructor(public activeRef: BsModalRef) { }
 }

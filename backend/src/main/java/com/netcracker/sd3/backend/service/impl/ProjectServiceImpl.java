@@ -1,6 +1,6 @@
 package com.netcracker.sd3.backend.service.impl;
 
-import com.netcracker.sd3.backend.entity.ProjectEntity;
+import com.netcracker.sd3.backend.entity.Project;
 import com.netcracker.sd3.backend.repositories.ProjectRepository;
 import com.netcracker.sd3.backend.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,19 +16,19 @@ public class ProjectServiceImpl implements ProjectService {
 
 
     @Override
-    public ProjectEntity addProject(ProjectEntity project) {
-        ProjectEntity nProject = projectRepository.save(project);
+    public Project addProject(Project project) {
+        Project nProject = projectRepository.save(project);
         return nProject;
     }
 
     @Override
-    public Optional<ProjectEntity> findById(Long id) {
+    public Optional<Project> findById(Long id) {
         return projectRepository.findById(id);
     }
 
     @Override
-    public List<ProjectEntity> getAll() {
-        return (List<ProjectEntity>) projectRepository.findAll();
+    public List<Project> getAll() {
+        return (List<Project>) projectRepository.findAll();
     }
 
     @Override

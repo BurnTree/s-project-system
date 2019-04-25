@@ -5,26 +5,22 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "role", schema = "projectdatabase", catalog = "")
-public class RoleEntity {
-    private int idRole;
+public class Role {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long idRole;
     private String nameRole;
 
-    @Id
-    @Column(name = "idRole")
-    public int getIdRole() {
+    public long getIdRole() {
         return idRole;
     }
-
-    public void setIdRole(int idRole) {
+    public void setIdRole(long idRole) {
         this.idRole = idRole;
     }
 
-    @Basic
-    @Column(name = "NameRole")
     public String getNameRole() {
         return nameRole;
     }
-
     public void setNameRole(String nameRole) {
         this.nameRole = nameRole;
     }
@@ -33,7 +29,7 @@ public class RoleEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        RoleEntity that = (RoleEntity) o;
+        Role that = (Role) o;
         return idRole == that.idRole &&
                 Objects.equals(nameRole, that.nameRole);
     }

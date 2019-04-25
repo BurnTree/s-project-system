@@ -1,60 +1,57 @@
 package com.netcracker.sd3.backend.entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "personal", schema = "projectdatabase", catalog = "")
-public class PersonalEntity {
-    private int id;
+public class Sign {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private String login;
     private String password;
+    private int usersIdUsers;
 
-    @Basic
-    @Column(name = "id")
-    public int getId() {
+    public long getId() {
         return id;
     }
-
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "login")
     public String getLogin() {
         return login;
     }
-
     public void setLogin(String login) {
         this.login = login;
     }
 
-    @Basic
-    @Column(name = "password")
     public String getPassword() {
         return password;
     }
-
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getUsersIdUsers() {
+        return usersIdUsers;
+    }
+    public void setUsersIdUsers(int usersIdUsers) {
+        this.usersIdUsers = usersIdUsers;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PersonalEntity that = (PersonalEntity) o;
-        return id == that.id &&
-                Objects.equals(login, that.login) &&
-                Objects.equals(password, that.password);
+        Sign sign = (Sign) o;
+        return usersIdUsers == sign.usersIdUsers &&
+                Objects.equals(login, sign.login) &&
+                Objects.equals(password, sign.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, login, password);
+        return Objects.hash(login, password, usersIdUsers);
     }
 }

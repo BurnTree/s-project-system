@@ -2,14 +2,14 @@
   <div class="bg-secondary text-white pl-3"><h2>Description:</h2></div>
   <div class = "row my-4">
     <div class = "col-md-6 form-group">
-      <textarea class="form-control h-100" >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum ipsa recusandae sint. Accusamus consequuntur facilis</textarea>
+      <textarea class="form-control h-100" >{{task.description}}</textarea>
     </div>
     <div class = "col-md-6">
       <div class = "row">
         <div class = "col-md-2"><p align = "right">Created</p></div>
         <div class = "col-md-4">
           <form name="test" method="post">
-            <input type="text" size="80" class="form-control">
+            <input type="text" size="80" class="form-control" value='{{task.createDate}}' disabled="disabled">
           </form>
         </div>
       </div>
@@ -18,7 +18,7 @@
         <div class = "col-md-2"><p align = "right">Updated</p></div>
         <div class = "col-md-4">
           <form name="test" method="post">
-            <input type="text" size="80" class="form-control">
+            <input type="text" size="80" class="form-control" value='{{task.updateDate}}' disabled="disabled">
           </form>
         </div>
       </div>
@@ -27,7 +27,7 @@
         <div class = "col-md-2"><p align = "right">Resolved</p></div>
         <div class = "col-md-4">
           <form name="test" method="post">
-            <input type="text" size="80" class="form-control">
+            <input type="text" size="80" class="form-control" disabled="disabled">
           </form>
         </div>
       </div>
@@ -36,7 +36,7 @@
         <div class = "col-md-2"><p align = "right">Closed</p></div>
         <div class = "col-md-4">
           <form name="test" method="post">
-            <input type="text" size="80" class="form-control">
+            <input type="text" size="80" class="form-control" disabled="disabled">
           </form>
         </div>
       </div>

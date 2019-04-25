@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api/user/")
 public class UserController {
@@ -24,9 +26,10 @@ public class UserController {
         return userService.addUser(account);
     }
 
-    @GetMapping(value = "/{id}")
-    public UsersEntity findUserById(@PathVariable(name = "id") Long id) {
-        return userService.findById(id).get();
+    @GetMapping(value = "/{idUsers}")
+    public ResponseEntity<UsersEntity> findUserById(@PathVariable(name = "idUsers") Long idUsers) {
+        Optional<UsersEntity> user = userService.findById(idUsers);
+        return ResponseEntity.ok(user.get());
     }
 
     @DeleteMapping(value = "/{id}")
