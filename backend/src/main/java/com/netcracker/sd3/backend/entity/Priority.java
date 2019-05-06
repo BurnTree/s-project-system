@@ -2,7 +2,6 @@ package com.netcracker.sd3.backend.entity;
 
 import javax.persistence.*;
 import java.util.Objects;
-
 @Entity
 @Table(name = "priority", schema = "projectdatabase", catalog = "")
 public class Priority {

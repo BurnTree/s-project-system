@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/user/")
+@RequestMapping("/api/user")
 public class UserController {
     private UserService userService;
 
@@ -28,8 +28,8 @@ public class UserController {
 
     @GetMapping(value = "/{idUsers}")
     public ResponseEntity<UsersEntity> findUserById(@PathVariable(name = "idUsers") Long idUsers) {
-        Optional<UsersEntity> user = userService.findById(idUsers);
-        return ResponseEntity.ok(user.get());
+        UsersEntity user = userService.findById(idUsers);
+        return ResponseEntity.ok(user);
     }
 
     @DeleteMapping(value = "/{id}")

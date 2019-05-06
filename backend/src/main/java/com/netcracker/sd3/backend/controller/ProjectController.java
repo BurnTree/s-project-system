@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/project/")
+@RequestMapping("/api/project")
 public class ProjectController {
 
     public ProjectService projectService;
@@ -19,4 +19,7 @@ public class ProjectController {
 
     @GetMapping(value = "/{id}")
     public Project findProjectById(@PathVariable(name = "id") Long id){return projectService.findById(id).get();}
+
+    @GetMapping(value = "/all")
+    public Iterable<Project> getAll(){return projectService.getAll();}
 }

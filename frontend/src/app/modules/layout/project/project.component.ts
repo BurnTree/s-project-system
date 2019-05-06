@@ -2,7 +2,7 @@ import {Component, OnInit, TemplateRef} from '@angular/core';
 import {TaskService} from "../../../services/task.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import { map } from "rxjs/operators";
-import {Task} from "../../task/models/task";
+import {Task} from "../../models/task";
 import {Subscription} from "rxjs";
 
 @Component({

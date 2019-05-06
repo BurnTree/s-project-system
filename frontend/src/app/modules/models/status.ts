@@ -1,7 +1,7 @@
 export class Status {
-  id: number;
+  idStatus: number;
   name: string;
   constructor(){
-    this.name ="";
-}
+    this.idStatus = 1;
+  }
 }

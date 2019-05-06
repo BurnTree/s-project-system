@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/task/")
+@RequestMapping("/api/task")
 public class TaskController {
-
+    //todo: посмотреть сохранение
     public TaskService taskService;
 
     @Autowired

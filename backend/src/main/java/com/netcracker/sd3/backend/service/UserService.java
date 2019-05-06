@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface UserService {
     UsersEntity addUser(UsersEntity user);
     UsersEntity getByName(String name);
-    Optional<UsersEntity> findById(Long id);
+    UsersEntity findById(Long id);
     Iterable<UsersEntity> getAll();
     void deleteUser(Long id);
 }

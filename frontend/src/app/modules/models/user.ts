@@ -2,7 +2,7 @@ import {Role} from "./role";
 import {Sign} from "./sign";
 
 export class User{
-  id: number;
+  idUsers: number;
   firstName: string;
   name: string;
   secondName: string;

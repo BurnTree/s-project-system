@@ -8,9 +8,7 @@ import {RegisterComponent} from './modules/layout/entry/register/register.compon
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full'},
-  { path: 'project/:id',
-    component: ProjectComponent,
-    pathMatch: 'full'},
+  { path: 'project/:id', component: ProjectComponent, pathMatch: 'full'},
   { path: 'login', component: LoginComponent, pathMatch: 'full'},
   { path: '**', redirectTo: '/'}
 ];

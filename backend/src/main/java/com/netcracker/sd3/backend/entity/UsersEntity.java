@@ -14,11 +14,11 @@ public class UsersEntity {
     private String firstName;
     private String secondName;
 
-    @NotNull
+    //@NotNull
     @OneToOne(targetEntity = Sign.class)
     private Sign sign;
 
-    @NotNull
+    //@NotNull
     @ManyToOne(targetEntity = Role.class)
     private Role role;
 

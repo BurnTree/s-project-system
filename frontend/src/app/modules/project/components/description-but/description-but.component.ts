@@ -2,7 +2,7 @@ import {Component, Input} from '@angular/core';
 import {EditComponent} from "../../../action/modal/edit/edit.component";
 import {AssignComponent} from "../../../action/modal/assign/assign.component";
 import {BsModalRef, BsModalService} from "ngx-bootstrap";
-import {Task} from "../../../task/models/task";
+import {Task} from "../../../models/task";
 
 @Component({
   selector: 'app-des-but',

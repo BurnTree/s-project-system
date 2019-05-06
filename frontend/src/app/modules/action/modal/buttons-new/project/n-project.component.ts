@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {BsModalRef} from 'ngx-bootstrap';
-import {User} from "../../../../task/models/user";
+import {User} from "../../../../models/user";
 import {Subscription} from "rxjs";
-import {Project} from "../../../../task/models/project";
+import {Project} from "../../../../models/project";
 import {ProjectService} from "../../../../../services/project.service";
 
 @Component({

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -16,12 +18,15 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<ProjectModel> getAll() {
-        return null;/*todo: getall*/
+        RestTemplate restTemplate = new RestTemplate();
+        ProjectModel[] projectModels = restTemplate.getForObject(backendServerUrl + "/api/project/all",ProjectModel[].class);
+        return projectModels == null ? Collections.emptyList() : Arrays.asList(projectModels);
     }
 
     @Override
     public ProjectModel findById(long id) {
-        return null;/*todo: find by id*/
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(backendServerUrl + "/api/project/" + id, ProjectModel.class);
     }
 
     @Override

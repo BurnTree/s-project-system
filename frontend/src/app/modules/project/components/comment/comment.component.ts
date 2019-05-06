@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Task} from 'src/app/modules/task/models/task';
+import {Task} from 'src/app/modules/models/task';
 
 @Component({
   selector: 'app-comment',

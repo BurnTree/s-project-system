@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {BsModalRef} from 'ngx-bootstrap';
 import {FormBuilder, FormControl} from "@angular/forms";
-import {Task} from "../../../../task/models/task";
+import {Task} from "../../../../models/task";
 import {Subscription} from "rxjs";
-import {User} from "../../../../task/models/user";
+import {User} from "../../../../models/user";
 import {TaskService} from "../../../../../services/task.service";
 import {UserService} from "../../../../../services/user.service";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-n-user',
@@ -19,7 +20,7 @@ export class NUserComponent implements OnInit{
   public newUser: User = new User();
   private subscriptions: Subscription[] = [];
 
-  constructor(public userService: UserService, public activeRef: BsModalRef) { }
+  constructor(public userService: UserService, public activeRef: BsModalRef, public http: HttpClient) { }
 
   ngOnInit(): void {
   }
@@ -30,5 +31,13 @@ export class NUserComponent implements OnInit{
       this.newUser = new User();
     }));
     console.log(this.newUser);
+  }
+
+  public ping() {
+    this.http.get('https://example.com/api/things')
+      .subscribe(
+        data => console.log(data),
+        err => console.log(err)
+      );
   }
 }

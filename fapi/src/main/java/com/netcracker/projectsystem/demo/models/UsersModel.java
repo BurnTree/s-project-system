@@ -55,4 +55,5 @@ public class UsersModel {
     public void setRole(RoleModel role) {
         this.role = role;
     }
+
 }

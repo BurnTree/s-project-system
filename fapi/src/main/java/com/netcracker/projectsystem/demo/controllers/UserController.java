@@ -7,25 +7,22 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/user/")
+@RequestMapping("/api/user")
 public class UserController {
     public UserService userService;
 
     @Autowired
     public UserController(UserService userService) {this.userService = userService; }
 
-   /* @GetMapping(value = "/all")
+    @GetMapping(value = "/all")
     public ResponseEntity getAllTask(){
         return ResponseEntity.ok(userService.getAll());
     }
-*/
 
-   /*
     @GetMapping(value = "/{id}")
-    public TaskModel  findTaskById(@PathVariable(name = "id") long id) {
-        return taskService.findById(id);
+    public UsersModel  findTaskById(@PathVariable(name = "id") long id) {
+        return userService.findById(id);
     }
-*/
 
     @PostMapping
     public ResponseEntity<UsersModel> saveUser(@RequestBody UsersModel user) {

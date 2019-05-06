@@ -3,7 +3,5 @@ export class Sign {
   login: string;
   password: string;
   constructor(){
-    this.login = "";
-    this.password = "";
   }
 }
