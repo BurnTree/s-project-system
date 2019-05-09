@@ -10,4 +10,5 @@ public interface TaskService {
     Optional<Task> findById(long id);
     List<Task> getAll();
     void deleteTask(long id);
+    Task update(Task task);
 }

@@ -24,4 +24,7 @@ public class TaskController {
 
     @PostMapping
     public Task newTask(@RequestBody Task task){ return taskService.addTask(task);}
+
+    @PutMapping(value = "{id}")
+    public Task updateTask(@RequestBody Task task){return taskService.update(task);}
 }

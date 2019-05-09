@@ -4,7 +4,11 @@
   <div class="mx-auto my-4">
     <button class="btn btn-dark ml-4 px-4  mx-3" (click)=openEdit()>Edit</button>
     <button class="btn btn-dark ml-4 px-4  mx-3" (click)=openAssign()>Assign</button>
-    <button class="btn btn-dark ml-4 px-4  mx-3">Start</button>
+    <button class="btn btn-dark ml-4 px-4  mx-3"
+            (click)=taskStart()
+            [disabled]="task.status.idStatus !== 1">
+      Start
+    </button>
     <button class="btn btn-dark ml-4 px-4  mx-3">Resolve</button>
     <button class="btn btn-dark ml-4 px-4  mx-3">Ready for test</button>
     <button class="btn btn-dark ml-4 px-4  mx-3">ReOpen</button>

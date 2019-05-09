@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="d-flex justify-content-center h-100">
+    <div class="card">
+      <div class="card-header bg-dark text-white text-center">
+      <h2>Sign in</h2>
+    </div>
+    <div class="card-body">
+      <form name="loginFormGroup" (ngSubmit)="onLoginSubmit()" [formGroup]="loginFormGroup">
+        <div class="form-group">
+          <input type="text"
+                 class="form-control"
+                 placeholder="Login"
+                 formControlName="login">
+        </div>
+        <div class="form-group">
+          <input type="password"
+                 class="form-control"
+                 placeholder="Password"
+                 formArrayName="password">
+        </div>
+          <button type="submit"
+                  class="btn mx-1 px-4 btn-dark login-btn float-right">
+            Login
+          </button>
+      </form>
+    </div>
+    </div>
+  </div>
+</div>
+

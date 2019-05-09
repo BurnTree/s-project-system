@@ -4,7 +4,7 @@ import {HttpClient, HttpRequest} from "@angular/common/http";
 import {User} from "../modules/models/user";
 import {Sign} from "../modules/models/sign";
 import {Observable} from "rxjs";
-//import 'rxjs/add/operator/map'
+import {map} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -17,16 +17,17 @@ export class AuthService {
 //todo: ты не доделал регистрацию
 
   login(user:User) {
-    return this.http.post <any>('/token/generate-token', user);/*
-      .map(user => {
+    return this.http.post <any>('/token/generate-token', user).pipe(
+      map(user => {
       // login successful if there's a jwt token in the response
       if (user && user.token) {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem('currentUser', JSON.stringify(user));
+        console.log(user);
       }
 
       return user;
-    });*/
+    }))
   }
 
   public getToken(): string {

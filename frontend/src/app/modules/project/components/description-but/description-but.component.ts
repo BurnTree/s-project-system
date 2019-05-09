@@ -28,4 +28,10 @@ export class DescriptionButComponent {
       console.log('results', result);
     });
   }
+
+  taskStart(){
+    this.task.status.idStatus = 2;
+    this.task.status.name = "";
+    
+  }
 }

@@ -1,10 +1,8 @@
 package com.netcracker.sd3.backend.entity;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -18,19 +16,26 @@ public class Task {
     @ManyToOne(targetEntity = Project.class)
     private Project project;
     private String description;
-    private Date dueData;
-    private Date estimation;
 
     @NotNull
     @ManyToOne(targetEntity = UsersEntity.class)
     private UsersEntity assigne;
     private String ticketCode;
 
-    //    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.DATE)
     private Date createDate;
-
-    //  @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.DATE)
     private Date updateDate;
+    @Temporal(TemporalType.DATE)
+    private Date dueData;
+    @Temporal(TemporalType.DATE)
+    private Date estimation;
+    @Temporal(TemporalType.DATE)
+    private Date resolvedDate;
+    @Temporal(TemporalType.DATE)
+    private Date closedDate;
+
+
     private String comments;
     private String attachment;
 
@@ -153,6 +158,22 @@ public class Task {
 
     public void setPriority(Priority priority) {
         this.priority = priority;
+    }
+
+    public Date getResolvedDate() {
+        return resolvedDate;
+    }
+
+    public void setResolvedDate(Date resolvedDate) {
+        this.resolvedDate = resolvedDate;
+    }
+
+    public Date getClosedDate() {
+        return closedDate;
+    }
+
+    public void setClosedDate(Date closedDate) {
+        this.closedDate = closedDate;
     }
 
     @Override

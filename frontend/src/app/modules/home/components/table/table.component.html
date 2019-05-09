@@ -1,0 +1,32 @@
+<table class = "table">
+  <thead class = "thead-dark">
+  <tr>
+    <th>Project Code</th>
+    <th>Task</th>
+    <th>Priority</th>
+    <th>Status</th>
+    <th>Created</th>
+    <th>Update</th>
+    <th>Due Data</th>
+    <th>Estmation</th>
+    <th>Assignee</th>
+    <th>Description</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let t of tasks">
+    <td scope="row">{{t.project.name}} {{t.idTask}}</td>
+    <td>{{t.idTask}}</td>
+    <td>{{t.priority.namePriority}}</td>
+    <td>{{t.status.name}}</td>
+    <td>{{t.createDate}}</td>
+    <td>{{t.updateDate}}</td>
+    <td>{{t.dueData}}</td>
+    <td>{{t.estimation}}</td>
+    <td>{{t.assigne.name}}</td>
+    <td>{{t.description}}</td>
+    <td><a routerLink="/project/{{t.idTask}}" align="center">edit</a></td>
+  </tr>
+  </tbody>
+</table>
