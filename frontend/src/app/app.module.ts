@@ -21,6 +21,8 @@ import { TableComponent } from './modules/home/components/table/table.component'
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/http";
 import {ApiInterceptor} from "./httpinterceptor/api.interceptor";
 import {JwtInt} from "./httpinterceptor/jwt.interceptor";
+import {EditComponent} from "./modules/action/modal/edit/edit.component";
+import {AssignComponent} from "./modules/action/modal/assign/assign.component";
 
 @NgModule({
   declarations: [
@@ -45,7 +47,7 @@ import {JwtInt} from "./httpinterceptor/jwt.interceptor";
     ModalModule.forRoot()
   ],
   providers: [
-  /*  {
+    {
     provide: HTTP_INTERCEPTORS,
       useClass: ApiInterceptor,
       multi: true
@@ -54,7 +56,7 @@ import {JwtInt} from "./httpinterceptor/jwt.interceptor";
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInt,
       multi: true
-    }*/
+    }
   ],
   entryComponents: [
     NProjectComponent,

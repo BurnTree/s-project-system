@@ -4,11 +4,15 @@ import com.netcracker.sd3.backend.entity.Task;
 import com.netcracker.sd3.backend.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 
 @RestController
 @RequestMapping("/api/task")
 public class TaskController {
-    //todo: посмотреть сохранение
+
     public TaskService taskService;
 
     @Autowired
@@ -27,4 +31,10 @@ public class TaskController {
 
     @PutMapping(value = "{id}")
     public Task updateTask(@RequestBody Task task){return taskService.update(task);}
+
+    @GetMapping(value = "/page")
+    public Page<Task> getAllTask(@PageableDefault(sort = {"taskId"}, direction = Sort.Direction.DESC)
+                                                    Pageable pageable) {
+        return taskService.getAllInPage(pageable);
+    }
 }

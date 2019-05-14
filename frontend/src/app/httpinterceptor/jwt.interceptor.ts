@@ -23,7 +23,7 @@ export class JwtInt implements HttpInterceptor{
         if (err instanceof HttpErrorResponse) {
           if (err.status === 401) {
             console.log(this.activatedRoute.snapshot);
-            this.router.navigate(['login'], {state: {reason: 'Your authorization is invalid now, log in'}});
+            this.router.navigate(['login']);
           }
         }
       })

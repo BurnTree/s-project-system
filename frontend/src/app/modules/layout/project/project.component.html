@@ -1,11 +1,11 @@
 
-<div class = "container">
+<div class = "container" *ngIf="task">
   <div class = "row n-b py-2">
     <div class = "col-md-6">
       <app-but-new></app-but-new>
     </div>
     <div class = "col-md-6 my-2 text-right">
-      <button type="button" routerLink="/login" class="btn btn-secondary mx-4">Login in</button>
+      <button type="button" class="btn btn-secondary mx-4" (click)=logoutSubmit()>Login out</button>
     </div>
   </div>
   <div class="ml-5 my-4"><h1>Task {{task.project.nameProject}}-{{task.idTask}}</h1></div>

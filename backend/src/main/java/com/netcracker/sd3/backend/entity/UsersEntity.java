@@ -10,7 +10,6 @@ public class UsersEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idUsers;
-    private String name;
     private String firstName;
     private String secondName;
 
@@ -29,12 +28,6 @@ public class UsersEntity {
         this.idUsers = idUsers;
     }
 
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -70,13 +63,12 @@ public class UsersEntity {
         if (o == null || getClass() != o.getClass()) return false;
         UsersEntity that = (UsersEntity) o;
         return idUsers == that.idUsers &&
-                Objects.equals(name, that.name) &&
                 Objects.equals(firstName, that.firstName) &&
                 Objects.equals(secondName, that.secondName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idUsers, name,  firstName, secondName);
+        return Objects.hash(idUsers, firstName, secondName);
     }
 }

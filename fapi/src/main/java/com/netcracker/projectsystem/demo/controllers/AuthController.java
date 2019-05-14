@@ -23,8 +23,8 @@ public class AuthController {
     @Autowired
     private TokenProvider tokenProvider;
 
-    @RequestMapping(value = "/generate-token", method = RequestMethod.POST)
-    public ResponseEntity register(@RequestBody UsersModel user) {
+    @PostMapping(value = "/generate")
+    public ResponseEntity<AuthToken> register(@RequestBody UsersModel user) {
         final Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         user.getSign().getLogin(),
@@ -32,7 +32,7 @@ public class AuthController {
                 )
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        final String token = tokenProvider.generateToken(authentication);
+        String token = tokenProvider.generateToken(authentication);
         return ResponseEntity.ok(new AuthToken(token));
     }
 }

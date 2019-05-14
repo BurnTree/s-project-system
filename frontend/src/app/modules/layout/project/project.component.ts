@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import { map } from "rxjs/operators";
 import {Task} from "../../models/task";
 import {Subscription} from "rxjs";
+import {AuthService} from "../../../services/auth.service";
 
 @Component({
   selector: 'app-project',
@@ -17,7 +18,8 @@ export class ProjectComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private taskService: TaskService) {  }
+    private taskService: TaskService,
+    private authService: AuthService) {  }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
@@ -33,6 +35,11 @@ export class ProjectComponent implements OnInit {
       });
     }
   });
+  }
+
+  public logoutSubmit(){
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
   gotoList() {

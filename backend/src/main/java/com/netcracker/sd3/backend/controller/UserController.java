@@ -1,11 +1,14 @@
 package com.netcracker.sd3.backend.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netcracker.sd3.backend.entity.UsersEntity;
 import com.netcracker.sd3.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -29,6 +32,12 @@ public class UserController {
     @GetMapping(value = "/{idUsers}")
     public ResponseEntity<UsersEntity> findUserById(@PathVariable(name = "idUsers") Long idUsers) {
         UsersEntity user = userService.findById(idUsers);
+        return ResponseEntity.ok(user);
+    }
+
+    @GetMapping(params = "login")
+    public ResponseEntity findByLogin(@RequestParam(name = "login") String login) {
+        UsersEntity user = userService.findByLogin(login);
         return ResponseEntity.ok(user);
     }
 

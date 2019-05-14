@@ -6,6 +6,8 @@ import com.netcracker.sd3.backend.repositories.SignRepository;
 import com.netcracker.sd3.backend.repositories.UserRepository;
 import com.netcracker.sd3.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,18 +21,19 @@ public class UserServiceImpl implements UserService {
     @Autowired
     SignRepository signRepository;
 
+    @Bean
+    BCryptPasswordEncoder encoder() {
+        return new BCryptPasswordEncoder();
+    }
+
     @Override
     public UsersEntity addUser(UsersEntity user) {
         Sign sign = signRepository.save(user.getSign());
+        sign.setPassword(encoder().encode(user.getSign().getPassword()));
         user.setSign(sign);
         UsersEntity nUser = userRepository.save(user);
 
         return nUser;
-    }
-
-    @Override
-    public UsersEntity getByName(String name) {
-        return userRepository.findByName(name);
     }
 
     @Override
@@ -39,6 +42,15 @@ public class UserServiceImpl implements UserService {
         Sign sign = signRepository.findById(user.getSign().getId()).get();
         user.setSign(sign);
         return user;
+    }
+
+
+    @Override
+    public UsersEntity findByLogin(String login) {
+       Optional<UsersEntity> user = Optional.empty();
+       Optional<Sign> sign = signRepository.findByLogin(login);
+       user = userRepository.findBySign(sign.get());
+       return user.get();
     }
 
     @Override

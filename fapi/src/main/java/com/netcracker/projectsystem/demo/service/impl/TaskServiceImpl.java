@@ -3,9 +3,14 @@ package com.netcracker.projectsystem.demo.service.impl;
 import com.netcracker.projectsystem.demo.models.TaskModel;
 import com.netcracker.projectsystem.demo.service.TaskService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -17,6 +22,8 @@ public class TaskServiceImpl implements TaskService {
 
     @Value("${backend.server.url}")
     private String backendServerUrl;
+
+    private RestTemplate restTemplate = new RestTemplate();
 
     @Override
     public List<TaskModel> getAll() {
@@ -35,6 +42,20 @@ public class TaskServiceImpl implements TaskService {
     public TaskModel save(TaskModel task) {
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.postForEntity(backendServerUrl+"/api/task", task, TaskModel.class).getBody();
+    }
+
+    @Override
+    public TaskModel update(TaskModel task) {
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.put(backendServerUrl+"/api/task/"+task.getIdTask(),task);
+        return task;
+    }
+
+    @Override
+    public Page<TaskModel> getAllInPage(int page, int size ) {
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(backendServerUrl+"/api/task/page?page=" + page
+                + "&size="+size, RestPageImpl.class);
     }
 
 

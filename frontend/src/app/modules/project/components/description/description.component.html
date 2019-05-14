@@ -27,7 +27,7 @@
         <div class = "col-md-2"><p align = "right">Resolved</p></div>
         <div class = "col-md-4">
           <form name="test" method="post">
-            <input type="text" size="80" class="form-control" disabled="disabled">
+            <input type="text" size="80" class="form-control" disabled="disabled" value='{{task.resolvedDate}}' >
           </form>
         </div>
       </div>
@@ -36,10 +36,12 @@
         <div class = "col-md-2"><p align = "right">Closed</p></div>
         <div class = "col-md-4">
           <form name="test" method="post">
-            <input type="text" size="80" class="form-control" disabled="disabled">
+            <input type="text" size="80" class="form-control" disabled="disabled" value='{{task.closedDate}}' >
           </form>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<app-edit *ngIf="is"></app-edit>

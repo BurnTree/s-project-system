@@ -19,6 +19,10 @@ export class TaskService {
   }
 
   saveTask(task: Task):Observable<Task>{
-    return this.http.post<Task>('http://localhost:8081/api/task',task);
+    return this.http.post<Task>('api/task',task);
+  }
+
+  updateTask(task: Task):Observable<Task>{
+    return this.http.put<Task>('api/task/'+task.idTask,task);
   }
 }

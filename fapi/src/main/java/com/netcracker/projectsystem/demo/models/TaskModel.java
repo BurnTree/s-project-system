@@ -1,12 +1,13 @@
 package com.netcracker.projectsystem.demo.models;
 
-import java.sql.Date;
+
+import java.util.Date;
 
 public class TaskModel {
     private long idTask;
     private String description;
     private Date dueData;
-    private Date estimation;
+    private int estimation;
     private UsersModel assignee;
     private String ticketCode;
     private Date createDate;
@@ -39,10 +40,10 @@ public class TaskModel {
         this.dueData = dueData;
     }
 
-    public Date getEstimation() {
+    public int getEstimation() {
         return estimation;
     }
-    public void setEstimation(Date estimation) {
+    public void setEstimation(int estimation) {
         this.estimation = estimation;
     }
 

@@ -32,12 +32,4 @@ export class NUserComponent implements OnInit{
     }));
     console.log(this.newUser);
   }
-
-  public ping() {
-    this.http.get('https://example.com/api/things')
-      .subscribe(
-        data => console.log(data),
-        err => console.log(err)
-      );
-  }
 }

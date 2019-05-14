@@ -13,6 +13,8 @@ export class Task {
   createDate: string;
   dueData: Date;
   updateDate: string;
+  resolvedDate: string;
+  closedDate: string;
   estimation: number;
   assigne: User;
   reporter: User;
@@ -25,5 +27,6 @@ export class Task {
     this.reporter = new User();
     this.project = new Project();
     this.priority = new Priority();
+    this.dueData = new Date();
   }
 }

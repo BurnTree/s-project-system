@@ -4,6 +4,7 @@ import {AuthService} from "../../../../services/auth.service";
 import {Router} from "@angular/router";
 import {Sign} from "../../../models/sign";
 import {User} from "../../../models/user";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-login',
@@ -12,8 +13,8 @@ import {User} from "../../../models/user";
 })
 export class LoginComponent {
   public loginFormGroup: FormGroup = new FormGroup({
-    login: new FormControl('', [Validators.required, Validators.minLength(5)]),
-    password: new FormControl('', [Validators.required, Validators.minLength(5)]),
+    login: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required]),
   });
 
 
@@ -23,10 +24,18 @@ export class LoginComponent {
   ) {}
 
   onLoginSubmit() {
-    console.log('sdasdasdasd');
     const user = new User();
     user.sign.login = this.loginFormGroup.controls.login.value;
     user.sign.password = this.loginFormGroup.controls.password.value;
-    this.authService.login(user);
+    this.authService.login(user).subscribe(() => {
+      console.log('in callback');
+      this.router.navigate(['']);
+    }, (e: HttpErrorResponse) => {
+      console.log(e);
+      if (e.status === 401) {
+        console.log('Wrong email or password');
+      }
+    });
+    console.log(user);
   }
 }

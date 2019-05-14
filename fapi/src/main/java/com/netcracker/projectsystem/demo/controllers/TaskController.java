@@ -3,6 +3,10 @@ package com.netcracker.projectsystem.demo.controllers;
 import com.netcracker.projectsystem.demo.models.TaskModel;
 import com.netcracker.projectsystem.demo.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,5 +37,22 @@ public class TaskController {
             return ResponseEntity.ok(taskService.save(task));
         }
         return null;
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity updateTask(@RequestBody TaskModel task)
+    {
+        taskService.update(task);
+        return ResponseEntity.ok(taskService.update(task));
+    }
+
+    @RequestMapping(value = "/page", method = RequestMethod.GET)
+    public ResponseEntity<Page<TaskModel>> getAllProducts(@RequestParam int page, @RequestParam int size){
+        Page<TaskModel> task = taskService.getAllInPage(page, size);
+        if (task.getContent() != null) {
+            return ResponseEntity.ok(task);
+        }else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

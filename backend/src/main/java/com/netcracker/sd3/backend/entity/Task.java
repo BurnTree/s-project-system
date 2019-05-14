@@ -1,5 +1,9 @@
 package com.netcracker.sd3.backend.entity;
 
+import org.hibernate.annotations.Formula;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -12,14 +16,17 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idTask;
 
-
     @ManyToOne(targetEntity = Project.class)
     private Project project;
     private String description;
 
-    @NotNull
+    private int estimation;
+
     @ManyToOne(targetEntity = UsersEntity.class)
     private UsersEntity assigne;
+
+    @Generated(value = GenerationTime.INSERT)
+    @Column(columnDefinition = "AS CONCAT( 'gygy', 'jkj')")
     private String ticketCode;
 
     @Temporal(TemporalType.DATE)
@@ -28,8 +35,7 @@ public class Task {
     private Date updateDate;
     @Temporal(TemporalType.DATE)
     private Date dueData;
-    @Temporal(TemporalType.DATE)
-    private Date estimation;
+
     @Temporal(TemporalType.DATE)
     private Date resolvedDate;
     @Temporal(TemporalType.DATE)
@@ -45,13 +51,13 @@ public class Task {
     @ManyToOne(targetEntity = UsersEntity.class)
     private UsersEntity reporter;
 
-    @NotNull
     @ManyToOne(targetEntity = Status.class)
     private Status status;
 
     public long getIdTask() {
         return idTask;
     }
+
     public void setIdTask(long idTask) {
         this.idTask = idTask;
     }
@@ -80,11 +86,11 @@ public class Task {
         this.dueData = dueData;
     }
 
-    public Date getEstimation() {
+    public int getEstimation() {
         return estimation;
     }
 
-    public void setEstimation(Date estimation) {
+    public void setEstimation(int estimation) {
         this.estimation = estimation;
     }
 

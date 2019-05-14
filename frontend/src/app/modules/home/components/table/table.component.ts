@@ -10,10 +10,14 @@ import {Task} from '../../../models/task';
 })
 export class TableComponent implements OnInit {
 
-  public tasks: Task[];
+
+  page: number = 1;
+  pageSize:number = 10;
+  tasks: Task[];
   private subscriptions: Subscription[] = [];
 
-  constructor(private taskService: TaskService) {
+  constructor(
+    private taskService: TaskService) {
   }
 
 
@@ -21,5 +25,14 @@ export class TableComponent implements OnInit {
     this.taskService.getTask().subscribe(data => {
       this.tasks = data;
     });
+  }
+
+
+  private loadTasks(): void {
+    this.subscriptions.push(this.taskService.getTask()
+      .subscribe(tsk => {
+        this.tasks = tsk as Task[];
+
+      }));
   }
 }

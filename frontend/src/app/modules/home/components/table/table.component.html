@@ -15,8 +15,8 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let t of tasks">
-    <td scope="row">{{t.project.name}} {{t.idTask}}</td>
+  <tr *ngFor="let t of tasks" role="row">
+    <td>{{t.project.name}}</td>
     <td>{{t.idTask}}</td>
     <td>{{t.priority.namePriority}}</td>
     <td>{{t.status.name}}</td>

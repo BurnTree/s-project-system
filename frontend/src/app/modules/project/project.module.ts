@@ -9,7 +9,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {AppRoutingModule} from '../../app-routing.module';
-import {ModalModule} from 'ngx-bootstrap';
+import {BsModalRef, ModalModule} from 'ngx-bootstrap';
 import {EditComponent} from '../action/modal/edit/edit.component';
 import {AssignComponent} from '../action/modal/assign/assign.component';
 import {CommonModule} from "@angular/common";
@@ -36,7 +36,9 @@ import {CommonModule} from "@angular/common";
     CommonModule,
     ModalModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+    BsModalRef
+  ],
   entryComponents: [
     EditComponent,
     AssignComponent

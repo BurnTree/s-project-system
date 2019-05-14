@@ -1,10 +1,13 @@
 package com.netcracker.sd3.backend.service.impl;
 
+import com.netcracker.sd3.backend.entity.Project;
 import com.netcracker.sd3.backend.entity.Status;
 import com.netcracker.sd3.backend.entity.Task;
 import com.netcracker.sd3.backend.repositories.TaskRepository;
 import com.netcracker.sd3.backend.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -22,6 +25,7 @@ public class TaskServiceImpl implements TaskService {
         Status status = new Status();
         status.setIdStatus(1);
         task.setStatus(status);
+        /*task.setTicketCode(task.getProject().getNameProject() + (taskRepository.countTaskInProject(task.getProject().getIdProject())+1));*/
         Task newTask = taskRepository.save(task);
         return newTask;
     }
@@ -49,5 +53,10 @@ public class TaskServiceImpl implements TaskService {
             task.setClosedDate(new Date());
         }
         return taskRepository.save(task);
+    }
+
+    @Override
+    public Page<Task> getAllInPage(Pageable pageable) {
+        return taskRepository.findAll(pageable);
     }
 }

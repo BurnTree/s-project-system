@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public UsersModel findByLogin(String login) {
         RestTemplate restTemplate = new RestTemplate();
-        UsersModel user = restTemplate.getForObject(backendServerUrl + "/api/user/login/" + login, UsersModel.class);
+        UsersModel user = restTemplate.getForObject(backendServerUrl + "/api/user?login=" + login, UsersModel.class);
         return user;
     }
 

@@ -14,19 +14,16 @@ export class AuthService {
   constructor(private http: HttpClient) {
   }
 
-//todo: ты не доделал регистрацию
-
+//todo:вернуть целого user
   login(user:User) {
-    return this.http.post <any>('/token/generate-token', user).pipe(
-      map(user => {
-      // login successful if there's a jwt token in the response
-      if (user && user.token) {
+    return this.http.post <any>('http://localhost:8081/token/generate', user).pipe(
+      map(returnToken => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem('currentUser', JSON.stringify(user));
+        localStorage.setItem("token", returnToken.token);
+        localStorage.setItem("role", user.role.name);
+        console.log(returnToken);
         console.log(user);
-      }
-
-      return user;
+      return returnToken;
     }))
   }
 
@@ -34,22 +31,11 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
-  public isAuthenticated(): boolean {
-    // get the token
-    const token = this.getToken();
-    // return a boolean reflecting
-    // whether or not the token is expired
-    return null;
+  public logout(){
+    localStorage.clear();
   }
 
-  cachedRequests: Array<HttpRequest<any>> = [];
-
-  public collectFailedRequest(request): void {
-    this.cachedRequests.push(request);
-  }
-
-  public retryFailedRequests(): void {
-    // retry the requests. this method can
-    // be called after the token is refreshed
+  public getRole(){
+    return localStorage.getItem('role');
   }
 }
