@@ -6,19 +6,23 @@
   </button>
 </div>
 <div class="modal-body">
-  <form>
+  <form [formGroup]="taskForm" (ngSubmit)="_createNewTask()">
     <div class="form-group">
       <label class="col-form-label">Project code:</label>
-      <input type="text" class="form-control" [ngModel]="newTask.project.idProject" (ngModelChange)="newTask.project.idProject = $event" [ngModelOptions]="{standalone: true}">
+      <input type="text" class="form-control"
+             formControlName="project"
+             [ngbTypeahead]="searchProject"
+             [resultTemplate]="templateProject"
+             [inputFormatter]="formatterProject">
     </div>
     <div class="form-group">
       <label class="col-form-label">Description</label>
-      <input type="text" class="form-control" [ngModel]="newTask.description" (ngModelChange)="newTask.description = $event" [ngModelOptions]="{standalone: true}">
+      <input type="text" class="form-control" formControlName="description">
     </div>
     <div class="form-group">
       <label class="col-form-label">Priority</label>
       <div class="form-group">
-        <select class="custom-select d-block" id="role" required="" [ngModel]="newTask.priority.idPriority" (ngModelChange)="newTask.priority.idPriority = $event" [ngModelOptions]="{standalone: true}">
+        <select class="custom-select d-block" id="role" required="" formControlName="priority">
           <option value="1">blocker</option>
           <option value="2">critical</option>
           <option value="3">major</option>
@@ -30,32 +34,47 @@
     <div class="form-group">
       <label class="col-form-label">Due Data</label>
       <div class="input-group">
-        <input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker" [ngModel]="newTask.dueData" (ngModelChange)="newTask.dueData = $event" [ngModelOptions]="{standalone: true}">
+        <input class="form-control"
+               placeholder="yyyy-mm-dd"
+               name="dp"
+               [displayMonths]="2"
+               [navigation]=true
+               [outsideDays]=true
+               [showWeekNumbers]=true
+               [startDate]="today"
+               [minDate]="{year: today.getFullYear(), month: today.getMonth()+1, day: today.getDate()}"
+               [markDisabled]="isDisabled"
+               formControlName="dueDate"
+               ngbDatepicker #d="ngbDatepicker">
         <div class="input-group-append">
-          <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button">Change</button>
+          <button class="btn-primary calendar" (click)="d.toggle()" type="button">Choose</button>
         </div>
       </div>
     </div>
     <div class="form-group">
       <label class="col-form-label">Estmation</label>
-      <input type="text" class="form-control" [ngModel]="newTask.estimation" (ngModelChange)="newTask.estimation = $event" [ngModelOptions]="{standalone: true}">
+      <input type="text" class="form-control" formControlName="estimation">
     </div>
     <div class="form-group">
-      <label class="col-form-label">Assigne</label>
-      <input type="text" class="form-control"
-             [ngModel]="newTask.assigne"
-             [ngbTypeahead]="search"
-             [resultTemplate]="templateSearch"
-             [inputFormatter]="formatter"
-             (ngModelChange)="newTask.assigne = $event"
-             [ngModelOptions]="{standalone: true}">
+      <label class="col-form-label">Assignee</label>
+      <input type="text" class="form-control" formControlName="assigned"
+             [ngbTypeahead]="searchUser"
+             [resultTemplate]="templateUser"
+             [inputFormatter]="formatterUser">
     </div>
   </form>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-dark text-white" (click)=_createNewTask()>Create</button>
+  <button type="button" class="btn btn-dark text-white"
+          (click)=_createNewTask()>
+    Create
+  </button>
 </div>
 
-<ng-template #templateSearch let-r="result" let-t="term">
-  {{r.firstName}}
+<ng-template #templateUser let-r="result" let-t="term">
+  {{r.firstName}} {{r.secondName}}
+</ng-template>
+
+<ng-template #templateProject let-r="result" let-t="term">
+  {{r.nameProject}}
 </ng-template>

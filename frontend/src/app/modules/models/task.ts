@@ -21,12 +21,10 @@ export class Task {
   attachment: string;
   comments: string;
   constructor(){
-    this.description = "";
     this.status = new Status();
     this.assigne = new User();
     this.reporter = new User();
     this.project = new Project();
     this.priority = new Priority();
-    this.dueData = new Date();
   }
 }

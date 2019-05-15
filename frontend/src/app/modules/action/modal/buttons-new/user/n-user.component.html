@@ -16,7 +16,20 @@
     </div>
     <div class="form-group">
       <label class="col-form-label">Second name:</label>
-      <input type="text" class="form-control" [ngModel]="newUser.secondName" (ngModelChange)="newUser.secondName = $event" [ngModelOptions]="{standalone: true}">
+      <input type="text" class="form-control"
+             required minlength="4"
+             #second="ngModel"
+             [ngModel]="newUser.secondName"
+             (ngModelChange)="newUser.secondName = $event"
+             [ngModelOptions]="{standalone: true}">
+    </div>
+    <div *ngIf="second.invalid && (second.dirty || second.touched)" class="alert alert-danger">
+      <div *ngIf="second.errors.minlength">
+        minLength = 4
+      </div>
+      <div *ngIf="second.errors.required">
+      Second Name required
+      </div>
     </div>
     <div class="form-group">
       <label class="col-form-label">Login:</label>

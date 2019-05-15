@@ -16,6 +16,12 @@ public class ProjectController {
         this.projectService = projectService;
     }
 
+
+    @GetMapping(value = "/all")
+    public ResponseEntity getAllTask(){
+        return ResponseEntity.ok(projectService.getAll());
+    }
+
     @PostMapping
     public ResponseEntity<ProjectModel> saveProject(@RequestBody ProjectModel project) {
         if (project != null) {

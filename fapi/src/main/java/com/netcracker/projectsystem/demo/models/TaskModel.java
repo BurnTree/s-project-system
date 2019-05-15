@@ -6,12 +6,14 @@ import java.util.Date;
 public class TaskModel {
     private long idTask;
     private String description;
-    private Date dueData;
     private int estimation;
-    private UsersModel assignee;
+    private UsersModel assigne;
     private String ticketCode;
     private Date createDate;
     private Date updateDate;
+    private Date dueData;
+    private Date resolvedDate;
+    private Date closedDate;
     private String comments;
     private String attachment;
     private ProjectModel project;
@@ -47,13 +49,6 @@ public class TaskModel {
         this.estimation = estimation;
     }
 
-    public UsersModel getAssigne() {
-        return assignee;
-    }
-    public void setAssigne(UsersModel assigne) {
-        this.assignee = assigne;
-    }
-
     public String getTicketCode() {
         return ticketCode;
     }
@@ -73,6 +68,22 @@ public class TaskModel {
     }
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
+    }
+
+    public Date getResolvedDate() {
+        return resolvedDate;
+    }
+
+    public void setResolvedDate(Date resolvedDate) {
+        this.resolvedDate = resolvedDate;
+    }
+
+    public Date getClosedDate() {
+        return closedDate;
+    }
+
+    public void setClosedDate(Date closedDate) {
+        this.closedDate = closedDate;
     }
 
     public String getComments() {
@@ -115,5 +126,13 @@ public class TaskModel {
     }
     public void setReporter(UsersModel reporter) {
         this.reporter = reporter;
+    }
+
+    public UsersModel getAssigne() {
+        return assigne;
+    }
+
+    public void setAssigne(UsersModel assigne) {
+        this.assigne = assigne;
     }
 }

@@ -1,3 +1,4 @@
+<div *ngIf="tasks">
 <table class = "table">
   <thead class = "thead-dark">
   <tr>
@@ -16,7 +17,7 @@
   </thead>
   <tbody>
   <tr *ngFor="let t of tasks" role="row">
-    <td>{{t.project.name}}</td>
+    <td>{{t.project.nameProject}}</td>
     <td>{{t.idTask}}</td>
     <td>{{t.priority.namePriority}}</td>
     <td>{{t.status.name}}</td>
@@ -24,9 +25,10 @@
     <td>{{t.updateDate}}</td>
     <td>{{t.dueData}}</td>
     <td>{{t.estimation}}</td>
-    <td>{{t.assigne.name}}</td>
+    <td>{{t.assigne.firstName}} n-ta{{t.assigne.secondName}}</td>
     <td>{{t.description}}</td>
     <td><a routerLink="/project/{{t.idTask}}" align="center">edit</a></td>
   </tr>
   </tbody>
 </table>
+</div>

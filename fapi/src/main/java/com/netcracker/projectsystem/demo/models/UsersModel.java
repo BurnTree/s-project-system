@@ -2,7 +2,6 @@ package com.netcracker.projectsystem.demo.models;
 
 public class UsersModel {
     private long idUsers;
-    private String name;
     private String firstName;
     private String secondName;
     private SignModel sign;
@@ -14,14 +13,6 @@ public class UsersModel {
 
     public void setIdUsers(long idUsers) {
         this.idUsers = idUsers;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getFirstName() {

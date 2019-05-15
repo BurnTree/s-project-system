@@ -4,7 +4,6 @@ import {Sign} from "./sign";
 export class User{
   idUsers: number;
   firstName: string;
-  name: string;
   secondName: string;
   role: Role;
   sign: Sign;
