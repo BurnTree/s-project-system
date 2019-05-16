@@ -7,7 +7,7 @@ import {CommentComponent} from './components/comment/comment.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {BrowserModule} from '@angular/platform-browser';
 import {RouterModule} from '@angular/router';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppRoutingModule} from '../../app-routing.module';
 import {BsModalRef, ModalModule} from 'ngx-bootstrap';
 import {EditComponent} from '../action/modal/edit/edit.component';
@@ -34,6 +34,7 @@ import {CommonModule} from "@angular/common";
     FormsModule,
     AppRoutingModule,
     CommonModule,
+    ReactiveFormsModule,
     ModalModule.forRoot(),
   ],
   providers: [

@@ -6,42 +6,49 @@
   </button>
 </div>
 <div class="modal-body">
-  <form>
+  <form [formGroup]="taskForm" (ngSubmit)="_editTask()">
+  <div class="form-group">
+    <label class="col-form-label">Description</label>
+    <input type="text" class="form-control" formControlName="description" placeholder="Description">
+  </div>
+  <div class="form-group">
+    <label class="col-form-label">Priority</label>
     <div class="form-group">
-      <label class="col-form-label">Description:</label>
-      <input type="text" class="form-control">
+      <select class="custom-select d-block" id="role" required="" formControlName="priority" >
+        <option value="1">blocker</option>
+        <option value="2">critical</option>
+        <option value="3">major</option>
+        <option value="4">normal</option>
+        <option value="5">minor</option>
+      </select>
     </div>
-    <div class="form-group">
-      <label class="col-form-label">Priority:</label>
-      <div class="form-group">
-        <select class="custom-select d-block" id="role" required="">
-          <option value="">blocker</option>
-          <option>critical</option>
-          <option>major</option>
-          <option>normal</option>
-          <option>minor</option>
-        </select>
+  </div>
+  <div class="form-group">
+    <label class="col-form-label">Due Data</label>
+    <div class="input-group">
+      <input class="form-control"
+             placeholder="yyyy-mm-dd"
+             name="dp"
+             [displayMonths]="2"
+             [navigation]=true
+             [outsideDays]=true
+             [showWeekNumbers]=true
+             [startDate]="today"
+             [minDate]="{year: today.getFullYear(), month: today.getMonth()+1, day: today.getDate()}"
+             [markDisabled]="isDisabled"
+             formControlName="dueDate"
+             ngbDatepicker #d="ngbDatepicker">
+      <div class="input-group-append">
+        <button class="btn-primary calendar" (click)="d.toggle()" type="button">Choose</button>
       </div>
     </div>
-    <div class="form-group">
-      <label class="col-form-label">Due Data:</label>
-      <div class="input-group">
-        <input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker" value="{{task.dueData}}">
-        <div class="input-group-append">
-          <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button">Change</button>
-        </div>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="col-form-label">Estmation:</label>
-      <input type="text" class="form-control" value="{{task.estimation}}">
-    </div>
-    <div class="form-group">
-      <label class="col-form-label">Assigne:</label>
-      <input type="text" class="form-control" value="{{task.assigne.firstName}} {{task.assigne.secondName}}">
-    </div>
-  </form>
+  </div>
+  <div class="form-group">
+    <label class="col-form-label">Estmation</label>
+    <input type="text" class="form-control" formControlName="estimation" placeholder="Estimation">
+  </div>
+</form>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-dark text-white" (click)="activeRef.hide('Save click')">Edit</button>
+  <button type="button" class="btn btn-dark text-white" (click)="_editTask()">Edit</button>
 </div>

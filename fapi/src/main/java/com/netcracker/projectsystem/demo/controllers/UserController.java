@@ -39,23 +39,9 @@ public class UserController {
         return null;
     }
 
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private TokenProvider tokenProvider;
-
-    @PostMapping(value = "/login")
-    public ResponseEntity<AuthToken> register(@RequestBody UsersModel user) {
-        final Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        user.getSign().getLogin(),
-                        user.getSign().getPassword()
-                )
-        );
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String token = tokenProvider.generateToken(authentication);
-        return ResponseEntity.ok(new AuthToken(token));
+    @GetMapping(params = "login")
+    public ResponseEntity findByLogin(@RequestParam(name = "login") String login) {
+        UsersModel user = userService.findByLogin(login);
+        return ResponseEntity.ok(user);
     }
 }

@@ -20,7 +20,9 @@ export class NUserComponent implements OnInit{
   public newUser: User = new User();
   private subscriptions: Subscription[] = [];
 
-  constructor(public userService: UserService, public activeRef: BsModalRef, public http: HttpClient) { }
+  constructor(public userService: UserService,
+              public activeRef: BsModalRef,
+              public http: HttpClient) { }
 
   ngOnInit(): void {
   }

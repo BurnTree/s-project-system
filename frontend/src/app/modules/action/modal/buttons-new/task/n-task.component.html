@@ -8,8 +8,9 @@
 <div class="modal-body">
   <form [formGroup]="taskForm" (ngSubmit)="_createNewTask()">
     <div class="form-group">
-      <label class="col-form-label">Project code:</label>
+      <label class="col-form-label">Project name:</label>
       <input type="text" class="form-control"
+             placeholder="Project"
              formControlName="project"
              [ngbTypeahead]="searchProject"
              [resultTemplate]="templateProject"
@@ -17,7 +18,7 @@
     </div>
     <div class="form-group">
       <label class="col-form-label">Description</label>
-      <input type="text" class="form-control" formControlName="description">
+      <input type="text" class="form-control" formControlName="description" placeholder="Description">
     </div>
     <div class="form-group">
       <label class="col-form-label">Priority</label>
@@ -53,11 +54,12 @@
     </div>
     <div class="form-group">
       <label class="col-form-label">Estmation</label>
-      <input type="text" class="form-control" formControlName="estimation">
+      <input type="text" class="form-control" formControlName="estimation" placeholder="Estimation">
     </div>
     <div class="form-group">
       <label class="col-form-label">Assignee</label>
       <input type="text" class="form-control" formControlName="assigned"
+             placeholder="Assignee name"
              [ngbTypeahead]="searchUser"
              [resultTemplate]="templateUser"
              [inputFormatter]="formatterUser">
@@ -66,6 +68,7 @@
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-dark text-white"
+          [disabled]="taskForm.invalid"
           (click)=_createNewTask()>
     Create
   </button>

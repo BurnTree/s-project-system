@@ -5,6 +5,9 @@ import {BsModalRef, BsModalService} from "ngx-bootstrap";
 import {Task} from "../../../models/task";
 import {Subscription} from "rxjs";
 import {TaskService} from "../../../../services/task.service";
+import {AuthService} from "../../../../services/auth.service";
+import {User} from "../../../models/user";
+import {enumRole} from "../../../models/role";
 
 @Component({
   selector: 'app-des-but',
@@ -14,12 +17,18 @@ export class DescriptionButComponent implements OnInit{
 
   @Input()
   public task: Task;
+  public t: Task = new Task();
+  status: number;
+  role = enumRole;
 
+  public user: User = new User();
   public isAppEditVisible: boolean = false;
   private modalRef: BsModalRef;
   private subscription: Subscription[] = [];
 
-  constructor(private modalService: BsModalService, private taskService: TaskService ) {}
+  constructor(private modalService: BsModalService,
+              private taskService: TaskService,
+              private authService: AuthService) {}
 
   openEdit() {
     this.modalRef = this.modalService.show(EditComponent);
@@ -34,28 +43,34 @@ export class DescriptionButComponent implements OnInit{
   }
 
   taskStart(){
-    this.task.status.idStatus = 2;
-    this.task.status.name = "In progress";
-    this.taskService.updateTask(this.task).subscribe((data: Task) => {
+    this.t = this.task;
+    this.t.status.idStatus = 2;
+    this.taskService.updateTask(this.t).subscribe((data: Task) => {
       console.log(data);
+      window.location.reload()
       }
     );
   }
 
   taskResolve(){
-    this.task.status.idStatus = 3;
-    this.taskService.updateTask(this.task).subscribe(
+    this.t = this.task;
+    this.t.status.idStatus = 3;
+    this.taskService.updateTask(this.t).subscribe(
       (data: Task)=>{
-      console.log(data);
-        this.task.status.name = "Resolve";}
+        console.log(data);
+        window.location.reload()}
       );
   }
 
 
   taskReadyForTest(){
-    this.task.status.idStatus = 4;
-    this.task.status.name = "Ready for test";
-    this.taskService.updateTask(this.task).subscribe(()=>console.log(this.task));
+    this.t = this.task;
+    this.t.status.idStatus = 4;
+    this.taskService.updateTask(this.t).subscribe(
+      (data: Task) => {
+      console.log(data);
+      window.location.reload()
+    })
   }
 
 
@@ -66,9 +81,30 @@ export class DescriptionButComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.user = this.authService.getUser();
+    this.status = this.task.status.idStatus;
   }
   //todo:сломаны модалки
   openModal(template: TemplateRef<any>): void {
     this.modalRef = this.modalService.show(template);
+  }
+
+
+  isAssignee(): boolean {
+    return this.user.idUsers === this.task.assigne.idUsers;
+  }
+
+  isReporter(): boolean{
+    return this.user.idUsers === this.task.reporter.idUsers;
+  }
+
+  isTester(): boolean{
+    return this.user.role.idRole === this.role.TESTER;
+  }
+  isReporterAndTester():boolean{
+    return (this.isReporter() || this.isTester());
+  }
+  isAssigneeAndReporter(): boolean{
+    return (this.isAssignee() || this.isReporter());
   }
 }

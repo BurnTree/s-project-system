@@ -2,39 +2,39 @@
   <div class="bg-secondary text-white pl-3"><h2>Description</h2></div>
   <br/>
   <div class="mx-auto my-4">
-    <button class="btn btn-dark ml-4 px-4  mx-3" (click)=openEdit()>Edit</button>
-    <button class="btn btn-dark ml-4 px-4  mx-3" (click)=openModal(assignModal)>Assign</button>
+    <button class="btn btn-dark ml-4 px-4  mx-3" [disabled]="!isAssigneeAndReporter()" (click)=openModal(edit)>Edit</button>
+    <button class="btn btn-dark ml-4 px-4  mx-3" [disabled]="!isReporter()" (click)=openModal(assignModal)>Assign</button>
     <button class="btn btn-dark ml-4 px-4  mx-3"
             (click)=taskStart()
-            [disabled]="task.status.idStatus !== 1">
+            [disabled]="status !== 1 ||(!isAssigneeAndReporter())">
       Start
     </button>
     <button class="btn btn-dark ml-4 px-4  mx-3"
             (click)="taskResolve()"
-            [disabled]="task.status.idStatus!==2">
+            [disabled]="status!==2 || (!isAssigneeAndReporter())">
       Resolve
     </button>
     <button class="btn btn-dark ml-4 px-4  mx-3"
             (click)="taskReadyForTest()"
-            [disabled]="task.status.idStatus!==3" >
+            [disabled]="status!==3 || (!isAssigneeAndReporter())" >
       Ready for test
     </button>
     <button class="btn btn-dark ml-4 px-4  mx-3"
             (click)="taskStart()"
-            [disabled]="task.status.idStatus!==4" >
+            [disabled]="status!==4 || (!isReporterAndTester())" >
       ReOpen
     </button>
     <button class="btn btn-dark ml-4 px-4  mx-3"
             (click)="taskClose()"
-            [disabled]="task.status.idStatus!==4" >
+            [disabled]="status!==4 || (!isReporterAndTester())" >
       Close
     </button>
   </div>
 </div>
 
-<!--<ng-template #edit>-->
-  <!--<app-edit [task]="task"></app-edit>-->
-<!--</ng-template>-->
+<ng-template #edit>
+  <app-edit [task]="task"></app-edit>
+</ng-template>
 
 <ng-template #assignModal>
   <app-assign [task]="task"></app-assign>

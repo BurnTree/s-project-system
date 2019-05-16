@@ -1,5 +1,5 @@
 
 <button type="button" class="btn btn-primary my-2 mx-3" routerLink="/">Home</button>
-<button type="button" class="btn btn-dark my-2 mx-3" (click)=openNProject()>New Project</button>
-<button type="button" class="btn btn-dark my-2 mx-3" (click)=openNTask()>New Task</button>
-<button type="button" class="btn btn-dark my-2 mx-3" (click)=openNUser()>New User</button>
+<button type="button" class="btn btn-dark my-2 mx-3" *ngIf="user.role.idRole == role.PROJECT_MANAGER || user.role.idRole == role.ADMINISTRATOR" (click)=openNProject()>New Project </button>
+<button type="button" class="btn btn-dark my-2 mx-3" *ngIf="user.role.idRole == role.PROJECT_MANAGER || user.role.idRole == role.ADMINISTRATOR" (click)=openNTask()>New Task</button>
+<button type="button" class="btn btn-dark my-2 mx-3" *ngIf="user.role.idRole == role.ADMINISTRATOR" (click)=openNUser()>New User</button>

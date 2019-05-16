@@ -10,41 +10,92 @@
     <div class="form-group">
       <label class="col-form-label">First name:</label>
       <input type="text" class="form-control"
+             placeholder="First name"
+             required minlength="4" maxlength="15"
+             #first="ngModel"
              [ngModel]="newUser.firstName"
              (ngModelChange)="newUser.firstName = $event"
              [ngModelOptions]="{standalone: true}">
     </div>
+    <div *ngIf="first.invalid && (first.dirty || first.touched)" class="alert alert-danger">
+      <div *ngIf="first.errors.minlength || first.errors.maxlength">
+        First name must be from 4 to 15 characters
+      </div>
+      <div *ngIf="first.errors.required">
+        First Name empty
+      </div>
+    </div>
     <div class="form-group">
       <label class="col-form-label">Second name:</label>
       <input type="text" class="form-control"
-             required minlength="4"
+             placeholder="Second name"
+             required minlength="4" maxlength="15"
              #second="ngModel"
              [ngModel]="newUser.secondName"
              (ngModelChange)="newUser.secondName = $event"
              [ngModelOptions]="{standalone: true}">
     </div>
     <div *ngIf="second.invalid && (second.dirty || second.touched)" class="alert alert-danger">
-      <div *ngIf="second.errors.minlength">
-        minLength = 4
+      <div *ngIf="second.errors.minlength || second.errors.maxlength">
+        Second name must be from 4 to 15 characters
       </div>
       <div *ngIf="second.errors.required">
-      Second Name required
+      Second Name empty
       </div>
     </div>
+
     <div class="form-group">
       <label class="col-form-label">Login:</label>
-      <input type="text" class="form-control" [ngModel]="newUser.sign.login" (ngModelChange)="newUser.sign.login = $event" [ngModelOptions]="{standalone: true}">
+      <input type="text" class="form-control"
+             placeholder="Login"
+             required minlength="4" maxlength="15"
+             #login="ngModel"
+             [ngModel]="newUser.sign.login"
+             (ngModelChange)="newUser.sign.login = $event"
+             [ngModelOptions]="{standalone: true}">
+    </div>
+    <div *ngIf="login.invalid && (login.dirty || login.touched)" class="alert alert-danger">
+      <div *ngIf="login.errors.minlength || login.errors.maxlength">
+        Login must be from 4 to 15 characters
+      </div>
+      <div *ngIf="login.errors.required">
+        Login empty
+      </div>
     </div>
     <div class="form-group">
       <label class="col-form-label">Password:</label>
-      <input type="text" class="form-control" [ngModel]="newUser.sign.password" (ngModelChange)="newUser.sign.password = $event" [ngModelOptions]="{standalone: true}">
+      <input type="password" class="form-control"
+             placeholder="Password"
+             required minlength="4" maxlength="15"
+             #password="ngModel"
+             [ngModel]="newUser.sign.password"
+             (ngModelChange)="newUser.sign.password = $event"
+             [ngModelOptions]="{standalone: true}">
+    </div>
+    <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+      <div *ngIf="password.errors.minlength || password.errors.maxlength">
+        Password must be from 4 to 15 characters
+      </div>
+      <div *ngIf="password.errors.required">
+        Password empty
+      </div>
     </div>
     <div class="form-group">
-      <select class="custom-select d-block" id="role" required="" [ngModel]="newUser.role.idRole" (ngModelChange)="newUser.role.idRole = $event" [ngModelOptions]="{standalone: true}">
+      <select class="custom-select d-block" id="role"
+              required
+              #role="ngModel"
+              [ngModel]="newUser.role.idRole"
+              (ngModelChange)="newUser.role.idRole = $event"
+              [ngModelOptions]="{standalone: true}">
         <option value="2">Project manager</option>
         <option value="3">Developer</option>
         <option value="4">Tester</option>
       </select>
+    </div>
+    <div *ngIf="role.invalid && (role.dirty || role.touched)" class="alert alert-danger">
+      <div *ngIf="role.errors.required">
+        Role empty
+      </div>
     </div>
   </form>
 </div>

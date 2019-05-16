@@ -22,4 +22,8 @@ export class UserService {
   saveUser(user: User):Observable<User>{
     return this.http.post<User>('api/user',user);
   }
+
+  getUserByLogin(login: string):Observable<User>{
+    return this.http.get<User>('http://localhost:8081/api/user?login=' + login);
+  }
 }

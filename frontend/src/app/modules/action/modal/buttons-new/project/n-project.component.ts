@@ -20,8 +20,8 @@ export class NProjectComponent implements OnInit {
   private subscriptions: Subscription[] = [];
 
   projectForm = new FormGroup({
-    name: new FormControl('', {validators:[Validators.required]}),
-    summary: new FormControl('', {validators:[Validators.required]}),
+    name: new FormControl('', {validators:[Validators.required, Validators.minLength(4),Validators.maxLength(15)]}),
+    summary: new FormControl('', {validators:[Validators.required,Validators.minLength(8),Validators.maxLength(50)]}),
   })
 
   constructor(//public activeModal: NgbActiveModal,

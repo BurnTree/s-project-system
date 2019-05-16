@@ -6,17 +6,21 @@
   </button>
 </div>
 <div class="modal-body">
-  <form>
+  <form [formGroup]="userForm" (ngSubmit)="assignNewUser()">
     <div class="form-group">
       <label class="col-form-label">User:</label>
-      <input type="text" class="form-control">
+      <input type="text" class="form-control" formControlName="assigned"
+             placeholder="Assignee name"
+             [ngbTypeahead]="searchUser"
+             [resultTemplate]="templateUser"
+             [inputFormatter]="formatterUser">
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-dark text-white" [disabled]="userForm.invalid" (click)=assignNewUser()>Assign</button>
     </div>
   </form>
 </div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-dark text-white" (click)=assignNewUser()>Assign</button>
-</div>
 
-<!--<ng-template #templateSearch let-r="result" let-t="term">-->
-  <!--{{r.firstName}}-->
-<!--</ng-template>-->
+<ng-template #templateUser let-r="result" let-t="term">
+  {{r.firstName}} {{r.secondName}}
+</ng-template>

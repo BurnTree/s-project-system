@@ -1,20 +1,26 @@
-import {Component, TemplateRef} from '@angular/core';
+import {Component, OnInit, TemplateRef} from '@angular/core';
 
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {NProjectComponent} from './project/n-project.component';
 import {NUserComponent} from './user/n-user.component';
 import {NTaskComponent} from './task/n-task.component';
+import {AuthService} from "../../../../services/auth.service";
+import {User} from "../../../models/user";
+import {enumRole} from "../../../models/role";
 
 @Component({
   selector: 'app-but-new',
   templateUrl: './but-new.component.html',
   styleUrls: ['./but-new.component.css']
 })
-export class ButNewComponent {
+export class ButNewComponent implements OnInit{
 
   private modalRef: BsModalRef;
 
-  constructor(private modalService: BsModalService ) {
+  role = enumRole;
+  user: User = new User();
+  constructor(private modalService: BsModalService,
+              private authService: AuthService) {
 
   }
 
@@ -30,5 +36,9 @@ export class ButNewComponent {
   }
   openNUser() {
     this.modalRef = this.modalService.show(NUserComponent);
+  }
+
+  ngOnInit(): void {
+    this.user = this.authService.getUser();
   }
 }

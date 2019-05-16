@@ -6,13 +6,17 @@ import {UserService} from "../../../../services/user.service";
 import {Observable, Subscription} from "rxjs";
 import {debounceTime, map} from "rxjs/operators";
 import {TaskService} from "../../../../services/task.service";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-assign',
   templateUrl: './assign.component.html'
 })
 
-export class AssignComponent implements OnInit{
+export class AssignComponent implements OnInit {
+
+  userForm = new FormGroup({
+    assigned: new FormControl(null, Validators.required)});
 
   @Input()
   public task: Task;
@@ -21,8 +25,9 @@ export class AssignComponent implements OnInit{
   private subscriptions: Subscription[] = [];
 
   constructor(public activeRef: BsModalRef,
-  public userService: UserService,
-              public taskService: TaskService) { }
+              public userService: UserService,
+              public taskService: TaskService) {
+  }
 
   ngOnInit(): void {
     this.userService.getAllUser().subscribe((data: User[]) => {
@@ -32,19 +37,26 @@ export class AssignComponent implements OnInit{
 
 
   public assignNewUser(): void {
-    this.taskService.updateTask(this.newTask).subscribe((data: Task) => {
+    const taskValue = this.userForm.getRawValue();
+    this.task.assigne =  taskValue.assigned;
+    this.taskService.updateTask(this.task).subscribe((data: Task) => {
         console.log(data);
       }
     );
   }
 
-  public search = (text$: Observable<string>) =>
+  public searchUser = (text$: Observable<string>) =>
     text$.pipe(
       debounceTime(200),
-      map(term => term === '' ? []
+      map(peaceUser => peaceUser === '' ? []
         : this.users.filter(user =>
-          user.firstName.toLowerCase().indexOf(term.toLowerCase()) > -1))
+          this.userName(user).toLowerCase().indexOf(peaceUser.toLowerCase()) > -1))
     )
 
-  public formatter = (result: any) => result.firstName;
+  public formatterUser = (result: any) => result.firstName + " " + result.secondName;
+
+  public userName(user: User): string {
+    return (user.firstName + " " + user.secondName);
+
+  }
 }

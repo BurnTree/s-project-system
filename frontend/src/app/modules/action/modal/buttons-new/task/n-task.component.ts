@@ -10,6 +10,7 @@ import {UserService} from "../../../../../services/user.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Project} from "../../../../models/project";
 import {ProjectService} from "../../../../../services/project.service";
+import {AuthService} from "../../../../../services/auth.service";
 
 
 @Component({
@@ -20,6 +21,7 @@ import {ProjectService} from "../../../../../services/project.service";
 
 export class NTaskComponent implements OnInit {
 
+  public localUser : User = new User();
   public users: User[] = [];
   public projects: Project[] = [];
 
@@ -28,16 +30,15 @@ export class NTaskComponent implements OnInit {
 
   today = new Date();
   date: NgbDate;
-  public test: string = " ";
+
   public newTask: Task = new Task();
   private subscriptions: Subscription[] = [];
 
   taskForm = new FormGroup({
-      project: new FormControl('', {validators:[Validators.required]}),
-      description : new FormControl('', Validators.required, ),
+      description : new FormControl('', {validators:[Validators.required, Validators.minLength(4)]}),
       priority: new FormControl('',Validators.required,  ),
       dueDate: new FormControl('' ,Validators.required, ),
-      estimation: new FormControl('',Validators.required),
+      estimation: new FormControl('',{validators:[Validators.required, Validators.pattern("^[0-9]*$")]}),
       assigned: new FormControl('',Validators.required, ),
     }
   );
@@ -45,7 +46,8 @@ export class NTaskComponent implements OnInit {
   constructor(public taskService: TaskService,
               public userService: UserService,
               public projectService: ProjectService,
-              public activeRef: BsModalRef) {
+              public activeRef: BsModalRef,
+              public authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -56,18 +58,19 @@ export class NTaskComponent implements OnInit {
     this.projectService.getAllProject().subscribe((allProject: Project[]) => {
       allProject.forEach((project: Project) => this.projects.push(project));
     });
+
+    this.localUser = this.authService.getUser();
   }
 
   public _createNewTask(): void {
     const taskValue = this.taskForm.getRawValue();
     let due  = taskValue.dueDate;
     this.newTask.dueData = new Date(due.year,due.month,due.day);
-    this.newTask.project = taskValue.project;
     this.newTask.description = taskValue.description;
     this.newTask.priority.idPriority = taskValue.priority;
     this.newTask.estimation = taskValue.estimation;
     this.newTask.assigne = taskValue.assigned;
-    this.newTask.reporter = this.newTask.assigne;
+    this.newTask.reporter = this.localUser;
     this.subscriptions.push(this.taskService.saveTask(this.newTask).subscribe(() => {
       console.log("Sucesss");
       this.newTask = new Task();
@@ -90,9 +93,12 @@ export class NTaskComponent implements OnInit {
       debounceTime(200),
       map(peaceUser => peaceUser === '' ? []
         : this.users.filter(user =>
-          user.firstName.toLowerCase().indexOf(peaceUser.toLowerCase()) > -1))
+          this.userName(user).toLowerCase().indexOf(peaceUser.toLowerCase()) > -1))
     )
 
-  public formatterUser = (result: any) => result.firstName + result.secondName;
+  public formatterUser = (result: any) => result.firstName + " "+result.secondName;
 
+  public userName(user: User):string{
+    return (user.firstName+ " "+ user.secondName);
+  }
 }
