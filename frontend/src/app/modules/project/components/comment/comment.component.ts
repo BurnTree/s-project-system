@@ -10,4 +10,5 @@ export class CommentComponent {
 
   @Input()
   public task: Task;
+
 }

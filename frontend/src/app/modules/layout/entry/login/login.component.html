@@ -12,11 +12,30 @@
                  placeholder="Login"
                  formControlName="login">
         </div>
+        <div class="alert alert-danger" *ngIf="loginFormGroup.controls['login'].invalid && loginFormGroup.controls['login'].touched">
+          <div *ngIf="loginFormGroup.controls['login'].errors['required']">
+            Empty login
+          </div>
+          <div *ngIf="loginFormGroup.controls['login'].errors['minlength'] || loginFormGroup.controls['login'].errors['maxlength']">
+            Login must be from 4 to 30 characters
+          </div>
+        </div>
         <div class="form-group">
           <input type="password"
                  class="form-control"
                  placeholder="Password"
                  formControlName="password">
+        </div>
+        <div class="alert alert-danger" *ngIf="loginFormGroup.controls['password'].invalid && loginFormGroup.controls['password'].touched">
+          <div *ngIf="loginFormGroup.controls['password'].errors['required']">
+            Empty password
+          </div>
+          <div *ngIf="loginFormGroup.controls['password'].errors['minlength'] || loginFormGroup.controls['password'].errors['maxlength']">
+            Password must be from 4 to 30 characters
+          </div>
+        </div>
+        <div class="alert alert-danger" *ngIf="enableSign">
+          Wrong login or password
         </div>
           <button type="submit"
                   class="btn mx-1 px-4 btn-dark login-btn float-right">

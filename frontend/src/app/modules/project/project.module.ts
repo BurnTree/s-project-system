@@ -10,9 +10,10 @@ import {RouterModule} from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppRoutingModule} from '../../app-routing.module';
 import {BsModalRef, ModalModule} from 'ngx-bootstrap';
-import {EditComponent} from '../action/modal/edit/edit.component';
-import {AssignComponent} from '../action/modal/assign/assign.component';
+import {EditComponent} from '../action/modal/project-buttons/edit/edit.component';
+import {AssignComponent} from '../action/modal/project-buttons/assign/assign.component';
 import {CommonModule} from "@angular/common";
+import {NewCommentComponent} from "../action/modal/project-buttons/comment/new-comment.component";
 
 
 
@@ -25,7 +26,8 @@ import {CommonModule} from "@angular/common";
     AttachmentComponent,
     CommentComponent,
     EditComponent,
-    AssignComponent
+    AssignComponent,
+    NewCommentComponent
   ],
   imports: [
     NgbModule,

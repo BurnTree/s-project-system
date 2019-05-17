@@ -6,6 +6,7 @@ import {Sign} from "../modules/models/sign";
 import {Observable} from "rxjs";
 import {map} from "rxjs/operators";
 import {UserService} from "./user.service";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ import {UserService} from "./user.service";
 export class AuthService {
 
   constructor(private http: HttpClient,
-              private userService: UserService) {
+              private userService: UserService,
+              private router: Router) {
   }
 
 //todo:вернуть целого user
@@ -42,6 +44,7 @@ export class AuthService {
     this.userService.getUserByLogin(login).subscribe((u:User)=> {
         localStorage.setItem('user', JSON.stringify(u));
         console.log(u);
+      this.router.navigate(['']);
       }
     );
   }

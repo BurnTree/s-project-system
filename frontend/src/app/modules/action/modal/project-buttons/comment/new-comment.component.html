@@ -1,0 +1,32 @@
+<div class="modal-header bg-dark text-white">
+  <h4 class="modal-title" id="modal-basic-title">Create Project</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeRef.hide('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="form-group">
+    <div class="modal-body">
+      <label class="col-form-label">Comment:</label>
+      <input type="text" class="form-control"
+             placeholder="New comment"
+             required minlength="10" maxlength="200"
+             #comment="ngModel"
+             [ngModel]="newComment"
+             (ngModelChange)="newComment = $event"
+             [ngModelOptions]="{standalone: true}">
+
+      <div *ngIf="comment.invalid && (comment.dirty || comment.touched)" class="alert alert-danger">
+        <div *ngIf="comment.errors.minlength || comment.errors.maxlength">
+          Comment must be from 10 to 200 characters
+        </div>
+        <div *ngIf="comment.errors.required">
+          Commentempty
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-dark text-white" [disabled]="comment.invalid" (click)="addComment()">Add</button>
+</div>

@@ -3,6 +3,7 @@ package com.netcracker.sd3.backend.controller;
 import com.netcracker.sd3.backend.entity.Task;
 import com.netcracker.sd3.backend.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -33,8 +34,8 @@ public class TaskController {
     public Task updateTask(@RequestBody Task task){return taskService.update(task);}
 
     @GetMapping(value = "/page")
-    public Page<Task> getAllTask(@PageableDefault(sort = {"taskId"}, direction = Sort.Direction.DESC)
-                                                    Pageable pageable) {
+    public Page<Task> getTaskOnPage(@RequestParam("page") int page, @RequestParam("size") int size) {
+        Pageable pageable = PageRequest.of(page, size);
         return taskService.getAllInPage(pageable);
     }
 }

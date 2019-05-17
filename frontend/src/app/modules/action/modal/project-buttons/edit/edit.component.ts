@@ -1,9 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {BsModalRef} from 'ngx-bootstrap';
-import {Task} from "../../../models/task";
+import {Task} from "../../../../models/task";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {NgbDate} from "@ng-bootstrap/ng-bootstrap";
-import {TaskService} from "../../../../services/task.service";
+import {TaskService} from "../../../../../services/task.service";
 
 @Component({
   selector: 'app-edit',

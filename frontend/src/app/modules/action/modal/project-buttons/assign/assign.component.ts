@@ -1,11 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {BsModalRef} from 'ngx-bootstrap';
-import {Task} from "../../../models/task";
-import {User} from "../../../models/user";
-import {UserService} from "../../../../services/user.service";
+import {Task} from "../../../../models/task";
+import {User} from "../../../../models/user";
+import {UserService} from "../../../../../services/user.service";
 import {Observable, Subscription} from "rxjs";
 import {debounceTime, map} from "rxjs/operators";
-import {TaskService} from "../../../../services/task.service";
+import {TaskService} from "../../../../../services/task.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({

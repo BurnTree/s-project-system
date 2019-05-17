@@ -15,7 +15,7 @@ export class TaskService {
   }
 
   getById(id: string):Observable<Task>{
-    return this.http.get<Task>('api/task/'+id);
+    return this.http.get<Task>('http://localhost:8081/api/task/'+id);
   }
 
   saveTask(task: Task):Observable<Task>{
@@ -24,5 +24,9 @@ export class TaskService {
 
   updateTask(task: Task):Observable<Task>{
     return this.http.put<Task>('api/task/'+task.idTask,task);
+  }
+
+  getPageTask(page: number, size: number):Observable<any>{
+    return this.http.get<any>('/api/task/page?page=' + page + "&size="+size);
   }
 }

@@ -5,6 +5,7 @@ import { map } from "rxjs/operators";
 import {Task} from "../../models/task";
 import {Subscription} from "rxjs";
 import {AuthService} from "../../../services/auth.service";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-project',
@@ -28,13 +29,27 @@ export class ProjectComponent implements OnInit {
       this.taskService.getById(id).subscribe((task: any) => {
         if (task) {
           this.task = task;
-        } else {
-          console.log(`Task with id '${id}' not found, returning to list`);
-          this.gotoList();
-        }
-      });
-    }
-  });
+        }else
+          this.router.navigate(['/not-found']);
+      }, (e: HttpErrorResponse) => {
+            console.log(e);
+            //if (e.status === 404) {*/
+              console.log('This task not found');
+              this.router.navigate(['/not-found']);
+            //};
+    })
+  }});
+    // this.sub = this.route.params.subscribe(params => {
+    //   const id = params['id'];
+    // if(id){
+    //   this.taskService.getById(id).subscribe(), (e: HttpErrorResponse) => {
+    //     /*console.log(e);
+    //     if (e.status === 404) {*/
+    //       console.log('This task not found');
+    //       this.router.navigate(['/not-found']);
+    //     //}
+    //   }}});
+
   }
 
   public logoutSubmit(){

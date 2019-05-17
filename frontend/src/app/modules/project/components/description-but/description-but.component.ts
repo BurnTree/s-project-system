@@ -1,6 +1,6 @@
 import {Component, Input, OnInit, TemplateRef} from '@angular/core';
-import {EditComponent} from "../../../action/modal/edit/edit.component";
-import {AssignComponent} from "../../../action/modal/assign/assign.component";
+import {EditComponent} from "../../../action/modal/project-buttons/edit/edit.component";
+import {AssignComponent} from "../../../action/modal/project-buttons/assign/assign.component";
 import {BsModalRef, BsModalService} from "ngx-bootstrap";
 import {Task} from "../../../models/task";
 import {Subscription} from "rxjs";
@@ -84,7 +84,7 @@ export class DescriptionButComponent implements OnInit{
     this.user = this.authService.getUser();
     this.status = this.task.status.idStatus;
   }
-  //todo:сломаны модалки
+
   openModal(template: TemplateRef<any>): void {
     this.modalRef = this.modalService.show(template);
   }

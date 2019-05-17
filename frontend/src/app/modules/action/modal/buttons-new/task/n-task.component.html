@@ -15,10 +15,23 @@
              [ngbTypeahead]="searchProject"
              [resultTemplate]="templateProject"
              [inputFormatter]="formatterProject">
+      <div class="alert alert-danger" *ngIf="taskForm.controls['project'].invalid && taskForm.controls['project'].touched">
+        <div *ngIf="taskForm.controls['project'].errors['required']">
+          Empty Name
+        </div>
+      </div>
     </div>
     <div class="form-group">
       <label class="col-form-label">Description</label>
       <input type="text" class="form-control" formControlName="description" placeholder="Description">
+      <div class="alert alert-danger" *ngIf="taskForm.controls['description'].invalid && taskForm.controls['description'].touched">
+        <div *ngIf="taskForm.controls['description'].errors['required']">
+          Empty description
+        </div>
+        <div *ngIf="taskForm.controls['description'].errors['minlength'] || taskForm.controls['description'].errors['maxlength']">
+          Description must be from 4 to 30 characters
+        </div>
+      </div>
     </div>
     <div class="form-group">
       <label class="col-form-label">Priority</label>
@@ -30,6 +43,11 @@
           <option value="4">normal</option>
           <option value="5">minor</option>
         </select>
+        <div class="alert alert-danger" *ngIf="taskForm.controls['priority'].invalid && taskForm.controls['priority'].touched">
+          <div *ngIf="taskForm.controls['priority'].errors['required']">
+            Empty priority
+          </div>
+        </div>
       </div>
     </div>
     <div class="form-group">
@@ -51,10 +69,23 @@
           <button class="btn-primary calendar" (click)="d.toggle()" type="button">Choose</button>
         </div>
       </div>
+      <div class="alert alert-danger" *ngIf="taskForm.controls['dueDate'].invalid && taskForm.controls['dueDate'].touched">
+        <div *ngIf="taskForm.controls['dueDate'].errors['required']">
+          Empty dueDate
+        </div>
+      </div>
     </div>
     <div class="form-group">
       <label class="col-form-label">Estmation</label>
       <input type="text" class="form-control" formControlName="estimation" placeholder="Estimation">
+      <div class="alert alert-danger" *ngIf="taskForm.controls['estimation'].invalid && taskForm.controls['estimation'].touched">
+        <div *ngIf="taskForm.controls['estimation'].errors['required']">
+          Empty Name
+        </div>
+        <div *ngIf="taskForm.controls['estimation'].errors['pattern']">
+          Only number
+        </div>
+      </div>
     </div>
     <div class="form-group">
       <label class="col-form-label">Assignee</label>
@@ -63,6 +94,11 @@
              [ngbTypeahead]="searchUser"
              [resultTemplate]="templateUser"
              [inputFormatter]="formatterUser">
+      <div class="alert alert-danger" *ngIf="taskForm.controls['assigned'].invalid && taskForm.controls['assigned'].touched">
+        <div *ngIf="taskForm.controls['assigned'].errors['required']">
+          Empty Name
+        </div>
+      </div>
     </div>
   </form>
 </div>

@@ -35,11 +35,12 @@ export class NTaskComponent implements OnInit {
   private subscriptions: Subscription[] = [];
 
   taskForm = new FormGroup({
-      description : new FormControl('', {validators:[Validators.required, Validators.minLength(4)]}),
+      project: new FormControl('',Validators.required, ),
+      description : new FormControl('', {validators:[Validators.required, Validators.minLength(4), Validators.maxLength(30)]}),
       priority: new FormControl('',Validators.required,  ),
       dueDate: new FormControl('' ,Validators.required, ),
       estimation: new FormControl('',{validators:[Validators.required, Validators.pattern("^[0-9]*$")]}),
-      assigned: new FormControl('',Validators.required, ),
+      assigned: new FormControl(null,Validators.required, ),
     }
   );
 
@@ -70,6 +71,7 @@ export class NTaskComponent implements OnInit {
     this.newTask.priority.idPriority = taskValue.priority;
     this.newTask.estimation = taskValue.estimation;
     this.newTask.assigne = taskValue.assigned;
+    this.newTask.project = taskValue.project;
     this.newTask.reporter = this.localUser;
     this.subscriptions.push(this.taskService.saveTask(this.newTask).subscribe(() => {
       console.log("Sucesss");

@@ -20,7 +20,7 @@ export class ButNewComponent implements OnInit{
   role = enumRole;
   user: User = new User();
   constructor(private modalService: BsModalService,
-              private authService: AuthService) {
+              private authService: AuthService ) {
 
   }
 
@@ -38,7 +38,22 @@ export class ButNewComponent implements OnInit{
     this.modalRef = this.modalService.show(NUserComponent);
   }
 
+  isAdmin(): boolean{
+    if(this.user)
+      return  (this.user.role.idRole == this.role.ADMINISTRATOR)
+    return null;
+  }
+
+  isProjectManager(): boolean{
+    if(this.user)
+      return (this.user.role.idRole == this.role.PROJECT_MANAGER)
+    return null;
+  }
   ngOnInit(): void {
+    this.user = this.authService.getUser();
+  }
+
+  findUser(){
     this.user = this.authService.getUser();
   }
 }

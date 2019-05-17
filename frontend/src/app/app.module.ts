@@ -21,8 +21,7 @@ import { TableComponent } from './modules/home/components/table/table.component'
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/http";
 import {ApiInterceptor} from "./httpinterceptor/api.interceptor";
 import {JwtInt} from "./httpinterceptor/jwt.interceptor";
-import {EditComponent} from "./modules/action/modal/edit/edit.component";
-import {AssignComponent} from "./modules/action/modal/assign/assign.component";
+import {NotFoundComponent} from "./modules/layout/404-not-found/not-found.component";
 
 @NgModule({
   declarations: [
@@ -32,7 +31,8 @@ import {AssignComponent} from "./modules/action/modal/assign/assign.component";
     LoginComponent,
     RegisterComponent,
     ButNewComponent,
-    TableComponent
+    TableComponent,
+    NotFoundComponent
   ],
   imports: [
     NgbModule,
