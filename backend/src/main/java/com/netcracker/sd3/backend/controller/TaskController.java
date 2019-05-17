@@ -40,4 +40,8 @@ public class TaskController {
         Pageable pageable = PageRequest.of(page, size, Sort.by(sort).descending());
         return taskService.getAllInPage(pageable);
     }
+    @GetMapping(value = "/assigne",params = "user")
+    public Iterable<Task> findByRole(@RequestParam(name = "user") long idUser) {
+        return taskService.getAllByAssignee(idUser);
+    }
 }

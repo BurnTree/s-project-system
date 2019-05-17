@@ -16,21 +16,22 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 export class AssignComponent implements OnInit {
 
   userForm = new FormGroup({
-    assigned: new FormControl(null, Validators.required)});
+    assigned: new FormControl(null, Validators.required)
+  });
 
   @Input()
   public task: Task;
+  public activeRef: BsModalRef;
   public users: User[] = [];
   public newTask: Task = this.task;
   private subscriptions: Subscription[] = [];
 
-  constructor(public activeRef: BsModalRef,
-              public userService: UserService,
+  constructor(public userService: UserService,
               public taskService: TaskService) {
   }
 
   ngOnInit(): void {
-    this.userService.getAllUser().subscribe((data: User[]) => {
+    this.userService.getAllByRole(3).subscribe((data: User[]) => {
       data.forEach((u: User) => this.users.push(u));
     }, (e) => console.log(e))
   }
@@ -38,7 +39,7 @@ export class AssignComponent implements OnInit {
 
   public assignNewUser(): void {
     const taskValue = this.userForm.getRawValue();
-    this.task.assigne =  taskValue.assigned;
+    this.task.assigne = taskValue.assigned;
     this.taskService.updateTask(this.task).subscribe((data: Task) => {
         console.log(data);
       }

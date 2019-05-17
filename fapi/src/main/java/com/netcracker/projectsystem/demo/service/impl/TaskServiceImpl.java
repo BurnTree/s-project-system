@@ -58,5 +58,12 @@ public class TaskServiceImpl implements TaskService {
                 + "&size="+size + "&sort=" + sort, RestPageImpl.class);
     }
 
+    @Override
+    public List<TaskModel> getAllByAsiignee(long idUser) {
+        RestTemplate restTemplate = new RestTemplate();
+        TaskModel[] taskModels = restTemplate.getForObject(backendServerUrl + "/api/task/assigne?user="+idUser,TaskModel[].class);
+        return taskModels == null ? Collections.emptyList() : Arrays.asList(taskModels);
+    }
+
 
 }

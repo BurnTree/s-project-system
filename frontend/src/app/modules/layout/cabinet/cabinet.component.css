@@ -1,0 +1,24 @@
+.but{
+  padding: 1px;
+  margin-left: 15px;
+}
+
+.txt-box{
+  margin-left: 50px;
+  width: 30px;
+
+}
+.op1{
+  opacity: 1 !important;
+} /*fade*/
+.fade{
+  opacity: 1 !important;
+}
+.b-1{
+  border: 2px;
+}
+
+.n-b{
+  border: 2px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}

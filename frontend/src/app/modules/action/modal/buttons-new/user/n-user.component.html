@@ -1,4 +1,3 @@
-
 <div class="modal-header bg-dark text-white">
   <h4 class="modal-title" id="modal-basic-title">Assign Role</h4>
   <button type="button" class="close" aria-label="Close" (click)="activeRef.hide('Cross click')">
@@ -40,15 +39,15 @@
         Second name must be from 4 to 15 characters
       </div>
       <div *ngIf="second.errors.required">
-      Second Name empty
+        Second Name empty
       </div>
     </div>
 
     <div class="form-group">
       <label class="col-form-label">Login:</label>
       <input type="text" class="form-control"
-             placeholder="Login"
              required minlength="4" maxlength="15"
+             placeholder="Login"
              #login="ngModel"
              [ngModel]="newUser.sign.login"
              (ngModelChange)="newUser.sign.login = $event"
@@ -64,7 +63,7 @@
     </div>
     <div class="form-group">
       <label class="col-form-label">Password:</label>
-      <input type="password" class="form-control"
+      <input type="text" class="form-control"
              placeholder="Password"
              required minlength="4" maxlength="15"
              #password="ngModel"

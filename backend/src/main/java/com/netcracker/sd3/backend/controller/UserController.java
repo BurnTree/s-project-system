@@ -17,7 +17,7 @@ public class UserController {
     private UserService userService;
 
     @Autowired
-    public UserController(UserService serService) {this.userService = serService; }
+    public UserController(UserService userService) {this.userService = userService; }
 
     @GetMapping(value = "/all")
     public Iterable<UsersEntity> getAll() {
@@ -45,6 +45,12 @@ public class UserController {
     public ResponseEntity deleteUser(@PathVariable(name = "id") Long id) {
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
+    }
+
+
+    @GetMapping(value = "/role",params = "role")
+    public Iterable<UsersEntity> findByRole(@RequestParam(name = "role") int role) {
+        return userService.getAllByRole(role);
     }
 
 }

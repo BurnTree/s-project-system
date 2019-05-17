@@ -1,4 +1,3 @@
-
 <div class="modal-header bg-dark text-white">
   <h4 class="modal-title" id="modal-basic-title">Create Task</h4>
   <button type="button" class="close" aria-label="Close" (click)="activeRef.hide('Cross click')">
@@ -15,7 +14,8 @@
              [ngbTypeahead]="searchProject"
              [resultTemplate]="templateProject"
              [inputFormatter]="formatterProject">
-      <div class="alert alert-danger" *ngIf="taskForm.controls['project'].invalid && taskForm.controls['project'].touched">
+      <div class="alert alert-danger"
+           *ngIf="taskForm.controls['project'].invalid && taskForm.controls['project'].touched">
         <div *ngIf="taskForm.controls['project'].errors['required']">
           Empty Name
         </div>
@@ -24,11 +24,13 @@
     <div class="form-group">
       <label class="col-form-label">Description</label>
       <input type="text" class="form-control" formControlName="description" placeholder="Description">
-      <div class="alert alert-danger" *ngIf="taskForm.controls['description'].invalid && taskForm.controls['description'].touched">
+      <div class="alert alert-danger"
+           *ngIf="taskForm.controls['description'].invalid && taskForm.controls['description'].touched">
         <div *ngIf="taskForm.controls['description'].errors['required']">
           Empty description
         </div>
-        <div *ngIf="taskForm.controls['description'].errors['minlength'] || taskForm.controls['description'].errors['maxlength']">
+        <div
+          *ngIf="taskForm.controls['description'].errors['minlength'] || taskForm.controls['description'].errors['maxlength']">
           Description must be from 4 to 30 characters
         </div>
       </div>
@@ -43,7 +45,8 @@
           <option value="4">normal</option>
           <option value="5">minor</option>
         </select>
-        <div class="alert alert-danger" *ngIf="taskForm.controls['priority'].invalid && taskForm.controls['priority'].touched">
+        <div class="alert alert-danger"
+             *ngIf="taskForm.controls['priority'].invalid && taskForm.controls['priority'].touched">
           <div *ngIf="taskForm.controls['priority'].errors['required']">
             Empty priority
           </div>
@@ -69,7 +72,8 @@
           <button class="btn-primary calendar" (click)="d.toggle()" type="button">Choose</button>
         </div>
       </div>
-      <div class="alert alert-danger" *ngIf="taskForm.controls['dueDate'].invalid && taskForm.controls['dueDate'].touched">
+      <div class="alert alert-danger"
+           *ngIf="taskForm.controls['dueDate'].invalid && taskForm.controls['dueDate'].touched">
         <div *ngIf="taskForm.controls['dueDate'].errors['required']">
           Empty dueDate
         </div>
@@ -78,7 +82,8 @@
     <div class="form-group">
       <label class="col-form-label">Estmation</label>
       <input type="text" class="form-control" formControlName="estimation" placeholder="Estimation">
-      <div class="alert alert-danger" *ngIf="taskForm.controls['estimation'].invalid && taskForm.controls['estimation'].touched">
+      <div class="alert alert-danger"
+           *ngIf="taskForm.controls['estimation'].invalid && taskForm.controls['estimation'].touched">
         <div *ngIf="taskForm.controls['estimation'].errors['required']">
           Empty Name
         </div>
@@ -94,10 +99,14 @@
              [ngbTypeahead]="searchUser"
              [resultTemplate]="templateUser"
              [inputFormatter]="formatterUser">
-      <div class="alert alert-danger" *ngIf="taskForm.controls['assigned'].invalid && taskForm.controls['assigned'].touched">
+      <div class="alert alert-danger"
+           *ngIf="taskForm.controls['assigned'].invalid && taskForm.controls['assigned'].touched">
         <div *ngIf="taskForm.controls['assigned'].errors['required']">
           Empty Name
         </div>
+        <!--<div *ngIf="taskForm.controls['assigned'].errors['validUser']">-->
+          <!--User Not Found-->
+        <!--</div>-->
       </div>
     </div>
   </form>

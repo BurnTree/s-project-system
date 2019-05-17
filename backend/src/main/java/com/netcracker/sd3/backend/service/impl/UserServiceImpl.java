@@ -1,5 +1,6 @@
 package com.netcracker.sd3.backend.service.impl;
 
+import com.netcracker.sd3.backend.entity.Role;
 import com.netcracker.sd3.backend.entity.Sign;
 import com.netcracker.sd3.backend.entity.UsersEntity;
 import com.netcracker.sd3.backend.repositories.SignRepository;
@@ -52,6 +53,12 @@ public class UserServiceImpl implements UserService {
        user = userRepository.findBySign(sign.get());
        return user.get();
     }
+
+    @Override
+    public Iterable<UsersEntity> getAllByRole(long role) {
+        return userRepository.findUsersEntitiesByRoleIdRole(role);
+    }
+
 
     @Override
     public Iterable<UsersEntity> getAll() {

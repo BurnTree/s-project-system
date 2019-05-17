@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row color-square py-2">
+    <div class="col-md-6">
+      <app-but-new></app-but-new>
+    </div>
+    <div class="col-md-6 my-2 text-right">
+      <app-icon-user></app-icon-user>
+    </div>
+  </div>
+  <div class="inf">
+    <h2>{{user.firstName}} {{user.secondName}}</h2>
+    <h1>Role: {{user.role.nameRole}}</h1>
+  </div>
+  <br>
+  <div class="assignTable">
+    <div class="text-center"><h2> Your tasks</h2></div>
+    <table class="table">
+      <thead class="thead-dark">
+      <tr>
+        <th>Project</th>
+        <th>Task</th>
+        <th>Priority</th>
+        <th>Status</th>
+        <th>Created</th>
+        <th>Update</th>
+        <th>Due Data</th>
+        <th>Estmation</th>
+        <th>Reporter</th>
+        <th>Description</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let t of tasks" role="row">
+        <td>{{t.project.nameProject}}</td>
+        <td>{{t.idTask}}</td>
+        <td>{{t.priority.namePriority}}</td>
+        <td>{{t.status.name}}</td>
+        <td>{{t.createDate}}</td>
+        <td>{{t.updateDate}}</td>
+        <td>{{t.dueData}}</td>
+        <td>{{t.estimation}}</td>
+        <td>{{t.reporter.firstName}} {{t.reporter.secondName}}</td>
+        <td>{{t.description}}</td>
+        <td><a routerLink="/project/{{t.idTask}}" align="center">edit</a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

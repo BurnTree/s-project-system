@@ -52,11 +52,17 @@ public class TaskServiceImpl implements TaskService {
         } else if (task.getStatus().getIdStatus() == 5) {
             task.setClosedDate(new Date());
         }
+        task.setUpdateDate(new Date());
         return taskRepository.save(task);
     }
 
     @Override
     public Page<Task> getAllInPage(Pageable pageable) {
         return taskRepository.findAll(pageable);
+    }
+
+    @Override
+    public List<Task> getAllByAssignee(long idUser) {
+        return taskRepository.findTasksByAssigneIdUsers(idUser);
     }
 }

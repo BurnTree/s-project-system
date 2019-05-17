@@ -7,6 +7,7 @@ import {ProjectService} from "../../../../../services/project.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {validate} from "codelyzer/walkerFactory/walkerFn";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
+import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
 
 @Component({
   selector: 'app-n-project',
@@ -20,24 +21,27 @@ export class NProjectComponent implements OnInit {
   private subscriptions: Subscription[] = [];
 
   projectForm = new FormGroup({
-    name: new FormControl('', {validators:[Validators.required, Validators.minLength(3),Validators.maxLength(15)]}),
-    summary: new FormControl('', {validators:[Validators.required,Validators.minLength(5),Validators.maxLength(50)]}),
+    name: new FormControl('', {validators: [Validators.required, Validators.minLength(3), Validators.maxLength(15)]}),
+    summary: new FormControl('', {validators: [Validators.required, Validators.minLength(5), Validators.maxLength(50)]}),
   })
 
   constructor(//public activeModal: NgbActiveModal,
     public projectService: ProjectService,
-              public activeRef: BsModalRef) {
+    public activeRef: BsModalRef,
+    private loadingService: Ng4LoadingSpinnerService) {
   }
 
   ngOnInit(): void {
   }
 
   public _createNewProject(): void {
+    this.loadingService.show();
     this.newProject.nameProject = this.projectForm.get('name').value;
     this.newProject.summary = this.projectForm.get('summary').value;
-    // this.subscriptions.push(this.projectService.saveProject(this.newProject).subscribe(() => {
-    //   this.newProject = new Project();
-    // }));
+    this.subscriptions.push(this.projectService.saveProject(this.newProject).subscribe(() => {
+      this.newProject = new Project();
+    }));
     console.log(this.newProject);
+    this.loadingService.hide();
   }
 }

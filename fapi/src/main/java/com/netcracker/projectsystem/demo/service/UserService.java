@@ -9,4 +9,5 @@ public interface UserService {
     UsersModel findById(long id);
     UsersModel save(UsersModel user);
     UsersModel findByLogin(String login);
+    List<UsersModel> getAllByRole(int role);
 }

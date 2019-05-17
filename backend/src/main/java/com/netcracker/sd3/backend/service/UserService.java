@@ -1,5 +1,6 @@
 package com.netcracker.sd3.backend.service;
 
+import com.netcracker.sd3.backend.entity.Role;
 import com.netcracker.sd3.backend.entity.UsersEntity;
 
 import java.util.List;
@@ -11,4 +12,5 @@ public interface UserService {
     Iterable<UsersEntity> getAll();
     void deleteUser(Long id);
     UsersEntity findByLogin(String login);
+    Iterable<UsersEntity> getAllByRole(long role);
 }

@@ -1,16 +1,17 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {BsModalRef} from 'ngx-bootstrap';
 import {Task} from 'src/app/modules/models/task';
-import {merge, Observable, Subject, Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {TaskService} from "../../../../../services/task.service";
-import {NgbDate, NgbTypeahead} from "@ng-bootstrap/ng-bootstrap";
-import {debounceTime, distinctUntilChanged, filter, map} from "rxjs/operators";
+import {NgbDate} from "@ng-bootstrap/ng-bootstrap";
+import {debounceTime, map} from "rxjs/operators";
 import {User} from "../../../../models/user";
 import {UserService} from "../../../../../services/user.service";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Project} from "../../../../models/project";
 import {ProjectService} from "../../../../../services/project.service";
 import {AuthService} from "../../../../../services/auth.service";
+import {Ng4LoadingSpinnerService} from "ng4-loading-spinner";
 
 
 @Component({
@@ -21,7 +22,7 @@ import {AuthService} from "../../../../../services/auth.service";
 
 export class NTaskComponent implements OnInit {
 
-  public localUser : User = new User();
+  public localUser: User = new User();
   public users: User[] = [];
   public projects: Project[] = [];
 
@@ -35,12 +36,12 @@ export class NTaskComponent implements OnInit {
   private subscriptions: Subscription[] = [];
 
   taskForm = new FormGroup({
-      project: new FormControl('',Validators.required, ),
-      description : new FormControl('', {validators:[Validators.required, Validators.minLength(4), Validators.maxLength(30)]}),
-      priority: new FormControl('',Validators.required,  ),
-      dueDate: new FormControl('' ,Validators.required, ),
-      estimation: new FormControl('',{validators:[Validators.required, Validators.pattern("^[0-9]*$")]}),
-      assigned: new FormControl(null,Validators.required, ),
+      project: new FormControl('', Validators.required,),
+      description: new FormControl('', {validators: [Validators.required, Validators.minLength(4), Validators.maxLength(30)]}),
+      priority: new FormControl('', Validators.required,),
+      dueDate: new FormControl('', Validators.required,),
+      estimation: new FormControl('', {validators: [Validators.required, Validators.pattern("^[0-9]*$")]}),
+      assigned: new FormControl(null, {validators: [Validators.required]}),
     }
   );
 
@@ -48,11 +49,13 @@ export class NTaskComponent implements OnInit {
               public userService: UserService,
               public projectService: ProjectService,
               public activeRef: BsModalRef,
-              public authService: AuthService) {
+              public authService: AuthService,
+              private loadingService: Ng4LoadingSpinnerService) {
   }
 
   ngOnInit(): void {
-    this.userService.getAllUser().subscribe((data: User[]) => {
+    this.loadingService.show();
+    this.userService.getAllByRole(3).subscribe((data: User[]) => {
       data.forEach((user: User) => this.users.push(user));
     });
 
@@ -61,12 +64,14 @@ export class NTaskComponent implements OnInit {
     });
 
     this.localUser = this.authService.getUser();
+    this.loadingService.hide();
   }
 
   public _createNewTask(): void {
+    this.loadingService.show();
     const taskValue = this.taskForm.getRawValue();
-    let due  = taskValue.dueDate;
-    this.newTask.dueData = new Date(due.year,due.month,due.day);
+    let due = taskValue.dueDate;
+    this.newTask.dueData = new Date(due.year, due.month, due.day);
     this.newTask.description = taskValue.description;
     this.newTask.priority.idPriority = taskValue.priority;
     this.newTask.estimation = taskValue.estimation;
@@ -78,6 +83,7 @@ export class NTaskComponent implements OnInit {
       this.newTask = new Task();
     }));
     console.log(this.newTask);
+    this.loadingService.hide();
   }
 
   public searchProject = (text$: Observable<string>) =>
@@ -85,7 +91,7 @@ export class NTaskComponent implements OnInit {
       debounceTime(200),
       map(peace => peace === '' ? []
         : this.projects.filter(project =>
-        project.nameProject.toLowerCase().indexOf(peace.toLowerCase()) > -1))
+          project.nameProject.toLowerCase().indexOf(peace.toLowerCase()) > -1))
     )
 
   public formatterProject = (result: any) => result.nameProject;
@@ -98,9 +104,19 @@ export class NTaskComponent implements OnInit {
           this.userName(user).toLowerCase().indexOf(peaceUser.toLowerCase()) > -1))
     )
 
-  public formatterUser = (result: any) => result.firstName + " "+result.secondName;
+  public formatterUser = (result: any) => result.firstName + " " + result.secondName;
 
-  public userName(user: User):string{
-    return (user.firstName+ " "+ user.secondName);
+  public userName(user: User): string {
+    return (user.firstName + " " + user.secondName);
   }
+}
+
+export function validateUser(control: AbstractControl) {
+  const u: User = control.value;
+
+  if (u) {
+    console.log("это нормальный класс")
+    return {validUser: true};
+  }
+  return null;
 }

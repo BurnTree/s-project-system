@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {Sign} from "../../../models/sign";
 import {User} from "../../../models/user";
 import {HttpErrorResponse} from "@angular/common/http";
+import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
 
 @Component({
   selector: 'app-login',
@@ -26,10 +27,12 @@ export class LoginComponent {
   public enableSign: boolean = false;
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private loadingService: Ng4LoadingSpinnerService
   ) {}
 
   onLoginSubmit() {
+    this.loadingService.show();
     const user = new User();
     user.sign.login = this.loginFormGroup.controls.login.value;
     user.sign.password = this.loginFormGroup.controls.password.value;
@@ -43,5 +46,6 @@ export class LoginComponent {
       }
     });
     console.log(user);
+    this.loadingService.hide();
   }
 }

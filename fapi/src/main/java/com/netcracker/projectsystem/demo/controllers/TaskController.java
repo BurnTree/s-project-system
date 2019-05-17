@@ -57,4 +57,10 @@ public class TaskController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping(value = "/assignee",params = "user")
+    public ResponseEntity getAllTask(@RequestParam(name = "user") long idUser){
+        return ResponseEntity.ok(taskService.getAllByAsiignee(idUser));
+    }
+
 }

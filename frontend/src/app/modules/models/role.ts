@@ -1,6 +1,6 @@
 export class Role{
   idRole: number;
-  name: string;
+  nameRole: string;
 }
 
 export enum enumRole{

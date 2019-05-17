@@ -14,4 +14,5 @@ public interface TaskService {
     TaskModel save(TaskModel task);
     TaskModel update(TaskModel task);
     Page<TaskModel> getAllInPage(int page, int size, String sort);
+    List<TaskModel> getAllByAsiignee(long idUser);
 }

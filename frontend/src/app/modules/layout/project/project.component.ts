@@ -1,11 +1,12 @@
 import {Component, OnInit, TemplateRef} from '@angular/core';
 import {TaskService} from "../../../services/task.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import { map } from "rxjs/operators";
+import {map} from "rxjs/operators";
 import {Task} from "../../models/task";
 import {Subscription} from "rxjs";
 import {AuthService} from "../../../services/auth.service";
 import {HttpErrorResponse} from "@angular/common/http";
+import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
 
 @Component({
   selector: 'app-project',
@@ -20,44 +21,34 @@ export class ProjectComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private taskService: TaskService,
-    private authService: AuthService) {  }
+    private authService: AuthService,
+    private loadingService: Ng4LoadingSpinnerService) {
+  }
 
   ngOnInit() {
+    this.loadingService.show();
     this.sub = this.route.params.subscribe(params => {
-    const id = params['id'];
-    if (id) {
-      this.taskService.getById(id).subscribe((task: any) => {
-        if (task) {
-          this.task = task;
-        }else
+      const id = params['id'];
+      if (id) {
+        this.taskService.getById(id).subscribe((task: any) => {
+          if (task) {
+            this.task = task;
+          } else
+            this.router.navigate(['/not-found']);
+        }, (e: HttpErrorResponse) => {
+          console.log(e);
+          //if (e.status === 404) {*/
+          console.log('This task not found');
           this.router.navigate(['/not-found']);
-      }, (e: HttpErrorResponse) => {
-            console.log(e);
-            //if (e.status === 404) {*/
-              console.log('This task not found');
-              this.router.navigate(['/not-found']);
-            //};
-    })
-  }});
-    // this.sub = this.route.params.subscribe(params => {
-    //   const id = params['id'];
-    // if(id){
-    //   this.taskService.getById(id).subscribe(), (e: HttpErrorResponse) => {
-    //     /*console.log(e);
-    //     if (e.status === 404) {*/
-    //       console.log('This task not found');
-    //       this.router.navigate(['/not-found']);
-    //     //}
-    //   }}});
-
+          //};
+        })
+      }
+    });
+    this.loadingService.hide();
   }
 
-  public logoutSubmit(){
+  public logoutSubmit() {
     this.authService.logout();
     this.router.navigate(['/login']);
-  }
-
-  gotoList() {
-    this.router.navigate(['/']);
   }
 }

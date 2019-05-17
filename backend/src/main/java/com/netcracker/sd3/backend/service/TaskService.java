@@ -14,4 +14,5 @@ public interface TaskService {
     void deleteTask(long id);
     Task update(Task task);
     Page<Task> getAllInPage(Pageable pageable);
+    List<Task> getAllByAssignee(long idUser);
 }

@@ -22,6 +22,9 @@ import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/h
 import {ApiInterceptor} from "./httpinterceptor/api.interceptor";
 import {JwtInt} from "./httpinterceptor/jwt.interceptor";
 import {NotFoundComponent} from "./modules/layout/404-not-found/not-found.component";
+import {Ng4LoadingSpinnerModule} from 'ng4-loading-spinner';
+import {IconUserComponent} from "./modules/action/icon-user/icon-user.component";
+import {CabinetComponent} from "./modules/layout/cabinet/cabinet.component";
 
 @NgModule({
   declarations: [
@@ -32,7 +35,9 @@ import {NotFoundComponent} from "./modules/layout/404-not-found/not-found.compon
     RegisterComponent,
     ButNewComponent,
     TableComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    IconUserComponent,
+    CabinetComponent
   ],
   imports: [
     NgbModule,
@@ -44,7 +49,8 @@ import {NotFoundComponent} from "./modules/layout/404-not-found/not-found.compon
     ProjectModule,
     ButNewModule,
     ReactiveFormsModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    Ng4LoadingSpinnerModule.forRoot()
   ],
   providers: [
     {

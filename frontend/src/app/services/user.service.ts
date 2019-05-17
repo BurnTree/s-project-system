@@ -26,4 +26,8 @@ export class UserService {
   getUserByLogin(login: string):Observable<User>{
     return this.http.get<User>('http://localhost:8081/api/user?login=' + login);
   }
+
+  getAllByRole(role: number):Observable<User[]>{
+    return this.http.get<User[]>('api/user/role?role='+role);
+  }
 }

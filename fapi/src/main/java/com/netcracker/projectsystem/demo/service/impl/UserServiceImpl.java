@@ -53,6 +53,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return user;
     }
 
+    @Override
+    public List<UsersModel> getAllByRole(int role) {
+        RestTemplate restTemplate = new RestTemplate();
+        UsersModel[] users = restTemplate.getForObject(backendServerUrl + "/api/user/role?role="+role,UsersModel[].class);
+        return users == null ? Collections.emptyList() : Arrays.asList(users);
+    }
+
     private Set<SimpleGrantedAuthority> getAuthority(UsersModel user) {
         Set<SimpleGrantedAuthority> authorities = new HashSet<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_" + user.getRole()));

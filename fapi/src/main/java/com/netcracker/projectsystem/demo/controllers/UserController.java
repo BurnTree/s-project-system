@@ -44,4 +44,9 @@ public class UserController {
         UsersModel user = userService.findByLogin(login);
         return ResponseEntity.ok(user);
     }
+
+    @GetMapping(value = "/role",params = "role")
+    public ResponseEntity findByLogin(@RequestParam(name = "role") int role) {
+        return ResponseEntity.ok(userService.getAllByRole(role));
+    }
 }
