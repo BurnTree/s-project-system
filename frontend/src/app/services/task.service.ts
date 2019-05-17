@@ -26,7 +26,7 @@ export class TaskService {
     return this.http.put<Task>('api/task/'+task.idTask,task);
   }
 
-  getPageTask(page: number, size: number):Observable<any>{
-    return this.http.get<any>('/api/task/page?page=' + page + "&size="+size);
+  getPageTask(page: number, size: number, sort: string):Observable<any>{
+    return this.http.get<any>('/api/task/page?page=' + page + "&size="+size + "&sort="+sort);
   }
 }

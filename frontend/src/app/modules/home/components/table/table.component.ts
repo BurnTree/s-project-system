@@ -16,6 +16,7 @@ export class TableComponent implements OnInit {
   pageSize:number = 3;
   allPages: number[];
   test: string;
+  sortName: string;
   tasks: Task[];
   totalPages: number;
   private subscriptions: Subscription[] = [];
@@ -29,13 +30,14 @@ export class TableComponent implements OnInit {
     // this.taskService.getTask().subscribe(data => {
     //   this.tasks = data;
     // });
+    this.sortName = "project";
     this.loadTasks(this.ourPage);
   }
 
 
   private loadTasks(page: number): void {
     this.ourPage = page;
-    this.subscriptions.push(this.taskService.getPageTask(page-1,this.pageSize)
+    this.subscriptions.push(this.taskService.getPageTask(page-1,this.pageSize, this.sortName)
       .subscribe(
         data=>{
           console.log(data.content);
@@ -43,5 +45,40 @@ export class TableComponent implements OnInit {
         this.totalPages = data.totalPages;
         this.allPages = Array(this.totalPages).fill(null).map((x, i) => i + 1);
       }));
+  }
+
+  public sortByProject(){
+    this.sortName = "project";
+    this.loadTasks(this.ourPage);
+  }
+
+
+  public sortByTask(){
+    this.sortName = "idTask";
+    this.loadTasks(this.ourPage);
+  }
+
+  public sortByPriority(){
+    this.sortName = "priority";
+    this.loadTasks(this.ourPage);
+  }
+
+  public sortByStatus(){
+    this.sortName = "status";
+    this.loadTasks(this.ourPage);
+  }
+  public sortByCreated(){
+    this.sortName = "createDate";
+    this.loadTasks(this.ourPage);
+  }
+
+  public sortByEstimation(){
+    this.sortName = "estimation";
+    this.loadTasks(this.ourPage);
+  }
+
+  public sortByAssignee(){
+    this.sortName = "assigne";
+    this.loadTasks(this.ourPage);
   }
 }

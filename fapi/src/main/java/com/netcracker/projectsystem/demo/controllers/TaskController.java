@@ -47,8 +47,10 @@ public class TaskController {
     }
 
     @RequestMapping(value = "/page", method = RequestMethod.GET)
-    public ResponseEntity<Page<TaskModel>> getAllProducts(@RequestParam int page, @RequestParam int size){
-        Page<TaskModel> task = taskService.getAllInPage(page, size);
+    public ResponseEntity<Page<TaskModel>> getAllProducts(@RequestParam("page") int page,
+                                                          @RequestParam("size") int size,
+                                                          @RequestParam("sort") String sort){
+        Page<TaskModel> task = taskService.getAllInPage(page, size, sort);
         if (task.getContent() != null) {
             return ResponseEntity.ok(task);
         }else {

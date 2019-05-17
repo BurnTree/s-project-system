@@ -7,7 +7,7 @@ import {AuthService} from "../../../../../services/auth.service";
 import {User} from "../../../../models/user";
 
 @Component({
-  selector: 'app-comment',
+  selector: 'app-new-comment',
   templateUrl: './new-comment.component.html'
 })
 
@@ -27,8 +27,8 @@ export class NewCommentComponent implements OnInit{
               public authService: AuthService) {
   }
   public addComment(){
-    this.task.comments += this.nowData.getMonth() + " "
-      + this.nowData.getDay() + ": "
+    this.task.comments += this.nowData.getDate() + "."
+      + this.nowData.getDay() + " : "
       + this.nowData.getHours() + " h "
       + this.nowData.getMinutes() + " min : "
       + this.user.firstName + " "

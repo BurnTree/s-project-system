@@ -2,15 +2,16 @@
 <table class = "table">
   <thead class = "thead-dark">
   <tr>
-    <th>Project Name</th>
-    <th>Task</th>
-    <th>Priority</th>
-    <th>Status</th>
-    <th>Created</th>
+    <th>Project<div class="btn btn-secondary" (click)="sortByProject()">^</div>
+    </th>
+    <th>Task<div class="btn btn-secondary" (click)="sortByTask()">^</div></th>
+    <th>Priority<div class="btn btn-secondary" (click)="sortByPriority()">^</div></th>
+    <th>Status<div class="btn btn-secondary" (click)="sortByStatus()">^</div></th>
+    <th>Created<div class="btn btn-secondary" (click)="sortByCreated()">^</div></th>
     <th>Update</th>
     <th>Due Data</th>
-    <th>Estmation</th>
-    <th>Assignee</th>
+    <th>Estmation<div class="btn btn-secondary" (click)="sortByEstimation()">^</div></th>
+    <th>Assignee<div class="btn btn-secondary" (click)="sortByAssignee()">^</div></th>
     <th>Description</th>
     <th>Action</th>
   </tr>

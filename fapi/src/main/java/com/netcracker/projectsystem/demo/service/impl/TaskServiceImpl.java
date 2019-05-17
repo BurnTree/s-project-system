@@ -52,10 +52,10 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Page<TaskModel> getAllInPage(int page, int size ) {
+    public Page<TaskModel> getAllInPage(int page, int size, String sort ) {
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.getForObject(backendServerUrl+"/api/task/page?page=" + page
-                + "&size="+size, RestPageImpl.class);
+                + "&size="+size + "&sort=" + sort, RestPageImpl.class);
     }
 
 

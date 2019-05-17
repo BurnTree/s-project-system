@@ -34,8 +34,10 @@ public class TaskController {
     public Task updateTask(@RequestBody Task task){return taskService.update(task);}
 
     @GetMapping(value = "/page")
-    public Page<Task> getTaskOnPage(@RequestParam("page") int page, @RequestParam("size") int size) {
-        Pageable pageable = PageRequest.of(page, size);
+    public Page<Task> getTaskOnPage(@RequestParam("page") int page,
+                                    @RequestParam("size") int size,
+                                    @RequestParam("sort") String sort) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sort).descending());
         return taskService.getAllInPage(pageable);
     }
 }
