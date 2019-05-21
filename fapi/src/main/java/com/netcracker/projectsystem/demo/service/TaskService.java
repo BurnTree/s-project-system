@@ -13,6 +13,6 @@ public interface TaskService {
     TaskModel findById(long id);
     TaskModel save(TaskModel task);
     TaskModel update(TaskModel task);
-    Page<TaskModel> getAllInPage(int page, int size, String sort);
+    Page<TaskModel> getAllInPage(int page, int size, String sort,Sort.Direction direction);
     List<TaskModel> getAllByAsiignee(long idUser);
 }

@@ -2,7 +2,11 @@
 <table class = "table">
   <thead class = "thead-dark">
   <tr>
-    <th>Project<div class="btn btn-secondary" (click)="sortByProject()">^</div>
+    <th>Project
+      <div class="btn btn-secondary" *ngIf="sortName === 'project'" (click)="sortByProject()">
+        <p *ngIf="direction === 'ASC'">&darr;</p>
+        <p *ngIf="direction === 'DESC'">&uarr;</p>
+      </div>
     </th>
     <th>Task<div class="btn btn-secondary" (click)="sortByTask()">^</div></th>
     <th>Priority<div class="btn btn-secondary" (click)="sortByPriority()">^</div></th>

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Task} from "../modules/models/task";
@@ -9,29 +9,33 @@ import {User} from "../modules/models/user";
 })
 export class TaskService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
-  getTask():Observable<Task[]>{
+  getTask(): Observable<Task[]> {
     return this.http.get<Task[]>('api/task/all');
   }
 
-  getById(id: string):Observable<Task>{
-    return this.http.get<Task>('http://localhost:8081/api/task/'+id);
+  getById(id: string): Observable<Task> {
+    return this.http.get<Task>('http://localhost:8081/api/task/' + id);
   }
 
-  saveTask(task: Task):Observable<Task>{
-    return this.http.post<Task>('http://localhost:8081/api/task',task);
+  saveTask(task: Task): Observable<Task> {
+    return this.http.post<Task>('http://localhost:8081/api/task', task);
   }
 
-  updateTask(task: Task):Observable<Task>{
-    return this.http.put<Task>('api/task/'+task.idTask,task);
+  updateTask(task: Task): Observable<Task> {
+    return this.http.put<Task>('api/task/' + task.idTask, task);
   }
 
-  getPageTask(page: number, size: number, sort: string):Observable<any>{
-    return this.http.get<any>('/api/task/page?page=' + page + "&size="+size + "&sort="+sort);
+  getPageTask(page: number, size: number, sort: string, direction: string): Observable<any> {
+    return this.http.get<any>('/api/task/page?page=' + page
+      + "&size=" + size
+      + "&sort=" + sort
+      + "&direction=" + direction);
   }
 
-  getAllByAssignee(idUser: number):Observable<Task[]>{
-    return this.http.get<Task[]>('api/task/assignee?user='+idUser);
+  getAllByAssignee(idUser: number): Observable<Task[]> {
+    return this.http.get<Task[]>('api/task/assignee?user=' + idUser);
   }
 }

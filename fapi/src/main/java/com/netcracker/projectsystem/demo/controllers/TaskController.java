@@ -19,16 +19,23 @@ public class TaskController {
     public TaskService taskService;
 
     @Autowired
-    public TaskController(TaskService taskService) {this.taskService = taskService; }
+    public TaskController(TaskService taskService) {
+        this.taskService = taskService;
+    }
 
     @GetMapping(value = "/all")
-    public ResponseEntity getAllTask(){
+    public ResponseEntity getAllTask() {
         return ResponseEntity.ok(taskService.getAll());
     }
 
     @GetMapping(value = "/{id}")
-    public TaskModel  findTaskById(@PathVariable(name = "id") long id) {
-        return taskService.findById(id);
+    public ResponseEntity<TaskModel> findTaskById(@PathVariable(name = "id") long id) {
+        TaskModel task = taskService.findById(id);
+        if (task != null) {
+            return ResponseEntity.ok(task);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping
@@ -40,8 +47,7 @@ public class TaskController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity updateTask(@RequestBody TaskModel task)
-    {
+    public ResponseEntity updateTask(@RequestBody TaskModel task) {
         taskService.update(task);
         return ResponseEntity.ok(taskService.update(task));
     }
@@ -49,17 +55,18 @@ public class TaskController {
     @RequestMapping(value = "/page", method = RequestMethod.GET)
     public ResponseEntity<Page<TaskModel>> getAllProducts(@RequestParam("page") int page,
                                                           @RequestParam("size") int size,
-                                                          @RequestParam("sort") String sort){
-        Page<TaskModel> task = taskService.getAllInPage(page, size, sort);
+                                                          @RequestParam("sort") String sort,
+                                                          @RequestParam(value = "direction", defaultValue = "ASC") Sort.Direction direction) {
+        Page<TaskModel> task = taskService.getAllInPage(page, size, sort, direction);
         if (task.getContent() != null) {
             return ResponseEntity.ok(task);
-        }else {
+        } else {
             return ResponseEntity.notFound().build();
         }
     }
 
-    @GetMapping(value = "/assignee",params = "user")
-    public ResponseEntity getAllTask(@RequestParam(name = "user") long idUser){
+    @GetMapping(value = "/assignee", params = "user")
+    public ResponseEntity getAllTask(@RequestParam(name = "user") long idUser) {
         return ResponseEntity.ok(taskService.getAllByAsiignee(idUser));
     }
 

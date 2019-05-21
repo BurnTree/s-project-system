@@ -21,6 +21,7 @@ export class AssignComponent implements OnInit {
 
   @Input()
   public task: Task;
+  @Input()
   public activeRef: BsModalRef;
   public users: User[] = [];
   public newTask: Task = this.task;

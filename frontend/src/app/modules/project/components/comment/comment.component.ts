@@ -15,11 +15,11 @@ export class CommentComponent {
   public task: Task;
 
   constructor(private modalService: BsModalService,
-              private modalRef: BsModalRef,
+              private activeRef: BsModalRef,
               private taskService: TaskService,
               private authService: AuthService) {}
 
   openModal(template: TemplateRef<any>): void {
-    this.modalRef = this.modalService.show(template);
+    this.activeRef = this.modalService.show(template);
   }
 }

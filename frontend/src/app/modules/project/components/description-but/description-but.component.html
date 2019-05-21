@@ -33,13 +33,9 @@
 </div>
 
 <ng-template #edit>
-  <app-edit [task]="task"></app-edit>
+  <app-edit [task]="task" [activeRef]="activeRef"></app-edit>
 </ng-template>
 
 <ng-template #assignModal>
-  <app-assign [task]="task"></app-assign>
+  <app-assign [task]="task" [activeRef]="activeRef"></app-assign>
 </ng-template>
-
-
-<!--<app-edit *ngIf="true"></app-edit>-->
-<app-assign *ngIf="isAppEditVisible"></app-assign>

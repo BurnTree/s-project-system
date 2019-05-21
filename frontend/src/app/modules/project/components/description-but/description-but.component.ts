@@ -23,7 +23,7 @@ export class DescriptionButComponent implements OnInit{
 
   public user: User = new User();
   public isAppEditVisible: boolean = false;
-  private modalRef: BsModalRef;
+  private activeRef: BsModalRef;
   private subscription: Subscription[] = [];
 
   constructor(private modalService: BsModalService,
@@ -31,8 +31,8 @@ export class DescriptionButComponent implements OnInit{
               private authService: AuthService) {}
 
   openEdit() {
-    this.modalRef = this.modalService.show(EditComponent);
-    this.modalRef.content.onClose.subscribe(result => {
+    this.activeRef = this.modalService.show(EditComponent);
+    this.activeRef.content.onClose.subscribe(result => {
       console.log('results', result);
     });
   }
@@ -86,7 +86,7 @@ export class DescriptionButComponent implements OnInit{
   }
 
   openModal(template: TemplateRef<any>): void {
-    this.modalRef = this.modalService.show(template);
+    this.activeRef = this.modalService.show(template);
   }
 
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TaskService} from "../../../../services/task.service";
 import {Subscription} from "rxjs";
 import {Task} from '../../../models/task';
@@ -13,10 +13,11 @@ export class TableComponent implements OnInit {
 
 
   ourPage: number = 1;
-  pageSize:number = 3;
+  pageSize: number = 3;
   allPages: number[];
   test: string;
   sortName: string;
+  direction: string;
   tasks: Task[];
   totalPages: number;
   private subscriptions: Subscription[] = [];
@@ -31,53 +32,63 @@ export class TableComponent implements OnInit {
     //   this.tasks = data;
     // });
     this.sortName = "project";
+    this.direction = "ASC";
     this.loadTasks(this.ourPage);
   }
 
 
   private loadTasks(page: number): void {
     this.ourPage = page;
-    this.subscriptions.push(this.taskService.getPageTask(page-1,this.pageSize, this.sortName)
+    this.subscriptions.push(this.taskService.getPageTask(page - 1, this.pageSize, this.sortName, this.direction)
       .subscribe(
-        data=>{
+        data => {
           console.log(data.content);
-        this.tasks = data.content as Task[];
-        this.totalPages = data.totalPages;
-        this.allPages = Array(this.totalPages).fill(null).map((x, i) => i + 1);
-      }));
+          this.tasks = data.content as Task[];
+          this.totalPages = data.totalPages;
+          this.allPages = Array(this.totalPages).fill(null).map((x, i) => i + 1);
+        }));
   }
 
-  public sortByProject(){
-    this.sortName = "project";
-    this.loadTasks(this.ourPage);
+  public sortByProject() {
+    if (this.sortName != "project") {
+      this.direction = "ASC";
+      this.sortName = "project";
+      this.loadTasks(this.ourPage);
+    } else {
+      if (this.direction == "ASC")
+        this.direction = "DESC";
+      else
+        this.direction = "ASC";
+    }
   }
 
 
-  public sortByTask(){
+  public sortByTask() {
     this.sortName = "idTask";
     this.loadTasks(this.ourPage);
   }
 
-  public sortByPriority(){
+  public sortByPriority() {
     this.sortName = "priority";
     this.loadTasks(this.ourPage);
   }
 
-  public sortByStatus(){
+  public sortByStatus() {
     this.sortName = "status";
     this.loadTasks(this.ourPage);
   }
-  public sortByCreated(){
+
+  public sortByCreated() {
     this.sortName = "createDate";
     this.loadTasks(this.ourPage);
   }
 
-  public sortByEstimation(){
+  public sortByEstimation() {
     this.sortName = "estimation";
     this.loadTasks(this.ourPage);
   }
 
-  public sortByAssignee(){
+  public sortByAssignee() {
     this.sortName = "assigne";
     this.loadTasks(this.ourPage);
   }

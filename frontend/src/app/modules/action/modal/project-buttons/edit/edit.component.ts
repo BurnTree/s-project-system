@@ -13,6 +13,8 @@ import {TaskService} from "../../../../../services/task.service";
 export class EditComponent implements OnInit{
   @Input()
   public task: Task;
+  @Input()
+  public activeRef: BsModalRef;
 
   isDisabled = (date: NgbDate) =>
     date > this.date;
@@ -27,7 +29,7 @@ export class EditComponent implements OnInit{
     }
   );
 
-  constructor(public activeRef: BsModalRef,
+  constructor(
               public taskService: TaskService) { }
 
 

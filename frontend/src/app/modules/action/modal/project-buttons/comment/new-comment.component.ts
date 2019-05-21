@@ -15,6 +15,8 @@ export class NewCommentComponent implements OnInit{
 
   @Input()
   public task: Task;
+  @Input()
+  public activeRef: BsModalRef;
   public user: User;
   public newComment: string;
   public nowData: Date = new Date();
@@ -22,7 +24,7 @@ export class NewCommentComponent implements OnInit{
     this.user = this.authService.getUser();
   }
 
-  constructor(public activeRef: BsModalRef,
+  constructor(
               public taskService: TaskService,
               public authService: AuthService) {
   }
