@@ -37,8 +37,8 @@ export class NewCommentComponent implements OnInit{
       + this.user.secondName + ": "
       + this.newComment + "\n";
     this.taskService.updateTask(this.task).subscribe((data: Task) => {
-        console.log("Success update");
-
+      console.log("Comment add");
+      this.activeRef.hide();
       }
     );
   }

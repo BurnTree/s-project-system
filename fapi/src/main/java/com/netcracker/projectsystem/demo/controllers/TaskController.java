@@ -66,8 +66,17 @@ public class TaskController {
     }
 
     @GetMapping(value = "/assignee", params = "user")
-    public ResponseEntity getAllTask(@RequestParam(name = "user") long idUser) {
+    public ResponseEntity getAssignneeTask(@RequestParam(name = "user") long idUser) {
         return ResponseEntity.ok(taskService.getAllByAsiignee(idUser));
     }
 
+    @GetMapping(value = "/reporter", params = "user")
+    public ResponseEntity getReporterTask(@RequestParam(name = "user") long idUser) {
+        return ResponseEntity.ok(taskService.getAllByReporter(idUser));
+    }
+
+    @GetMapping(value = "/openForTest")
+    public ResponseEntity getTesting() {
+        return ResponseEntity.ok(taskService.getAllTesting());
+    }
 }

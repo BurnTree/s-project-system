@@ -6,7 +6,7 @@ import {Status} from './status';
 export class Task {
   idTask: number;
   project: Project;
-  code: string;
+  ticketCode: string;
   description: string;
   priority: Priority;
   status: Status;
@@ -18,8 +18,8 @@ export class Task {
   estimation: number;
   assigne: User;
   reporter: User;
-  attachment: string;
   comments: string;
+  history: string;
   constructor(){
     this.status = new Status();
     this.assigne = new User();

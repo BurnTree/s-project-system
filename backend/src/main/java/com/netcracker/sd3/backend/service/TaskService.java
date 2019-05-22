@@ -15,4 +15,6 @@ public interface TaskService {
     Task update(Task task);
     Page<Task> getAllInPage(Pageable pageable);
     List<Task> getAllByAssignee(long idUser);
+    List<Task> getAllByReporter(long idUser);
+    List<Task> getAllTesting();
 }

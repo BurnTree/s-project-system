@@ -1,7 +1,7 @@
 package com.netcracker.sd3.backend.entity;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.util.Objects;
 
 @Entity
@@ -10,14 +10,19 @@ public class UsersEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idUsers;
+
+    @NotBlank
+    @Size(min=4, max=15)
     private String firstName;
+
+    @NotBlank
+    @Size(min=4, max=15)
     private String secondName;
 
-    //@NotNull
     @OneToOne(targetEntity = Sign.class)
     private Sign sign;
 
-    //@NotNull
+    @NotNull
     @ManyToOne(targetEntity = Role.class)
     private Role role;
 

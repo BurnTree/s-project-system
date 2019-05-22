@@ -6,7 +6,9 @@ import {UserService} from "../../../../../services/user.service";
 import {Observable, Subscription} from "rxjs";
 import {debounceTime, map} from "rxjs/operators";
 import {TaskService} from "../../../../../services/task.service";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
+import {Project} from "../../../../models/project";
+import {enumRole} from "../../../../models/role";
 
 @Component({
   selector: 'app-assign',
@@ -16,7 +18,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 export class AssignComponent implements OnInit {
 
   userForm = new FormGroup({
-    assigned: new FormControl(null, Validators.required)
+    assigned: new FormControl(null, {validators: [Validators.required,validateUser]})
   });
 
   @Input()
@@ -26,13 +28,17 @@ export class AssignComponent implements OnInit {
   public users: User[] = [];
   public newTask: Task = this.task;
   private subscriptions: Subscription[] = [];
-
+  needRole: number;
+  role = enumRole;
   constructor(public userService: UserService,
               public taskService: TaskService) {
   }
 
   ngOnInit(): void {
-    this.userService.getAllByRole(3).subscribe((data: User[]) => {
+    this.needRole = this.role.DEVELOPER;
+    if(this.task.status.idStatus == 4)
+      this.needRole = this.role.TESTER;
+    this.userService.getAllByRole(this.needRole).subscribe((data: User[]) => {
       data.forEach((u: User) => this.users.push(u));
     }, (e) => console.log(e))
   }
@@ -43,6 +49,8 @@ export class AssignComponent implements OnInit {
     this.task.assigne = taskValue.assigned;
     this.taskService.updateTask(this.task).subscribe((data: Task) => {
         console.log(data);
+      console.log("User assignee ");
+      this.activeRef.hide();
       }
     );
   }
@@ -61,4 +69,13 @@ export class AssignComponent implements OnInit {
     return (user.firstName + " " + user.secondName);
 
   }
+}
+
+export function validateUser(control: AbstractControl) {
+  const u: User = control.value;
+
+  if (typeof u === "string") {
+    return {validUser: true};
+  }
+  return null;
 }

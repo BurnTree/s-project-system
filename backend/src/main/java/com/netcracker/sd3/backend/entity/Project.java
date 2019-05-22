@@ -1,6 +1,9 @@
 package com.netcracker.sd3.backend.entity;
 
+import org.hibernate.validator.constraints.UniqueElements;
+
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.util.Objects;
 
 @Entity
@@ -8,8 +11,16 @@ import java.util.Objects;
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
     private long idProject;
+
+    @NotBlank
+    @Size(min=4, max=50)
     private String summary;
+
+    @NotBlank
+    @Size(min=2, max=10)
+    @Column(unique = true)
     private String nameProject;
 
     public long getIdProject() {

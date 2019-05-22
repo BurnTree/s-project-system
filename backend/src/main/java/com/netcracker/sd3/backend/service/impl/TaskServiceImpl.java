@@ -1,6 +1,5 @@
 package com.netcracker.sd3.backend.service.impl;
 
-import com.netcracker.sd3.backend.entity.Project;
 import com.netcracker.sd3.backend.entity.Status;
 import com.netcracker.sd3.backend.entity.Task;
 import com.netcracker.sd3.backend.repositories.TaskRepository;
@@ -25,7 +24,7 @@ public class TaskServiceImpl implements TaskService {
         Status status = new Status();
         status.setIdStatus(1);
         task.setStatus(status);
-        /*task.setTicketCode(task.getProject().getNameProject() + (taskRepository.countTaskInProject(task.getProject().getIdProject())+1));*/
+        task.setTicketCode(task.getProject().getNameProject() + "-" + (taskRepository.countTaskByProjectIdProject(task.getProject().getIdProject()) + 1));
         Task newTask = taskRepository.save(task);
         return newTask;
     }
@@ -37,7 +36,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public List<Task> getAll() {
-        return (List<Task>) taskRepository.findAll();
+        return taskRepository.findAll();
     }
 
     @Override
@@ -64,5 +63,15 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public List<Task> getAllByAssignee(long idUser) {
         return taskRepository.findTasksByAssigneIdUsers(idUser);
+    }
+
+    @Override
+    public List<Task> getAllByReporter(long idUser) {
+        return taskRepository.findTasksByReporterIdUsers(idUser);
+    }
+
+    @Override
+    public List<Task> getAllTesting() {
+        return taskRepository.findTasksByStatusIdStatus(4);
     }
 }

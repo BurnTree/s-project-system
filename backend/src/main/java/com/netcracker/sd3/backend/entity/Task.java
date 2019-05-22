@@ -5,6 +5,7 @@ import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.Objects;
@@ -16,41 +17,49 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idTask;
 
+    @NotNull
     @ManyToOne(targetEntity = Project.class)
     private Project project;
+
     private String description;
 
     private int estimation;
 
+    @NotNull
     @ManyToOne(targetEntity = UsersEntity.class)
     private UsersEntity assigne;
 
-    @Generated(value = GenerationTime.INSERT)
-    @Column(columnDefinition = "AS CONCAT( 'gygy', 'jkj')")
     private String ticketCode;
 
     @Temporal(TemporalType.DATE)
     private Date createDate;
+
     @Temporal(TemporalType.DATE)
     private Date updateDate;
+
+    @NotNull
     @Temporal(TemporalType.DATE)
     private Date dueData;
 
     @Temporal(TemporalType.DATE)
     private Date resolvedDate;
+
     @Temporal(TemporalType.DATE)
     private Date closedDate;
 
-
     private String comments;
-    private String attachment;
 
+    private String history;
 
+    @NotNull
     @ManyToOne(targetEntity = Priority.class)
     private Priority priority;
+
+    @NotNull
     @ManyToOne(targetEntity = UsersEntity.class)
     private UsersEntity reporter;
 
+    @NotNull
     @ManyToOne(targetEntity = Status.class)
     private Status status;
 
@@ -126,14 +135,6 @@ public class Task {
         this.comments = comments;
     }
 
-    public String getAttachment() {
-        return attachment;
-    }
-
-    public void setAttachment(String attachment) {
-        this.attachment = attachment;
-    }
-
     public Status getStatus() {
         return status;
     }
@@ -182,6 +183,14 @@ public class Task {
         this.closedDate = closedDate;
     }
 
+    public String getHistory() {
+        return history;
+    }
+
+    public void setHistory(String history) {
+        this.history = history;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -199,11 +208,12 @@ public class Task {
                 Objects.equals(project, that.project) &&
                 Objects.equals(reporter, that.reporter) &&
                 Objects.equals(priority, that.priority) &&
-                Objects.equals(status, that.status);
+                Objects.equals(status, that.status) &&
+                Objects.equals(history, that.history);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idTask, description, dueData, estimation, assigne, ticketCode, createDate, updateDate, comments, attachment, status);
+        return Objects.hash(idTask, description, dueData, estimation, assigne, ticketCode, createDate, updateDate, comments, status, history);
     }
 }

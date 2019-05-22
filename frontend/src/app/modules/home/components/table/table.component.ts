@@ -53,43 +53,121 @@ export class TableComponent implements OnInit {
     if (this.sortName != "project") {
       this.direction = "ASC";
       this.sortName = "project";
-      this.loadTasks(this.ourPage);
-    } else {
-      if (this.direction == "ASC")
-        this.direction = "DESC";
-      else
-        this.direction = "ASC";
     }
+    else{
+      if(this.direction == "ASC"){
+        this.direction = "DESC";
+      }else {
+        this.direction = "ASC";
+      }
+    }
+    this.loadTasks(this.ourPage);
   }
 
 
   public sortByTask() {
-    this.sortName = "idTask";
+    if (this.sortName != "idTask") {
+      this.direction = "ASC";
+      this.sortName = "idTask";
+    }
+    else{
+      if(this.direction == "ASC"){
+        this.direction = "DESC";
+      }else {
+        this.direction = "ASC";
+      }
+    }
     this.loadTasks(this.ourPage);
   }
 
   public sortByPriority() {
-    this.sortName = "priority";
+    if (this.sortName != "priority") {
+      this.direction = "ASC";
+      this.sortName = "priority";
+    }
+    else{
+      if(this.direction == "ASC"){
+        this.direction = "DESC";
+      }else {
+        this.direction = "ASC";
+      }
+    }
     this.loadTasks(this.ourPage);
   }
 
   public sortByStatus() {
-    this.sortName = "status";
+    if (this.sortName != "status") {
+      this.direction = "ASC";
+      this.sortName = "status";
+    }
+    else{
+      if(this.direction == "ASC"){
+        this.direction = "DESC";
+      }else {
+        this.direction = "ASC";
+      }
+    }
     this.loadTasks(this.ourPage);
   }
 
   public sortByCreated() {
-    this.sortName = "createDate";
+    if (this.sortName != "createDate") {
+      this.direction = "ASC";
+      this.sortName = "createDate";
+    }
+    else{
+      if(this.direction == "ASC"){
+        this.direction = "DESC";
+      }else {
+        this.direction = "ASC";
+      }
+    }
     this.loadTasks(this.ourPage);
   }
 
   public sortByEstimation() {
-    this.sortName = "estimation";
+    if (this.sortName != "estimation") {
+      this.direction = "ASC";
+      this.sortName = "estimation";
+    }
+    else{
+      if(this.direction == "ASC"){
+        this.direction = "DESC";
+      }else {
+        this.direction = "ASC";
+      }
+    }
+    this.loadTasks(this.ourPage);
+  }
+
+  public sortByDueData() {
+    if (this.sortName != "dueData") {
+      this.direction = "ASC";
+      this.sortName = "dueData";
+    }
+    else{
+      if(this.direction == "ASC"){
+        this.direction = "DESC";
+      }else {
+        this.direction = "ASC";
+      }
+    }
     this.loadTasks(this.ourPage);
   }
 
   public sortByAssignee() {
     this.sortName = "assigne";
+    if (this.sortName != "project") {
+      this.direction = "ASC";
+      this.sortName = "project";
+    }
+    else{
+      if(this.direction == "ASC"){
+        this.direction = "DESC";
+      }else {
+        this.direction = "ASC";
+      }
+    }
     this.loadTasks(this.ourPage);
   }
 }

@@ -19,6 +19,9 @@
         <div *ngIf="taskForm.controls['project'].errors['required']">
           Empty Name
         </div>
+        <div *ngIf="taskForm.controls['project'].errors['validProject']">
+          This project not found
+        </div>
       </div>
     </div>
     <div class="form-group">
@@ -104,9 +107,9 @@
         <div *ngIf="taskForm.controls['assigned'].errors['required']">
           Empty Name
         </div>
-        <!--<div *ngIf="taskForm.controls['assigned'].errors['validUser']">-->
-          <!--User Not Found-->
-        <!--</div>-->
+        <div *ngIf="taskForm.controls['assigned'].errors['validUser']">
+          User Not Found
+        </div>
       </div>
     </div>
   </form>

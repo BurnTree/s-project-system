@@ -38,4 +38,12 @@ export class TaskService {
   getAllByAssignee(idUser: number): Observable<Task[]> {
     return this.http.get<Task[]>('api/task/assignee?user=' + idUser);
   }
+
+  getOpenForTestTasks():Observable<Task[]>{
+    return this.http.get<Task[]>('api/task/openForTest');
+  }
+
+  getAllByReporter(idUser: number): Observable<Task[]> {
+    return this.http.get<Task[]>('api/task/reporter?user=' + idUser);
+  }
 }

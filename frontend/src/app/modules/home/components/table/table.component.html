@@ -2,20 +2,55 @@
 <table class = "table">
   <thead class = "thead-dark">
   <tr>
-    <th>Project
-      <div class="btn btn-secondary" *ngIf="sortName === 'project'" (click)="sortByProject()">
+    <th class="cursorPointer" (click)="sortByProject()">Project
+      <div class="btn cursorPointer text-secondary" *ngIf="sortName === 'project'" >
         <p *ngIf="direction === 'ASC'">&darr;</p>
         <p *ngIf="direction === 'DESC'">&uarr;</p>
       </div>
     </th>
-    <th>Task<div class="btn btn-secondary" (click)="sortByTask()">^</div></th>
-    <th>Priority<div class="btn btn-secondary" (click)="sortByPriority()">^</div></th>
-    <th>Status<div class="btn btn-secondary" (click)="sortByStatus()">^</div></th>
-    <th>Created<div class="btn btn-secondary" (click)="sortByCreated()">^</div></th>
+    <th class="cursorPointer" (click)="sortByTask()">Task
+      <div class="btn cursorPointer text-secondary" *ngIf="sortName === 'idTask'" >
+        <p *ngIf="direction === 'ASC'">&darr;</p>
+        <p *ngIf="direction === 'DESC'">&uarr;</p>
+      </div>
+    </th>
+    <th class="cursorPointer" (click)="sortByPriority()">Priority
+      <div class="btn cursorPointer text-secondary" *ngIf="sortName === 'priority'" >
+        <p *ngIf="direction === 'ASC'">&darr;</p>
+        <p *ngIf="direction === 'DESC'">&uarr;</p>
+      </div>
+    </th>
+    <th class="cursorPointer" (click)="sortByStatus()">Status
+      <div class="btn cursorPointer text-secondary" *ngIf="sortName === 'status'" >
+        <p *ngIf="direction === 'ASC'">&darr;</p>
+        <p *ngIf="direction === 'DESC'">&uarr;</p>
+      </div>
+    </th>
+    <th class="cursorPointer" (click)="sortByCreated()">Created
+      <div class="btn cursorPointer text-secondary" *ngIf="sortName === 'createDate'" >
+        <p *ngIf="direction === 'ASC'">&darr;</p>
+        <p *ngIf="direction === 'DESC'">&uarr;</p>
+      </div>
+    </th>
     <th>Update</th>
-    <th>Due Data</th>
-    <th>Estmation<div class="btn btn-secondary" (click)="sortByEstimation()">^</div></th>
-    <th>Assignee<div class="btn btn-secondary" (click)="sortByAssignee()">^</div></th>
+    <th class="cursorPointer" (click)="sortByDueData()">Due Data
+      <div class="btn cursorPointer text-secondary" *ngIf="sortName === 'dueData'" >
+        <p *ngIf="direction === 'ASC'">&darr;</p>
+        <p *ngIf="direction === 'DESC'">&uarr;</p>
+      </div>
+    </th>
+    <th class="cursorPointer" (click)="sortByEstimation()">Estmation
+      <div class="btn cursorPointer text-secondary" *ngIf="sortName === 'estimation'" >
+        <p *ngIf="direction === 'ASC'">&darr;</p>
+        <p *ngIf="direction === 'DESC'">&uarr;</p>
+      </div>
+    </th>
+    <th class="cursorPointer" (click)="sortByAssignee()">Assignee
+      <div class="btn cursorPointer text-secondary" *ngIf="sortName === 'assigne'" >
+        <p *ngIf="direction === 'ASC'">&darr;</p>
+        <p *ngIf="direction === 'DESC'">&uarr;</p>
+      </div>
+    </th>
     <th>Description</th>
     <th>Action</th>
   </tr>

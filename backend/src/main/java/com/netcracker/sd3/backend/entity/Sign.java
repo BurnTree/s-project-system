@@ -1,6 +1,10 @@
 package com.netcracker.sd3.backend.entity;
 
+
+import org.hibernate.validator.constraints.UniqueElements;
+
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.util.Objects;
 
 @Entity
@@ -8,7 +12,13 @@ public class Sign {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @NotBlank
+    @Size(min=4, max=15)
+    @Column(unique = true)
     private String login;
+
+    @NotBlank
     private String password;
 
     public long getId() {

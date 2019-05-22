@@ -10,7 +10,7 @@ import {TaskService} from "../../../../../services/task.service";
   templateUrl: './edit.component.html'
 })
 
-export class EditComponent implements OnInit{
+export class EditComponent implements OnInit {
   @Input()
   public task: Task;
   @Input()
@@ -22,26 +22,29 @@ export class EditComponent implements OnInit{
   date: NgbDate;
 
   taskForm = new FormGroup({
-      description : new FormControl('', {validators:[Validators.required, Validators.minLength(4)]}),
-      priority: new FormControl('',Validators.required,  ),
-      dueDate: new FormControl('' ,Validators.required, ),
-      estimation: new FormControl('',{validators:[Validators.required, Validators.pattern("^[0-9]*$")]}),
+      description: new FormControl('', {validators: [Validators.required, Validators.minLength(4)]}),
+      priority: new FormControl('', Validators.required,),
+      dueDate: new FormControl('', Validators.required,),
+      estimation: new FormControl('', {validators: [Validators.required, Validators.pattern("^[0-9]*$")]}),
     }
   );
 
   constructor(
-              public taskService: TaskService) { }
+    public taskService: TaskService) {
+  }
 
 
   public _editTask(): void {
     const taskValue = this.taskForm.getRawValue();
-    let due  = taskValue.dueDate;
-    this.task.dueData = new Date(due.year,due.month,due.day);
+    let due = taskValue.dueDate;
+    this.task.dueData = new Date(due.year, due.month, due.day);
     this.task.description = taskValue.description;
     this.task.priority.idPriority = taskValue.priority;
     this.task.estimation = taskValue.estimation;
     this.taskService.updateTask(this.task).subscribe((data: Task) => {
         console.log(data);
+        console.log("Task edit");
+        this.activeRef.hide();
       }
     );
   }

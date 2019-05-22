@@ -65,5 +65,19 @@ public class TaskServiceImpl implements TaskService {
         return taskModels == null ? Collections.emptyList() : Arrays.asList(taskModels);
     }
 
+    @Override
+    public List<TaskModel> getAllByReporter(long idUser) {
+        RestTemplate restTemplate = new RestTemplate();
+        TaskModel[] taskModels = restTemplate.getForObject(backendServerUrl + "/api/task/reporter?user="+idUser,TaskModel[].class);
+        return taskModels == null ? Collections.emptyList() : Arrays.asList(taskModels);
+    }
+
+    @Override
+    public List<TaskModel> getAllTesting() {
+        RestTemplate restTemplate = new RestTemplate();
+        TaskModel[] taskModels = restTemplate.getForObject(backendServerUrl + "/api/task/openForTest",TaskModel[].class);
+        return taskModels == null ? Collections.emptyList() : Arrays.asList(taskModels);
+    }
+
 
 }

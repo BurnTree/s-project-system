@@ -12,6 +12,7 @@ import {Project} from "../../../../models/project";
 import {ProjectService} from "../../../../../services/project.service";
 import {AuthService} from "../../../../../services/auth.service";
 import {Ng4LoadingSpinnerService} from "ng4-loading-spinner";
+import {enumRole} from "../../../../models/role";
 
 
 @Component({
@@ -25,6 +26,7 @@ export class NTaskComponent implements OnInit {
   public localUser: User = new User();
   public users: User[] = [];
   public projects: Project[] = [];
+  public role = enumRole;
 
   isDisabled = (date: NgbDate) =>
     date > this.date;
@@ -36,12 +38,12 @@ export class NTaskComponent implements OnInit {
   private subscriptions: Subscription[] = [];
 
   taskForm = new FormGroup({
-      project: new FormControl('', Validators.required,),
+      project: new FormControl('', {validators: [Validators.required,validateProject]}),
       description: new FormControl('', {validators: [Validators.required, Validators.minLength(4), Validators.maxLength(30)]}),
       priority: new FormControl('', Validators.required,),
       dueDate: new FormControl('', Validators.required,),
       estimation: new FormControl('', {validators: [Validators.required, Validators.pattern("^[0-9]*$")]}),
-      assigned: new FormControl(null, {validators: [Validators.required]}),
+      assigned: new FormControl(null, {validators: [Validators.required, validateUser]}),
     }
   );
 
@@ -55,15 +57,16 @@ export class NTaskComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadingService.show();
-    this.userService.getAllByRole(3).subscribe((data: User[]) => {
+    this.localUser = this.authService.getUser();
+    this.userService.getAllByRole(this.role.DEVELOPER).subscribe((data: User[]) => {
       data.forEach((user: User) => this.users.push(user));
+      this.users.push(this.localUser);
     });
 
     this.projectService.getAllProject().subscribe((allProject: Project[]) => {
       allProject.forEach((project: Project) => this.projects.push(project));
     });
 
-    this.localUser = this.authService.getUser();
     this.loadingService.hide();
   }
 
@@ -79,8 +82,9 @@ export class NTaskComponent implements OnInit {
     this.newTask.project = taskValue.project;
     this.newTask.reporter = this.localUser;
     this.subscriptions.push(this.taskService.saveTask(this.newTask).subscribe(() => {
-      console.log("Sucesss");
       this.newTask = new Task();
+      console.log("Task created");
+      this.activeRef.hide();
     }));
     console.log(this.newTask);
     this.loadingService.hide();
@@ -114,9 +118,17 @@ export class NTaskComponent implements OnInit {
 export function validateUser(control: AbstractControl) {
   const u: User = control.value;
 
-  if (u) {
-    console.log("это нормальный класс")
+  if (typeof u === "string") {
     return {validUser: true};
+  }
+  return null;
+}
+
+export function validateProject(control: AbstractControl) {
+  const project: Project = control.value;
+
+  if (typeof project === "string") {
+    return {validProject: true};
   }
   return null;
 }

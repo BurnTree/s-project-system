@@ -15,4 +15,6 @@ public interface TaskService {
     TaskModel update(TaskModel task);
     Page<TaskModel> getAllInPage(int page, int size, String sort,Sort.Direction direction);
     List<TaskModel> getAllByAsiignee(long idUser);
+    List<TaskModel> getAllByReporter(long idUser);
+    List<TaskModel> getAllTesting();
 }

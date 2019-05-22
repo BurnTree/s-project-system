@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="row color-square py-2">
+  <div class="row n-b py-2">
     <div class="col-md-6">
       <app-but-new></app-but-new>
     </div>
@@ -8,11 +8,47 @@
     </div>
   </div>
   <div class="inf">
-    <h2>{{user.firstName}} {{user.secondName}}</h2>
-    <h1>Role: {{user.role.nameRole}}</h1>
+    <br/>
+    <h1>{{user.firstName}} {{user.secondName}}</h1>
+    <h2>Role: {{user.role.nameRole}}</h2>
   </div>
   <br>
-  <div class="assignTable">
+  <div class="assignTable" *ngIf="user.role.idRole != role.ADMINISTRATOR">
+    <div class="text-center"><h2> Need created task</h2></div>
+    <table class="table">
+      <thead class="thead-dark">
+      <tr>
+        <th>Project</th>
+        <th>Task</th>
+        <th>Priority</th>
+        <th>Status</th>
+        <th>Created</th>
+        <th>Update</th>
+        <th>Due Data</th>
+        <th>Estmation</th>
+        <th>Reporter</th>
+        <th>Description</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let t of assigneeTasks" role="row">
+        <td>{{t.project.nameProject}}</td>
+        <td>{{t.idTask}}</td>
+        <td>{{t.priority.namePriority}}</td>
+        <td>{{t.status.name}}</td>
+        <td>{{t.createDate}}</td>
+        <td>{{t.updateDate}}</td>
+        <td>{{t.dueData}}</td>
+        <td>{{t.estimation}}</td>
+        <td>{{t.reporter.firstName}} {{t.reporter.secondName}}</td>
+        <td>{{t.description}}</td>
+        <td><a routerLink="/project/{{t.idTask}}" align="center">edit</a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="reporterTable" *ngIf="user.role.idRole == role.PROJECT_MANAGER">
     <div class="text-center"><h2> Your tasks</h2></div>
     <table class="table">
       <thead class="thead-dark">
@@ -31,7 +67,44 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let t of tasks" role="row">
+      <tr *ngFor="let t of reporterTask" role="row">
+        <td>{{t.project.nameProject}}</td>
+        <td>{{t.idTask}}</td>
+        <td>{{t.priority.namePriority}}</td>
+        <td>{{t.status.name}}</td>
+        <td>{{t.createDate}}</td>
+        <td>{{t.updateDate}}</td>
+        <td>{{t.dueData}}</td>
+        <td>{{t.estimation}}</td>
+        <td>{{t.reporter.firstName}} {{t.reporter.secondName}}</td>
+        <td>{{t.description}}</td>
+        <td><a routerLink="/project/{{t.idTask}}" align="center">edit</a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="testingTask" *ngIf="user.role.idRole == role.TESTER">
+    <div class="text-center" >
+      <h2> Task open for test</h2>
+    </div>
+    <table class="table">
+      <thead class="thead-dark">
+      <tr>
+        <th>Project</th>
+        <th>Task</th>
+        <th>Priority</th>
+        <th>Status</th>
+        <th>Created</th>
+        <th>Update</th>
+        <th>Due Data</th>
+        <th>Estmation</th>
+        <th>Reporter</th>
+        <th>Description</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let t of testingTask" role="row">
         <td>{{t.project.nameProject}}</td>
         <td>{{t.idTask}}</td>
         <td>{{t.priority.namePriority}}</td>

@@ -3,7 +3,7 @@
   <br/>
   <div class="mx-auto my-4">
     <button class="btn btn-dark ml-4 px-4  mx-3" [disabled]="!isAssigneeAndReporter()" (click)=openModal(edit)>Edit</button>
-    <button class="btn btn-dark ml-4 px-4  mx-3" [disabled]="!isReporter()" (click)=openModal(assignModal)>Assign</button>
+    <button class="btn btn-dark ml-4 px-4  mx-3" [disabled]="!(isAssigneeAndReporter() ||(isTester() && status == 4) )" (click)=openModal(assignModal)>Assign</button>
     <button class="btn btn-dark ml-4 px-4  mx-3"
             (click)=taskStart()
             [disabled]="status !== 1 ||(!isAssigneeAndReporter())">
@@ -15,18 +15,18 @@
       Resolve
     </button>
     <button class="btn btn-dark ml-4 px-4  mx-3"
-            (click)="taskReadyForTest()"
+            (click)="(taskReadyForTest() && openModal(assignModal))"
             [disabled]="status!==3 || (!isAssigneeAndReporter())" >
       Ready for test
     </button>
     <button class="btn btn-dark ml-4 px-4  mx-3"
             (click)="taskStart()"
-            [disabled]="status!==4 || (!isReporterAndTester())" >
+            [disabled]="status!==4 || !(isAssigneeAndReporter()) || isDev()" >
       ReOpen
     </button>
     <button class="btn btn-dark ml-4 px-4  mx-3"
-            (click)="taskClose()"
-            [disabled]="status!==4 || (!isReporterAndTester())" >
+            (click)="(taskClose())"
+            [disabled]="status!==4 || (!isAssigneeAndReporter()) || isDev()" >
       Close
     </button>
   </div>

@@ -30,18 +30,6 @@ export class DescriptionButComponent implements OnInit{
               private taskService: TaskService,
               private authService: AuthService) {}
 
-  openEdit() {
-    this.activeRef = this.modalService.show(EditComponent);
-    this.activeRef.content.onClose.subscribe(result => {
-      console.log('results', result);
-    });
-  }
-
-  openAssign() {
-    this.isAppEditVisible = true;
-    //this.modalRef = this.modalService.show(AssignComponent);
-  }
-
   taskStart(){
     this.t = this.task;
     this.t.status.idStatus = 2;
@@ -61,7 +49,6 @@ export class DescriptionButComponent implements OnInit{
         window.location.reload()}
       );
   }
-
 
   taskReadyForTest(){
     this.t = this.task;
@@ -101,6 +88,11 @@ export class DescriptionButComponent implements OnInit{
   isTester(): boolean{
     return this.user.role.idRole === this.role.TESTER;
   }
+
+  isDev(): boolean{
+    return this.user.role.idRole === this.role.DEVELOPER;
+  }
+
   isReporterAndTester():boolean{
     return (this.isReporter() || this.isTester());
   }

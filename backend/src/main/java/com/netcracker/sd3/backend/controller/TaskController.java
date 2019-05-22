@@ -4,6 +4,7 @@ import com.netcracker.sd3.backend.entity.Task;
 import com.netcracker.sd3.backend.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -38,12 +39,22 @@ public class TaskController {
                                     @RequestParam("size") int size,
                                     @RequestParam("sort") String sort,
                                     @RequestParam("direction") Sort.Direction direction) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by(sort).descending());
+        Pageable pageable = PageRequest.of(page, size, Sort.by(direction, sort));
         return taskService.getAllInPage(pageable);
     }
 
     @GetMapping(value = "/assigne",params = "user")
     public Iterable<Task> findByRole(@RequestParam(name = "user") long idUser) {
         return taskService.getAllByAssignee(idUser);
+    }
+
+    @GetMapping(value = "/reporter", params = "user")
+    public Iterable<Task> findReporter(@RequestParam(name = "user") long idUser) {
+        return taskService.getAllByReporter(idUser);
+    }
+
+    @GetMapping(value = "/openForTest")
+    public Iterable<Task> findTesting() {
+        return taskService.getAllTesting();
     }
 }

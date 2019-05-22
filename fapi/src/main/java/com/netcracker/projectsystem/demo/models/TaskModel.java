@@ -15,11 +15,11 @@ public class TaskModel {
     private Date resolvedDate;
     private Date closedDate;
     private String comments;
-    private String attachment;
     private ProjectModel project;
     private UsersModel reporter;
     private PriorityModel priority;
     private StatusModel status;
+    private String history;
 
     public long getIdTask() {
         return idTask;
@@ -93,13 +93,6 @@ public class TaskModel {
         this.comments = comments;
     }
 
-    public String getAttachment() {
-        return attachment;
-    }
-    public void setAttachment(String attachment) {
-        this.attachment = attachment;
-    }
-
     public StatusModel getStatus() {
         return status;
     }
@@ -134,5 +127,13 @@ public class TaskModel {
 
     public void setAssigne(UsersModel assigne) {
         this.assigne = assigne;
+    }
+
+    public String getHistory() {
+        return history;
+    }
+
+    public void setHistory(String history) {
+        this.history = history;
     }
 }

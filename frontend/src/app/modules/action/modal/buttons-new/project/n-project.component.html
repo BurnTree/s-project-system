@@ -1,6 +1,6 @@
 <div class="modal-header bg-dark text-white">
   <h4 class="modal-title" id="modal-basic-title">Create Project</h4>
-  <button type="button" class="close" aria-label="Close" (click)="activeRef.hide('Cross click')">
+  <button type="button" class="close" aria-label="Close" (click)="activeRef.hide()">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
@@ -20,6 +20,9 @@
         <div *ngIf="projectForm.controls['name'].errors['maxlength']">
           Maximum length = 15
         </div>
+      </div>
+      <div class="alert alert-danger" *ngIf="searchDublicate()">
+        This name a created
       </div>
     </div>
     <div class="form-group">
