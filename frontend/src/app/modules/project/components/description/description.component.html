@@ -9,7 +9,7 @@
         <div class = "col-md-2"><p align = "right">Created</p></div>
         <div class = "col-md-4">
           <form name="test" method="post">
-            <input type="text" size="80" class="form-control" value='{{task.createDate}}' disabled="disabled">
+            <input type="text" size="80" class="form-control" value='{{task.createDate | date}}' disabled="disabled">
           </form>
         </div>
       </div>
@@ -18,7 +18,7 @@
         <div class = "col-md-2"><p align = "right">Updated</p></div>
         <div class = "col-md-4">
           <form name="test" method="post">
-            <input type="text" size="80" class="form-control" value='{{task.updateDate}}' disabled="disabled">
+            <input type="text" size="80" class="form-control" value='{{task.updateDate | date}}' disabled="disabled">
           </form>
         </div>
       </div>
@@ -27,7 +27,7 @@
         <div class = "col-md-2"><p align = "right">Resolved</p></div>
         <div class = "col-md-4">
           <form name="test" method="post">
-            <input type="text" size="80" class="form-control" disabled="disabled" value='{{task.resolvedDate}}' >
+            <input type="text" size="80" class="form-control" disabled="disabled" value='{{task.resolvedDate | date}}' >
           </form>
         </div>
       </div>
@@ -36,7 +36,7 @@
         <div class = "col-md-2"><p align = "right">Closed</p></div>
         <div class = "col-md-4">
           <form name="test" method="post">
-            <input type="text" size="80" class="form-control" disabled="disabled" value='{{task.closedDate}}' >
+            <input type="text" size="80" class="form-control" disabled="disabled" value='{{task.closedDate | date}}' >
           </form>
         </div>
       </div>

@@ -21,7 +21,7 @@
           Maximum length = 15
         </div>
       </div>
-      <div class="alert alert-danger" *ngIf="searchDublicate()">
+      <div class="alert alert-danger" *ngIf="searchCreatedProject()">
         This name a created
       </div>
     </div>
@@ -45,7 +45,7 @@
   </form>
 </div>
 <div class="modal-footer">
-  <button type="submit" class="btn btn-dark text-white" [disabled]="projectForm.invalid" (click)="_createNewProject()">
+  <button type="submit" class="btn btn-dark text-white" [disabled]="projectForm.invalid || searchCreatedProject()" (click)="_createNewProject()">
     Create
   </button>
 </div>

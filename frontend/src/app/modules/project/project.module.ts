@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {AttachmentComponent} from './components/attachment/attachment.component';
+import {HistoryComponent} from './components/history/history.component';
 import {DescriptionButComponent} from './components/description-but/description-but.component';
 import {DetailsComponent} from './components/details/details.component';
 import {DescriptionComponent} from './components/description/description.component';
@@ -23,7 +23,7 @@ import {NewCommentComponent} from "../action/modal/project-buttons/comment/new-c
     DescriptionButComponent,
     DetailsComponent,
     DescriptionComponent,
-    AttachmentComponent,
+    HistoryComponent,
     CommentComponent,
     EditComponent,
     AssignComponent,
@@ -50,7 +50,7 @@ import {NewCommentComponent} from "../action/modal/project-buttons/comment/new-c
     DescriptionButComponent,
     DetailsComponent,
     DescriptionComponent,
-    AttachmentComponent,
+    HistoryComponent,
     CommentComponent
   ]
 })

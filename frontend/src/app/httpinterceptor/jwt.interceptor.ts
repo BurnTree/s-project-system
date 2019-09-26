@@ -21,7 +21,7 @@ export class JwtInt implements HttpInterceptor{
       tap((event: HttpEvent<any>) => {
       }, (err: any) => {
         if (err instanceof HttpErrorResponse) {
-          if (err.status === 401 || err.status === 500) {
+          if (err.status === 401) {
             console.log(this.activatedRoute.snapshot);
             this.router.navigate(['login']);
           }

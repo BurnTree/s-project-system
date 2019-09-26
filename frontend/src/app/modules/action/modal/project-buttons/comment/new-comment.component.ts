@@ -28,6 +28,7 @@ export class NewCommentComponent implements OnInit{
               public taskService: TaskService,
               public authService: AuthService) {
   }
+
   public addComment(){
     this.task.comments += this.nowData.getDate() + "."
       + this.nowData.getDay() + " : "

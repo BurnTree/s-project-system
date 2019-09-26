@@ -12,7 +12,7 @@ export class ApiInterceptor implements HttpInterceptor{
   if (request.url != 'http://localhost:8081/token/generate') {
     request = request.clone({
       setHeaders: {
-        Authorization: `Bearer ${this.auth.getToken()}`
+        Authorization: `Bearer${this.auth.getToken()}`
       }
     });
   }

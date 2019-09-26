@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/task")
 public class TaskController {
@@ -57,12 +58,7 @@ public class TaskController {
                                                           @RequestParam("size") int size,
                                                           @RequestParam("sort") String sort,
                                                           @RequestParam(value = "direction", defaultValue = "ASC") Sort.Direction direction) {
-        Page<TaskModel> task = taskService.getAllInPage(page, size, sort, direction);
-        if (task.getContent() != null) {
-            return ResponseEntity.ok(task);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+         return ResponseEntity.ok(taskService.getAllInPage(page, size, sort, direction));
     }
 
     @GetMapping(value = "/assignee", params = "user")

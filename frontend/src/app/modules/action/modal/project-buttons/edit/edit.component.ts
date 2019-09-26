@@ -24,7 +24,6 @@ export class EditComponent implements OnInit {
   taskForm = new FormGroup({
       description: new FormControl('', {validators: [Validators.required, Validators.minLength(4)]}),
       priority: new FormControl('', Validators.required,),
-      dueDate: new FormControl('', Validators.required,),
       estimation: new FormControl('', {validators: [Validators.required, Validators.pattern("^[0-9]*$")]}),
     }
   );
@@ -36,8 +35,6 @@ export class EditComponent implements OnInit {
 
   public _editTask(): void {
     const taskValue = this.taskForm.getRawValue();
-    let due = taskValue.dueDate;
-    this.task.dueData = new Date(due.year, due.month, due.day);
     this.task.description = taskValue.description;
     this.task.priority.idPriority = taskValue.priority;
     this.task.estimation = taskValue.estimation;
@@ -52,7 +49,6 @@ export class EditComponent implements OnInit {
   ngOnInit(): void {
     this.taskForm.controls["description"].setValue(this.task.description);
     this.taskForm.controls["priority"].setValue(this.task.priority.idPriority);
-    this.taskForm.controls["dueDate"].setValue(this.task.dueData);
     this.taskForm.controls["estimation"].setValue(this.task.estimation);
   }
 }

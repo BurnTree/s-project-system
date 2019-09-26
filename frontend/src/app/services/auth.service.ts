@@ -32,7 +32,7 @@ export class AuthService {
   }
 
   public getToken(): string {
-    return localStorage.getItem('token');
+    return localStorage.getItem("token");
   }
 
   public logout(){

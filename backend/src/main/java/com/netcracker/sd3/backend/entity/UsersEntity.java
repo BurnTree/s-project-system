@@ -33,7 +33,6 @@ public class UsersEntity {
         this.idUsers = idUsers;
     }
 
-
     public String getFirstName() {
         return firstName;
     }

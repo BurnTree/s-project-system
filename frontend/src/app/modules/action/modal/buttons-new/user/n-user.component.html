@@ -103,6 +103,10 @@
   </form>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-dark text-white" [disabled]="!(role.valid && password.valid && login.valid && second.valid && first.valid)"(click)="_createNewUser()">Create</button>
+  <button type="button" class="btn btn-dark text-white" [disabled]="!(role.valid &&
+  password.valid &&
+  login.valid &&
+  second.valid &&
+  first.valid) || searchCreatedUser()"(click)="_createNewUser()">Create</button>
 </div>
 

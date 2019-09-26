@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Task} from "../modules/models/task";
 import {User} from "../modules/models/user";
+import {Status} from "../modules/models/status";
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class TaskService {
   }
 
   getById(id: string): Observable<Task> {
-    return this.http.get<Task>('http://localhost:8081/api/task/' + id);
+    return this.http.get<Task>('api/task/' + id);
   }
 
   saveTask(task: Task): Observable<Task> {
@@ -45,5 +46,9 @@ export class TaskService {
 
   getAllByReporter(idUser: number): Observable<Task[]> {
     return this.http.get<Task[]>('api/task/reporter?user=' + idUser);
+  }
+
+  getAllStatus(): Observable<Status[]> {
+    return this.http.get<Status[]>('http://localhost:8080/api/status/all');
   }
 }

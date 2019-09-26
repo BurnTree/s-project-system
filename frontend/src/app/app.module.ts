@@ -25,6 +25,7 @@ import {NotFoundComponent} from "./modules/layout/404-not-found/not-found.compon
 import {Ng4LoadingSpinnerModule} from 'ng4-loading-spinner';
 import {IconUserComponent} from "./modules/action/icon-user/icon-user.component";
 import {CabinetComponent} from "./modules/layout/cabinet/cabinet.component";
+import {DatePipe} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import {CabinetComponent} from "./modules/layout/cabinet/cabinet.component";
     RegisterComponent,
     ButNewComponent,
     TableComponent,
+    // ToastrModule.forRoot(),
     NotFoundComponent,
     IconUserComponent,
     CabinetComponent
@@ -53,6 +55,7 @@ import {CabinetComponent} from "./modules/layout/cabinet/cabinet.component";
     Ng4LoadingSpinnerModule.forRoot()
   ],
   providers: [
+    DatePipe,
     {
     provide: HTTP_INTERCEPTORS,
       useClass: ApiInterceptor,

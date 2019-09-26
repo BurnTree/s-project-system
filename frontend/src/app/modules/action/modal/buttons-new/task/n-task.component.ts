@@ -27,6 +27,7 @@ export class NTaskComponent implements OnInit {
   public users: User[] = [];
   public projects: Project[] = [];
   public role = enumRole;
+  public nowData: Date = new Date();
 
   isDisabled = (date: NgbDate) =>
     date > this.date;
@@ -81,6 +82,7 @@ export class NTaskComponent implements OnInit {
     this.newTask.assigne = taskValue.assigned;
     this.newTask.project = taskValue.project;
     this.newTask.reporter = this.localUser;
+    this.newTask.history = this.addCreatedHistory();
     this.subscriptions.push(this.taskService.saveTask(this.newTask).subscribe(() => {
       this.newTask = new Task();
       console.log("Task created");
@@ -112,6 +114,18 @@ export class NTaskComponent implements OnInit {
 
   public userName(user: User): string {
     return (user.firstName + " " + user.secondName);
+  }
+
+
+  public addCreatedHistory():string {
+    const history = this.nowData.getDate() + "."
+      + this.nowData.getDay() + " : "
+      + this.nowData.getHours() + " h "
+      + this.nowData.getMinutes() + " min : "
+      + this.localUser.firstName + " "
+      + this.localUser.secondName + ": "
+      + "Created task\n";
+    return history;
   }
 }
 

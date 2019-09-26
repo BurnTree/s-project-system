@@ -3,6 +3,7 @@ import {TaskService} from "../../../../services/task.service";
 import {Subscription} from "rxjs";
 import {Task} from '../../../models/task';
 import {load} from "@angular/core/src/render3";
+import {Ng4LoadingSpinnerService} from "ng4-loading-spinner";
 
 @Component({
   selector: 'app-table',
@@ -23,7 +24,8 @@ export class TableComponent implements OnInit {
   private subscriptions: Subscription[] = [];
 
   constructor(
-    private taskService: TaskService) {
+    private taskService: TaskService,
+  private loadingService: Ng4LoadingSpinnerService) {
   }
 
 
@@ -46,6 +48,7 @@ export class TableComponent implements OnInit {
           this.tasks = data.content as Task[];
           this.totalPages = data.totalPages;
           this.allPages = Array(this.totalPages).fill(null).map((x, i) => i + 1);
+          console.log("tak load");
         }));
   }
 
@@ -157,9 +160,9 @@ export class TableComponent implements OnInit {
 
   public sortByAssignee() {
     this.sortName = "assigne";
-    if (this.sortName != "project") {
+    if (this.sortName != "assigne") {
       this.direction = "ASC";
-      this.sortName = "project";
+      this.sortName = "assigne";
     }
     else{
       if(this.direction == "ASC"){

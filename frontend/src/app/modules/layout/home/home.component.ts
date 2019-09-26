@@ -14,9 +14,12 @@ export class HomeComponent implements OnInit{
   user: User = new User();
   constructor(
     private authService: AuthService,
+    private loadingService: Ng4LoadingSpinnerService
   ){}
 
   ngOnInit(): void {
+    this.loadingService.show();
     this.user = this.authService.getUser();
+    this.loadingService.hide();
   }
 }

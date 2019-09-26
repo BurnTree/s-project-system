@@ -1,5 +1,5 @@
 <div class="modal-header bg-dark text-white">
-  <h4 class="modal-title" id="modal-basic-title">Create Project</h4>
+  <h4 class="modal-title" id="modal-basic-title">Add new comment</h4>
   <button type="button" class="close" aria-label="Close" (click)="activeRef.hide('Cross click')">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -21,7 +21,7 @@
           Comment must be from 10 to 200 characters
         </div>
         <div *ngIf="comment.errors.required">
-          Commentempty
+          Comment empty
         </div>
       </div>
     </div>

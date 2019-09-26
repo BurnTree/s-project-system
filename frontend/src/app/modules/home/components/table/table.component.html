@@ -61,9 +61,9 @@
     <td>{{t.idTask}}</td>
     <td>{{t.priority.namePriority}}</td>
     <td>{{t.status.name}}</td>
-    <td>{{t.createDate}}</td>
-    <td>{{t.updateDate}}</td>
-    <td>{{t.dueData}}</td>
+    <td>{{t.createDate | date}}</td>
+    <td>{{t.updateDate | date}}</td>
+    <td>{{t.dueData | date}}</td>
     <td>{{t.estimation}}</td>
     <td>{{t.assigne.firstName}} {{t.assigne.secondName}}</td>
     <td>{{t.description}}</td>

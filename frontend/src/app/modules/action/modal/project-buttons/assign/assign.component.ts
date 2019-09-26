@@ -9,6 +9,7 @@ import {TaskService} from "../../../../../services/task.service";
 import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Project} from "../../../../models/project";
 import {enumRole} from "../../../../models/role";
+import {AuthService} from "../../../../../services/auth.service";
 
 @Component({
   selector: 'app-assign',
@@ -18,25 +19,30 @@ import {enumRole} from "../../../../models/role";
 export class AssignComponent implements OnInit {
 
   userForm = new FormGroup({
-    assigned: new FormControl(null, {validators: [Validators.required,validateUser]})
+    assigned: new FormControl(null, {validators: [Validators.required, validateUser]})
   });
 
   @Input()
   public task: Task;
   @Input()
   public activeRef: BsModalRef;
+  public user: User = new User();
   public users: User[] = [];
   public newTask: Task = this.task;
+  public nowData: Date = new Date();
   private subscriptions: Subscription[] = [];
   needRole: number;
   role = enumRole;
+
   constructor(public userService: UserService,
-              public taskService: TaskService) {
+              public taskService: TaskService,
+              public authService: AuthService) {
   }
 
   ngOnInit(): void {
+    this.user = this.authService.getUser();
     this.needRole = this.role.DEVELOPER;
-    if(this.task.status.idStatus == 4)
+    if (this.task.status.idStatus == 4)
       this.needRole = this.role.TESTER;
     this.userService.getAllByRole(this.needRole).subscribe((data: User[]) => {
       data.forEach((u: User) => this.users.push(u));
@@ -47,10 +53,11 @@ export class AssignComponent implements OnInit {
   public assignNewUser(): void {
     const taskValue = this.userForm.getRawValue();
     this.task.assigne = taskValue.assigned;
+    this.task.history += this.addAsignneeHistory(this.task.assigne);
     this.taskService.updateTask(this.task).subscribe((data: Task) => {
         console.log(data);
-      console.log("User assignee ");
-      this.activeRef.hide();
+        console.log("User assignee ");
+        this.activeRef.hide();
       }
     );
   }
@@ -68,6 +75,19 @@ export class AssignComponent implements OnInit {
   public userName(user: User): string {
     return (user.firstName + " " + user.secondName);
 
+  }
+
+  public addAsignneeHistory(u: User):string {
+    const history= this.nowData.getDate() + "."
+      + this.nowData.getDay() + " : "
+      + this.nowData.getHours() + " h "
+      + this.nowData.getMinutes() + " min : "
+      + this.user.firstName + " "
+      + this.user.secondName + ": "
+      + "assignee task on "
+      + u.firstName + " "
+      + u.secondName + "\n"
+    return history;
   }
 }
 

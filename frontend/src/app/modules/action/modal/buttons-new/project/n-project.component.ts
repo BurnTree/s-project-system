@@ -43,6 +43,7 @@ export class NProjectComponent implements OnInit {
     this.loadingService.show();
     this.newProject.nameProject = this.projectForm.get('name').value;
     this.newProject.summary = this.projectForm.get('summary').value;
+    if(!this.searchCreatedProject())
     this.subscriptions.push(this.projectService.saveProject(this.newProject).subscribe(() => {
       this.newProject = new Project();
       console.log("Project created");
@@ -52,7 +53,7 @@ export class NProjectComponent implements OnInit {
     this.loadingService.hide();
   }
 
-  public searchDublicate():boolean{
+  public searchCreatedProject():boolean{
     this.isNewProject = false;
     this.allProject.forEach((u: Project)=> {
         if (this.newProject.nameProject === u.nameProject)

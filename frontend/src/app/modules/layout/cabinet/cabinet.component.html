@@ -14,7 +14,7 @@
   </div>
   <br>
   <div class="assignTable" *ngIf="user.role.idRole != role.ADMINISTRATOR">
-    <div class="text-center"><h2> Need created task</h2></div>
+    <div class="text-center"><h2> You task</h2></div>
     <table class="table">
       <thead class="thead-dark">
       <tr>
@@ -37,9 +37,9 @@
         <td>{{t.idTask}}</td>
         <td>{{t.priority.namePriority}}</td>
         <td>{{t.status.name}}</td>
-        <td>{{t.createDate}}</td>
-        <td>{{t.updateDate}}</td>
-        <td>{{t.dueData}}</td>
+        <td>{{t.createDate | date}}</td>
+        <td>{{t.updateDate | date}}</td>
+        <td>{{t.dueData | date}}</td>
         <td>{{t.estimation}}</td>
         <td>{{t.reporter.firstName}} {{t.reporter.secondName}}</td>
         <td>{{t.description}}</td>
@@ -49,7 +49,7 @@
     </table>
   </div>
   <div class="reporterTable" *ngIf="user.role.idRole == role.PROJECT_MANAGER">
-    <div class="text-center"><h2> Your tasks</h2></div>
+    <div class="text-center"><h2> Your created tasks</h2></div>
     <table class="table">
       <thead class="thead-dark">
       <tr>
@@ -72,9 +72,9 @@
         <td>{{t.idTask}}</td>
         <td>{{t.priority.namePriority}}</td>
         <td>{{t.status.name}}</td>
-        <td>{{t.createDate}}</td>
-        <td>{{t.updateDate}}</td>
-        <td>{{t.dueData}}</td>
+        <td>{{t.createDate | date}}</td>
+        <td>{{t.updateDate | date}}</td>
+        <td>{{t.dueData | date}}</td>
         <td>{{t.estimation}}</td>
         <td>{{t.reporter.firstName}} {{t.reporter.secondName}}</td>
         <td>{{t.description}}</td>
@@ -109,9 +109,9 @@
         <td>{{t.idTask}}</td>
         <td>{{t.priority.namePriority}}</td>
         <td>{{t.status.name}}</td>
-        <td>{{t.createDate}}</td>
-        <td>{{t.updateDate}}</td>
-        <td>{{t.dueData}}</td>
+        <td>{{t.createDate | date}}</td>
+        <td>{{t.updateDate | date}}</td>
+        <td>{{t.dueData | date}}</td>
         <td>{{t.estimation}}</td>
         <td>{{t.reporter.firstName}} {{t.reporter.secondName}}</td>
         <td>{{t.description}}</td>

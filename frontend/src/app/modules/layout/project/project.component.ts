@@ -6,6 +6,7 @@ import {Subscription} from "rxjs";
 import {AuthService} from "../../../services/auth.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
+import {count} from "rxjs/operators";
 
 @Component({
   selector: 'app-project',
@@ -36,10 +37,10 @@ export class ProjectComponent implements OnInit {
             this.router.navigate(['/not-found']);
         }, (e: HttpErrorResponse) => {
           console.log(e);
-          //if (e.status === 404) {*/
+          // if (e.status === 404) {
           console.log('This task not found');
           this.router.navigate(['/not-found']);
-          //};
+          // };
         })
       }
     });
